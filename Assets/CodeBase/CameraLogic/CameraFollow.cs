@@ -10,6 +10,11 @@ namespace CodeBase.CameraLogic
 
         private Transform _following;
 
+        private void Start()
+        {
+            _following = GameObject.Find("Knight").transform;
+        }
+
         private void LateUpdate()
         {
             if (_following == null)
