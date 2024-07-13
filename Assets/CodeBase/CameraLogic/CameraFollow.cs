@@ -1,4 +1,5 @@
 using UnityEngine;
+using Zenject;
 
 namespace CodeBase.CameraLogic
 {
@@ -10,9 +11,11 @@ namespace CodeBase.CameraLogic
 
         private Transform _following;
 
-        private void Start()
+        [Inject]
+        private void Construct(GameObject hero)
         {
-            _following = GameObject.Find("Knight").transform;
+            _following = hero.transform;
+            Debug.Log(_following.gameObject);
         }
 
         private void LateUpdate()
