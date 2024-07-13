@@ -79,7 +79,6 @@ namespace CodeBase.Enemy
             }
             else if (stateHash == _walkingStateHash)
             {
-                Debug.Log("WWW");
                 state = AnimatorState.Walking;
             }
             else if (stateHash == _deathStateHash)

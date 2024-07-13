@@ -7,9 +7,8 @@ namespace CodeBase.Enemy.States
     public class IdleState : EnemyState
     {
         [SerializeField] private EnemyAnimator _animator;
-        [SerializeField] private float patrolDistance;
-        public float _distance = 3f;
-        [SerializeField] private float minDistance = 2f;
+        [SerializeField] private float _maxDistance;
+        [SerializeField] private float _minDistance;
 
         public override void Enter()
         {
@@ -29,15 +28,12 @@ namespace CodeBase.Enemy.States
         {
             float distance = Vector3.Distance(transform.position, _target.transform.position);
 
-            if (distance >= minDistance && distance <= _distance)
+            if (distance >= _minDistance && distance <= _maxDistance)
             {
                 return true;
             }
 
             return false;
-
-            /* Transit = Vector3.Distance(transform.position, _target.transform.position) <= _distance;
-             return Vector3.Distance(transform.position, _target.transform.position) <= _distance;*/
         }
     }
 }

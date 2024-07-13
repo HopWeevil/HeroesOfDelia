@@ -6,13 +6,10 @@ using UnityEngine.AI;
 namespace CodeBase.Enemy.States
 {
     public class PatrolState : EnemyState
-    {
-        
-        [SerializeField] private float _maxDistance = 2f;
-        [SerializeField] private float _minDistance = 3f;
+    {   
+        [SerializeField] private float _maxDistance;
+        [SerializeField] private float _minDistance;
         [SerializeField] private EnemyPatrol _patrol;
-
-      
 
         public override void Enter()
         {
@@ -39,8 +36,6 @@ namespace CodeBase.Enemy.States
             }
 
             return false;
-        }
-
-       
+        }     
     }
 }

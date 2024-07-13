@@ -13,12 +13,12 @@ namespace CodeBase.Enemy
         public float EffectiveDistance = 0.5f;
         public float Damage = 10f;
 
-        private Transform _heroTransform;
         private bool _isAttacking;
         private int _layerMask;
         private Collider[] _hits = new Collider[1];
         private bool _attackIsActive;
-        public float _attackTimer;
+        private float _attackTimer;
+
         private void Awake()
         {
             _layerMask = 1 << LayerMask.NameToLayer("Player");

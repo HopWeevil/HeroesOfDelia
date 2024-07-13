@@ -5,8 +5,8 @@ namespace CodeBase.Enemy.States
 {
     public class AttackState : EnemyState
     {
-        [SerializeField] private float attackDistance = 2f;
-        [SerializeField] private float minattackDistance = 2f;
+        [SerializeField] private float _maxDistance;
+        [SerializeField] private float _minDistance;
         [SerializeField] private EnemyAttack _enemyAttack;
         [SerializeField] private RotateToHero _rotateToHero;
 
@@ -30,24 +30,12 @@ namespace CodeBase.Enemy.States
         {
             float distance = Vector3.Distance(transform.position, _target.transform.position);
 
-            if (distance >= minattackDistance && distance <= attackDistance)
+            if (distance >= _minDistance && distance <= _maxDistance)
             {
                 return true;
             }
 
             return false;
-
-        }
-
-        private void OnDrawGizmos()
-        {
-            Color oldColor = Gizmos.color;
-            Gizmos.color = Color.yellow;
-            Matrix4x4 oldMatrix = Gizmos.matrix;
-            Gizmos.matrix = Matrix4x4.TRS(transform.position, Quaternion.identity, new Vector3(1, 1, 1));
-            Gizmos.DrawWireSphere(Vector3.zero, attackDistance);
-            Gizmos.matrix = oldMatrix;
-            Gizmos.color = oldColor;
         }
     }
 }
