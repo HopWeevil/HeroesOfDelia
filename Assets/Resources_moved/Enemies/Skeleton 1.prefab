@@ -578,9 +578,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _animator: {fileID: 8642156504750914339}
-  AttackCooldown: 2
+  AttackCooldown: 1
   Cleavage: 0.5
-  EffectiveDistance: 0.5
+  EffectiveDistance: 1
   Damage: 10
   _attackTimer: 0
 --- !u!114 &6600548589633569542
@@ -595,13 +595,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3cfb239deade5b9488e4dfa118b95bcb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _priority: 2
-  Transit: 0
   attackDistance: 2
   minattackDistance: 0
   _enemyAttack: {fileID: 63558356380438582}
   _rotateToHero: {fileID: 6967779543076715155}
-  _enemyMover: {fileID: 4144554703929804354}
 --- !u!114 &-2340893821601403868
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -614,8 +611,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 73001b08b8707b141b6826d42bfa4bfd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _priority: 1
-  Transit: 0
   _minDistance: 2
   _maxDistance: 5
   _enemyMover: {fileID: 4144554703929804354}
@@ -662,8 +657,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 94fb7ffd1d68eb240a3d5bf148d0e845, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _priority: 0
-  Transit: 0
   _maxDistance: 7
   _minDistance: 6
   _patrol: {fileID: 4262755949818249621}
@@ -679,8 +672,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dc79425b61b978a4498f0657c591c446, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _priority: 0
-  Transit: 0
   _animator: {fileID: 8642156504750914339}
   patrolDistance: 0
   _distance: 7

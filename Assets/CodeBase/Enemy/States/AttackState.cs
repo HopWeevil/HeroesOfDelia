@@ -1,6 +1,5 @@
-﻿using CodeBase.Enemy;
-using Unity.VisualScripting;
-using UnityEngine;
+﻿using UnityEngine;
+
 
 namespace CodeBase.Enemy.States
 {
@@ -38,6 +37,17 @@ namespace CodeBase.Enemy.States
 
             return false;
 
+        }
+
+        private void OnDrawGizmos()
+        {
+            Color oldColor = Gizmos.color;
+            Gizmos.color = Color.yellow;
+            Matrix4x4 oldMatrix = Gizmos.matrix;
+            Gizmos.matrix = Matrix4x4.TRS(transform.position, Quaternion.identity, new Vector3(1, 1, 1));
+            Gizmos.DrawWireSphere(Vector3.zero, attackDistance);
+            Gizmos.matrix = oldMatrix;
+            Gizmos.color = oldColor;
         }
     }
 }

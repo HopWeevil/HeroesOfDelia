@@ -6,11 +6,17 @@ namespace CodeBase.Enemy
 {
     public class EnemyAnimator : MonoBehaviour, IAnimationStateReader
     {
-        private static readonly int Attack = Animator.StringToHash("Attack_1");
-        private static readonly int Speed = Animator.StringToHash("Speed");
-        private static readonly int IsMoving = Animator.StringToHash("IsMoving");
-        private static readonly int Hit = Animator.StringToHash("Hit");
-        private static readonly int Die = Animator.StringToHash("Die");
+        private readonly int[] _attackHashes =
+         {
+            Animator.StringToHash("Attack_1"),
+            Animator.StringToHash("Attack_2"),
+            Animator.StringToHash("Attack_3")
+        };
+
+        private readonly int Speed = Animator.StringToHash("Speed");
+        private readonly int IsMoving = Animator.StringToHash("IsMoving");
+        private readonly int Hit = Animator.StringToHash("Hit");
+        private readonly int Die = Animator.StringToHash("Die");
 
         private readonly int _idleStateHash = Animator.StringToHash("idle");
         private readonly int _attackStateHash = Animator.StringToHash("attack01");
@@ -43,13 +49,10 @@ namespace CodeBase.Enemy
             Animator.SetBool(IsMoving, false);
         }
 
-        public void StartPlayAttack()
+        public void PlayAttack()
         {
-            Animator.SetBool(Attack, true);
-        }
-        public void StopPlayAttack()
-        {
-            Animator.SetBool(Attack, false);
+            int randomIndex = UnityEngine.Random.Range(0, _attackHashes.Length);
+            Animator.SetTrigger(_attackHashes[randomIndex]);
         }
 
         public void EnteredState(int stateHash)
@@ -76,6 +79,7 @@ namespace CodeBase.Enemy
             }
             else if (stateHash == _walkingStateHash)
             {
+                Debug.Log("WWW");
                 state = AnimatorState.Walking;
             }
             else if (stateHash == _deathStateHash)

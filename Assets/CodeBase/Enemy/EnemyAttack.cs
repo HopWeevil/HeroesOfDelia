@@ -1,3 +1,4 @@
+using System.Linq;
 using UnityEngine;
 
 namespace CodeBase.Enemy
@@ -18,18 +19,15 @@ namespace CodeBase.Enemy
         private Collider[] _hits = new Collider[1];
         private bool _attackIsActive;
         public float _attackTimer;
-
-
-        private void Start()
+        private void Awake()
         {
-            _attackTimer = AttackCooldown;
+            _layerMask = 1 << LayerMask.NameToLayer("Player");
         }
 
         public void Execute()
         {
-            _attackTimer += Time.deltaTime;
-
-            if (_attackIsActive && !_isAttacking && _attackTimer >= AttackCooldown)
+            UpdateCooldown();
+            if (CanAttack())
             {
                 StartAttack();
             }
@@ -38,14 +36,35 @@ namespace CodeBase.Enemy
         private void StartAttack()
         {
             _isAttacking = true;
-            _animator.StartPlayAttack();
-            _attackTimer = 0f;
+            _animator.PlayAttack();
+        }
+
+        private bool Hit(out Collider hit)
+        {
+            int hitCount = Physics.OverlapSphereNonAlloc(CalculateStartPoint(), Cleavage, _hits, _layerMask);
+            hit = _hits.FirstOrDefault();
+            return hitCount > 0;
+        }
+
+        private Vector3 CalculateStartPoint()
+        {
+            return new Vector3(transform.position.x, transform.position.y + 0.5f, transform.position.z) + transform.forward * EffectiveDistance;
+        }
+
+        private void OnAttack()
+        {
+            if (Hit(out Collider collider))
+            {
+                Debug.Log(collider.name);
+                PhysicsDebug.DrawDebug(CalculateStartPoint(), Cleavage, 1f);
+                //collider.transform.GetComponent<IHealth>().TakeDamage(Damage);
+            }
         }
 
         private void OnAttackEnded()
         {
             _isAttacking = false;
-            _animator.StopPlayAttack();
+            _attackTimer = AttackCooldown;
         }
 
         public void EnableAttack()
@@ -57,7 +76,24 @@ namespace CodeBase.Enemy
         {
             _isAttacking = false;
             _attackIsActive = false;
-            _animator.StopPlayAttack();
+        }
+
+        private bool CanAttack()
+        {
+            return _attackIsActive && !_isAttacking && CooldownIsUp();
+        }
+
+        private void UpdateCooldown()
+        {
+            if (!CooldownIsUp())
+            {
+                _attackTimer -= Time.deltaTime;
+            }
+        }
+
+        private bool CooldownIsUp()
+        {
+            return _attackTimer <= 0;
         }
     }
 }
