@@ -27,11 +27,6 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: b63026d0b66c0954584fb361b253113a
-    m_Address: Skeleton
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 23346e98e6f77ff479aaeffded9afa77
     m_Address: Skeleton1
     m_ReadOnly: 0
