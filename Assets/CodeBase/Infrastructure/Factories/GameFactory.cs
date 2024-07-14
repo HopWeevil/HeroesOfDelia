@@ -80,7 +80,7 @@ namespace CodeBase.Infrastructure.Factories
 
             //monster.GetComponent<ActorUI>().Construct(health);
            // monster.GetComponent<NavMeshAgent>().speed = monsterData.MoveSpeed;
-            EnemyStateMachine stateMachine = monster.GetComponent<EnemyStateMachine>();
+            EnemyStateMachine stateMachine = monster.GetComponentInChildren<EnemyStateMachine>();
             stateMachine.Construct(_hero);
 
             EnemyAttack attack = monster.GetComponent<EnemyAttack>();
