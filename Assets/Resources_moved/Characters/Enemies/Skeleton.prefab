@@ -738,7 +738,7 @@ MonoBehaviour:
   _deathFx: {fileID: 100004, guid: 7867af58a6ec48846ae807eb4022fbaa, type: 3}
   _boxCollider: {fileID: 6565677819205861634}
   _stateMachine: {fileID: 5846322235988337634}
-  _hpBar: {fileID: 0}
+  _hpBar: {fileID: 7487539363141411184}
   _destroyAfterDeathTime: 3
 --- !u!114 &3069234405818324996
 MonoBehaviour:

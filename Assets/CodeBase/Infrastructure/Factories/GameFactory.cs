@@ -68,37 +68,36 @@ namespace CodeBase.Infrastructure.Factories
             _container.InjectGameObject(spawner.gameObject);
         }
 
-        public async Task<GameObject> CreateMonster(EnemyTypeId monsterTypeId, Transform parent)
+        public async Task<GameObject> CreateMonster(EnemyTypeId enemyTypeId, Transform parent)
         {
-           // MonsterStaticData monsterData = _staticDataService.ForMonster(monsterTypeId);
+            EnemyStaticData enemyData = _staticDataService.ForEnemy(enemyTypeId);
 
+            GameObject prefab = await _assets.Load<GameObject>(enemyData.PrefabReference);
+            GameObject enemy = Object.Instantiate(prefab, parent.position, Quaternion.identity, parent);
 
-            GameObject prefab = await _assets.Load<GameObject>("Skeleton1");
-            GameObject monster = Object.Instantiate(prefab, parent.position, Quaternion.identity, parent);
+            IHealth health = enemy.GetComponent<IHealth>();
+            health.Current = enemyData.Hp;
+            health.Max = enemyData.Hp;
 
-            IHealth health = monster.GetComponent<IHealth>();
-            /*health.Current = monsterData.Hp;
-            health.Max = monsterData.Hp;*/
+            enemy.GetComponent<ActorUI>().Construct(health);
 
-            monster.GetComponent<ActorUI>().Construct(health);
-           // monster.GetComponent<NavMeshAgent>().speed = monsterData.MoveSpeed;
-            EnemyStateMachine stateMachine = monster.GetComponentInChildren<EnemyStateMachine>();
+            EnemyStateMachine stateMachine = enemy.GetComponentInChildren<EnemyStateMachine>();
             stateMachine.Construct(_hero);
 
-            EnemyAttack attack = monster.GetComponent<EnemyAttack>();
-            //attack.Construct(_hero.transform);
-          /*  attack.Damage = monsterData.Damage;
-            attack.Cleavage = monsterData.Cleavage;
-            attack.EffectiveDistance = monsterData.EffectiveDistance;*/
+            enemy.GetComponent<EnemyMover>().SetStats(enemyData.MoveSpeed);
 
-           // monster.GetComponent<AgentMover>()?.Construct(_hero.transform);
-            monster.GetComponent<RotateToHero>()?.Construct(_hero.transform);
+            EnemyAttack attack = enemy.GetComponent<EnemyAttack>();
+            attack.Damage = enemyData.Damage;
+            attack.Cleavage = enemyData.Cleavage;
+            attack.EffectiveDistance = enemyData.EffectiveDistance;
+
+            enemy.GetComponent<RotateToHero>()?.Construct(_hero.transform);
 
             /*LootSpawner lootSpawner = monster.GetComponentInChildren<LootSpawner>();
             lootSpawner.Construct(this, _randomService);
             lootSpawner.SetLootValue(monsterData.MinLoot, monsterData.MaxLoot);*/
 
-            return monster;
+            return enemy;
         }
 
 

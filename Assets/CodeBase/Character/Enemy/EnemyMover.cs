@@ -17,6 +17,11 @@ namespace CodeBase.Enemy
 
         public float StoppingDistance => _agent.stoppingDistance;
 
+        public void SetStats(float speed)
+        {
+            _agent.speed = speed;
+        }
+
         public void Execute()
         {
             if (IsInitialized())

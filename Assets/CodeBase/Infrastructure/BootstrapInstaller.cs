@@ -45,7 +45,9 @@ public class BootstrapInstaller : MonoInstaller
 
     private void BindStaticDataService()
     {
-        Container.Bind<IStaticDataService>().To<StaticDataService>().AsSingle();
+        IStaticDataService staticDataService = new StaticDataService();
+        staticDataService.LoadMonsters();
+        Container.BindInstance(staticDataService).AsSingle();
     }
 
     private void BindAssetProvider()
