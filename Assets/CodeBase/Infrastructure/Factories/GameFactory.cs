@@ -10,6 +10,8 @@ using Zenject;
 using CodeBase.Enemy;
 using CodeBase.Enums;
 using CodeBase.Enemy.StateMachine;
+using CodeBase.UI;
+using CodeBase.Logic;
 
 namespace CodeBase.Infrastructure.Factories
 {
@@ -74,11 +76,11 @@ namespace CodeBase.Infrastructure.Factories
             GameObject prefab = await _assets.Load<GameObject>("Skeleton1");
             GameObject monster = Object.Instantiate(prefab, parent.position, Quaternion.identity, parent);
 
-           /* IHealth health = monster.GetComponent<IHealth>();
-            health.Current = monsterData.Hp;
+            IHealth health = monster.GetComponent<IHealth>();
+            /*health.Current = monsterData.Hp;
             health.Max = monsterData.Hp;*/
 
-            //monster.GetComponent<ActorUI>().Construct(health);
+            monster.GetComponent<ActorUI>().Construct(health);
            // monster.GetComponent<NavMeshAgent>().speed = monsterData.MoveSpeed;
             EnemyStateMachine stateMachine = monster.GetComponentInChildren<EnemyStateMachine>();
             stateMachine.Construct(_hero);

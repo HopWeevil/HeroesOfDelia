@@ -1,9 +1,11 @@
 ﻿using CodeBase.CameraLogic;
+using CodeBase.Hero;
 using CodeBase.Infrastructure.Factories;
 using CodeBase.Infrastructure.Sceneloader;
 using CodeBase.Logic;
 using CodeBase.Services.PersistentProgress;
 using CodeBase.Services.StaticData;
+using CodeBase.UI;
 using System.Threading.Tasks;
 using UnityEngine;
 
@@ -76,6 +78,7 @@ namespace CodeBase.Infrastructure.States
         private async Task InitHud(GameObject hero)
         {
             GameObject hud = await _gameFactory.CreateHud();
+            hud.GetComponentInChildren<ActorUI>().Construct(hero.GetComponent<IHealth>());
         }
     }
 }

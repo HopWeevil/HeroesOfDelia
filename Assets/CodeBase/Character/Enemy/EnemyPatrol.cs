@@ -56,7 +56,7 @@ namespace CodeBase.Enemy
 
         private bool IsDestinationReached(Vector3 destination)
         {
-            return Vector3.Distance(transform.position, destination) >= _enemyMover.StoppingDistance;
+            return Vector3.Distance(transform.position, destination) >= _enemyMover.StoppingDistance && _isMoving == true;
         }
 
         private bool TryGetRandomPosition(Vector3 center, float radius, out Vector3 position)

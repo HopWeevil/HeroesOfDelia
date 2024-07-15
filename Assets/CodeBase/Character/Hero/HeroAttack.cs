@@ -43,7 +43,6 @@ namespace CodeBase.Hero
         {
             for (int i = 0; i < Hit(); ++i)
             {
-                Debug.Log(_hits[i].name);
                 _hits[i].transform.parent.GetComponent<IHealth>().TakeDamage(_stats.Damage);
             }
         }
