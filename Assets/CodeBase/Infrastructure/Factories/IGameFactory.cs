@@ -12,7 +12,8 @@ namespace CodeBase.Infrastructure.Factories
         List<ISavedProgress> ProgressWriters { get; }
         Task<GameObject> CreateHero(Vector3 at);
         Task<GameObject> CreateHud();
+        Task<GameObject> CreateSaveTrigger(Vector3 at);
         Task<GameObject> CreateMonster(EnemyTypeId monsterTypeId, Transform parent);
-        void CreateSpawners();
+        Task CreateSpawner(string spawnerId, Vector3 at, EnemyTypeId enemyTypeId);
     }
 }

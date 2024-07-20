@@ -1,7 +1,7 @@
 using UnityEngine;
 using Zenject;
 
-namespace CodeBase.CameraLogic
+namespace CodeBase.Logic.Camera
 {
     public class CameraFollow : MonoBehaviour
     {
@@ -10,13 +10,6 @@ namespace CodeBase.CameraLogic
         [SerializeField] private float _offsetY;
 
         private Transform _following;
-
-        [Inject]
-        private void Construct(GameObject hero)
-        {
-            _following = hero.transform;
-            Debug.Log(_following.gameObject);
-        }
 
         private void LateUpdate()
         {

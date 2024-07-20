@@ -1,13 +1,13 @@
-﻿using CodeBase.CameraLogic;
-using CodeBase.Hero;
-using CodeBase.Infrastructure.Factories;
+﻿using CodeBase.Infrastructure.Factories;
 using CodeBase.Infrastructure.Sceneloader;
 using CodeBase.Logic;
+using CodeBase.Logic.Camera;
 using CodeBase.Services.PersistentProgress;
 using CodeBase.Services.StaticData;
 using CodeBase.UI;
 using System.Threading.Tasks;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace CodeBase.Infrastructure.States
 {
@@ -27,6 +27,7 @@ namespace CodeBase.Infrastructure.States
             _loadingCurtain = loadingCurtain;
             _gameFactory = gameFactory;
             _progressService = progressService;
+            _staticDataService = staticDataService;
         }
 
         public void Enter(string sceneName)
@@ -58,8 +59,11 @@ namespace CodeBase.Infrastructure.States
 
         private async Task InitGameWorld()
         {
-            GameObject hero = await InitHero();
-            _gameFactory.CreateSpawners();
+            LevelStaticData levelData = _staticDataService.ForLevel(SceneManager.GetActiveScene().name);
+
+            GameObject hero = await InitHero(levelData);
+            await InitSpawners(levelData);
+            await InitSaveTrigger(levelData);
             await InitHud(hero);
             CameraFollow(hero);
         }
@@ -69,9 +73,9 @@ namespace CodeBase.Infrastructure.States
             Camera.main.GetComponent<CameraFollow>().Follow(hero);
         }
 
-        private async Task<GameObject> InitHero()
+        private async Task<GameObject> InitHero(LevelStaticData levelData)
         {
-            GameObject hero = await _gameFactory.CreateHero(new Vector3(0,0,0));
+            GameObject hero = await _gameFactory.CreateHero(levelData.InitialHeroPosition);
             return hero;
         }
 
@@ -79,6 +83,20 @@ namespace CodeBase.Infrastructure.States
         {
             GameObject hud = await _gameFactory.CreateHud();
             hud.GetComponentInChildren<ActorUI>().Construct(hero.GetComponent<IHealth>());
+        }
+
+        private async Task InitSpawners(LevelStaticData levelData)
+        {
+            foreach (EnemySpawnerData spawnerData in levelData.EnemySpawners)
+            {
+                Debug.Log(spawnerData.Id);
+                await _gameFactory.CreateSpawner(spawnerData.Id, spawnerData.Position, spawnerData.EnemyTypeId);
+            }
+        }
+
+        private async Task InitSaveTrigger(LevelStaticData levelData)
+        {
+             await _gameFactory.CreateSaveTrigger(levelData.SaveTriggerMarker);
         }
     }
 }

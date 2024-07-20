@@ -1,7 +1,6 @@
 ﻿using CodeBase.Enums;
 using System.Collections.Generic;
 using System.Linq;
-using UnityEditor.PackageManager.UI;
 using UnityEngine;
 
 namespace CodeBase.Services.StaticData
@@ -14,7 +13,7 @@ namespace CodeBase.Services.StaticData
         private Dictionary<string, LevelStaticData> _levels;
         private Dictionary<EnemyTypeId, EnemyStaticData> _enemies;
 
-        public void LoadMonsters()
+        public void Load()
         {
             _enemies = Resources.LoadAll<EnemyStaticData>(Enemies).ToDictionary(x => x.EnemyTypeId, x => x);
             _levels = Resources.LoadAll<LevelStaticData>(LevelsDataPath).ToDictionary(x => x.LevelKey, x => x);  

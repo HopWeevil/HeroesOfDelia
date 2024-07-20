@@ -62,10 +62,22 @@ namespace CodeBase.Infrastructure.Factories
             _assets.Cleanup();
         }
 
-        public void CreateSpawners()
+        public async Task CreateSpawner(string spawnerId, Vector3 at, EnemyTypeId enemyTypeId)
         {
-            EnemySpawner spawner = Object.FindObjectOfType<EnemySpawner>();
+            GameObject prefab = await _assets.Load<GameObject>(AssetAddress.Spawner);
+            EnemySpawner spawner = InstantiateRegistered(prefab, at).GetComponent<EnemySpawner>();
+
             _container.InjectGameObject(spawner.gameObject);
+            spawner.Initialize(spawnerId, enemyTypeId);
+            Debug.Log("DDDDDDDDDDD");
+        }
+
+        public async Task<GameObject> CreateSaveTrigger(Vector3 at)
+        {
+            GameObject prefab = await _assets.Load<GameObject>(AssetAddress.SaveTrigger);
+            GameObject saveTrigger = InstantiateRegistered(prefab, at);
+            _container.InjectGameObject(saveTrigger);
+            return saveTrigger;
         }
 
         public async Task<GameObject> CreateMonster(EnemyTypeId enemyTypeId, Transform parent)

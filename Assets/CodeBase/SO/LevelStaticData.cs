@@ -1,4 +1,5 @@
 
+using CodeBase.Logic;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -11,4 +12,5 @@ public class LevelStaticData : ScriptableObject
 
     public Vector3 InitialHeroPosition;
     public LevelTransferData LevelTransfer;
+    public Vector3 SaveTriggerMarker;
 }

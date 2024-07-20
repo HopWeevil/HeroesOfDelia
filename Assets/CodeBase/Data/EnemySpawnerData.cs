@@ -6,13 +6,13 @@ using CodeBase.Enums;
 public class EnemySpawnerData
 {
     public string Id;
-    public EnemyTypeId MonsterTypeId;
+    public EnemyTypeId EnemyTypeId;
     public Vector3 Position;
 
     public EnemySpawnerData(string id, EnemyTypeId enemyTypeId, Vector3 position)
     {
         Id = id;
-        MonsterTypeId = enemyTypeId;
+        EnemyTypeId = enemyTypeId;
         Position = position;
     }
 }

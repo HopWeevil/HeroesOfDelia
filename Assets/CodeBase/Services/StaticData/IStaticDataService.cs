@@ -4,7 +4,7 @@ namespace CodeBase.Services.StaticData
 {
     public interface IStaticDataService
     {
-        void LoadMonsters();
+        void Load();
         EnemyStaticData ForEnemy(EnemyTypeId id);
         LevelStaticData ForLevel(string sceneKey);
     }
