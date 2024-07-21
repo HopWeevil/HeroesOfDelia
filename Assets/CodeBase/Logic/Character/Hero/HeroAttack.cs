@@ -14,7 +14,7 @@ namespace CodeBase.Hero
     {
         [SerializeField] private LayerMask _targetsLayer;
         [SerializeField] private CharacterAnimator _animator;
-        [SerializeField] private CharacterController _characterController;
+        //[SerializeField] private CharacterController _characterController;
         [SerializeField] private float _attackCooldown = 2f;
 
         private IInputService _inputService;

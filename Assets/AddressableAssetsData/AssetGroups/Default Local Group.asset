@@ -27,11 +27,6 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 23346e98e6f77ff479aaeffded9afa77
-    m_Address: Skeleton
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: c46d047ada62a524eb947f683972f193
     m_Address: EnemySpawner
     m_ReadOnly: 0
@@ -39,6 +34,21 @@ MonoBehaviour:
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 1036cf4d311c9df4ca0830db70c9c17e
     m_Address: SaveTrigger
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: fdf0211393deb1e469376627d6b83248
+    m_Address: SkeletonWizzard
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: fcddae9d5251e8541a2e0abed240b4b8
+    m_Address: Skeleton
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: b58bea1ed69fa17419217afb58216187
+    m_Address: SkeletonArcher
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0

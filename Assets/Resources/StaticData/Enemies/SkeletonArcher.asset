@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 33d3edf984fca1348b3a145243b93c7a, type: 3}
-  m_Name: Skeleton
+  m_Name: SkeletonArcher
   m_EditorClassIdentifier: 
-  EnemyTypeId: 0
+  EnemyTypeId: 3
   Hp: 2
   Damage: 1
   AttackCooldown: 1
@@ -22,7 +22,7 @@ MonoBehaviour:
   MaxGold: 1
   MinGold: 1
   PrefabReference:
-    m_AssetGUID: fcddae9d5251e8541a2e0abed240b4b8
+    m_AssetGUID: b58bea1ed69fa17419217afb58216187
     m_SubObjectName: 
     m_SubObjectType: 
     m_EditorAssetChanged: 0

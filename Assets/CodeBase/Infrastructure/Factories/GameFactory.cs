@@ -69,7 +69,6 @@ namespace CodeBase.Infrastructure.Factories
 
             _container.InjectGameObject(spawner.gameObject);
             spawner.Initialize(spawnerId, enemyTypeId);
-            Debug.Log("DDDDDDDDDDD");
         }
 
         public async Task<GameObject> CreateSaveTrigger(Vector3 at)
@@ -98,10 +97,8 @@ namespace CodeBase.Infrastructure.Factories
 
             enemy.GetComponent<EnemyMover>().SetStats(enemyData.MoveSpeed);
 
-            EnemyAttack attack = enemy.GetComponent<EnemyAttack>();
-            attack.Damage = enemyData.Damage;
-            attack.Cleavage = enemyData.Cleavage;
-            attack.EffectiveDistance = enemyData.EffectiveDistance;
+            IAttack attack = enemy.GetComponent<IAttack>();
+            attack.InitializeStats(enemyData);
 
             enemy.GetComponent<RotateToHero>()?.Construct(_hero.transform);
 
