@@ -47,12 +47,12 @@ namespace CodeBase.Hero
 
         public void TakeDamage(float damage)
         {
-            if(Current <= 0)
-            {
-                return;
-            }
             Current -= damage;
-            _animator.PlayHit();
+            HealthChanged?.Invoke();
+            if (Current > 0)
+            {
+                _animator.PlayHit();
+            }
         }
     }
 }

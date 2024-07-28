@@ -1,4 +1,5 @@
 using CodeBase.Character;
+using CodeBase.SO;
 using UnityEngine;
 
 public class RangedAttack : MonoBehaviour, IAttack

@@ -1,4 +1,6 @@
 ﻿using CodeBase.Enums;
+using CodeBase.SO;
+using System.Collections.Generic;
 
 namespace CodeBase.Services.StaticData
 {
@@ -7,5 +9,8 @@ namespace CodeBase.Services.StaticData
         void Load();
         EnemyStaticData ForEnemy(EnemyTypeId id);
         LevelStaticData ForLevel(string sceneKey);
+        EquipmentStaticData ForEquipment(EquipmentTypeId id);
+        ResourceStaticData ForResource(ResourceTypeId id);
+        List<EquipmentStaticData> GetEquipmentByRarity(Rarity rarity);
     }
 }

@@ -15,7 +15,7 @@ MonoBehaviour:
   EnemyTypeId: 2
   Hp: 2
   Damage: 1
-  AttackCooldown: 1
+  AttackCooldown: 3
   EffectiveDistance: 1
   Cleavage: 0.5
   MoveSpeed: 2
@@ -26,3 +26,12 @@ MonoBehaviour:
     m_SubObjectName: 
     m_SubObjectType: 
     m_EditorAssetChanged: 0
+  LootData:
+    CoinsAmount:
+      MinValue: 5
+      MaxValue: 10
+    CommonDropChance: 100
+    RareDropChance: 0
+    EpicDropChance: 0
+    LegendaryDropChance: 0
+    MythicDropChance: 0

@@ -1,5 +1,6 @@
 using CodeBase.Character;
 using CodeBase.Logic;
+using CodeBase.SO;
 using UnityEngine;
 
 public class MeleeAttack : MonoBehaviour, IAttack

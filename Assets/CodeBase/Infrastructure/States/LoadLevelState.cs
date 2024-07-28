@@ -4,6 +4,7 @@ using CodeBase.Logic;
 using CodeBase.Logic.Camera;
 using CodeBase.Services.PersistentProgress;
 using CodeBase.Services.StaticData;
+using CodeBase.SO;
 using CodeBase.UI;
 using System.Threading.Tasks;
 using UnityEngine;

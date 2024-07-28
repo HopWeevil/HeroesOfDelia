@@ -2668,7 +2668,7 @@ PrefabInstance:
     - target: {fileID: 5712173882477594237, guid: 23346e98e6f77ff479aaeffded9afa77,
         type: 3}
       propertyPath: _maxDistance
-      value: 5
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 6418516695812028776, guid: 23346e98e6f77ff479aaeffded9afa77,
         type: 3}

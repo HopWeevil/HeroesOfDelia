@@ -1,12 +1,29 @@
-﻿using UnityEngine;
+﻿using CodeBase.SO;
+using UnityEditor.Experimental.GraphView;
+using UnityEngine;
 
 namespace CodeBase.Services.Randomizer
 {
     public class RandomService : IRandomService
     {
-        public int Next(int min, int max)
+        public int Next(int minValue, int maxValue)
         {
-            return Random.Range(min, max);
+            return Random.Range(minValue, maxValue);
+        }
+
+        public float Next(float minValue, float maxValue)
+        {
+            return Random.Range(minValue, maxValue);
+        }
+
+        public int Next(MinMaxRange minMax)
+        {
+            return Random.Range(minMax.MinValue, minMax.MaxValue);
+        }
+
+        public int NextBetweenZeroAndHundred()
+        {
+            return Random.Range(0, 101);
         }
     }
 }

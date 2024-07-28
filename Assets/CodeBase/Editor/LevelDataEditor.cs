@@ -9,6 +9,7 @@ using Unity.Plastic.Newtonsoft.Json;
 using CodeBase.Enums;
 using System;
 using CodeBase.Logic.EnemySpawners;
+using CodeBase.SO;
 
 public class LevelDataEditor : EditorWindow
 {

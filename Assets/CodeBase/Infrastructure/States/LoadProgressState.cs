@@ -34,6 +34,7 @@ namespace CodeBase.Infrastructure.States
         private void LoadProgressOrInitNew()
         {
             _progressService.Progress = _saveLoadProgress.LoadProgress() ?? NewProgress();
+            _progressService.Economy = NewEconomy();
         }
 
         private PlayerProgress NewProgress()
@@ -44,6 +45,13 @@ namespace CodeBase.Infrastructure.States
             progress.HeroStats.Damage = 1;
             progress.HeroStats.DamageRadius = 0.5f;
             progress.HeroState.ResetHP();
+            return progress;
+        }
+
+
+        private PlayerEconomyData NewEconomy()
+        {
+            var progress = new PlayerEconomyData();
             return progress;
         }
     }

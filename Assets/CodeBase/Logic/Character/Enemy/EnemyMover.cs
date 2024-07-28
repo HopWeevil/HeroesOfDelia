@@ -35,7 +35,6 @@ namespace CodeBase.Enemy
         {
             _agent.ResetPath();
             _animator.StopMoving();
-            enabled = false;
         }
 
         public void SetDestination(Vector3 target)

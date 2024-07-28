@@ -39,14 +39,15 @@ namespace CodeBase.Enemy
 
         private void Die()
         {
+            SpawnDeathFx();
+            Happened?.Invoke();
+
             _animator.PlayDeath();
             _boxCollider.enabled = false;
             _stateMachine.enabled = false;
             _hpBar.enabled = false;
-            SpawnDeathFx();
             StartCoroutine(DestroyTimer());
       
-            Happened?.Invoke();
         }
 
         private void SpawnDeathFx()

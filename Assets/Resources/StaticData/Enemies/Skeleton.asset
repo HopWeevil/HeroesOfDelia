@@ -26,3 +26,12 @@ MonoBehaviour:
     m_SubObjectName: 
     m_SubObjectType: 
     m_EditorAssetChanged: 0
+  LootData:
+    CoinsAmount:
+      MinValue: 5
+      MaxValue: 10
+    CommonDropChance: 0
+    RareDropChance: 0
+    EpicDropChance: 0
+    LegendaryDropChance: 0
+    MythicDropChance: 0

@@ -12,6 +12,9 @@ using CodeBase.Enums;
 using CodeBase.Enemy.StateMachine;
 using CodeBase.UI;
 using CodeBase.Logic;
+using CodeBase.Logic.Loot;
+using CodeBase.SO;
+using Zenject.ReflectionBaking.Mono.Cecil;
 
 namespace CodeBase.Infrastructure.Factories
 {
@@ -48,9 +51,30 @@ namespace CodeBase.Infrastructure.Factories
             return _hero;
         }
 
+        public async Task<ResourceLoot> CreateResourceLoot(ResourceTypeId resourceType, Vector3 at)
+        {
+            ResourceStaticData resource = _staticDataService.ForResource(resourceType);
+            GameObject prefab = await _assets.Load<GameObject>(resource.PrefabReference);
+            ResourceLoot lootPiece = Object.Instantiate(prefab, at, prefab.transform.rotation).GetComponent<ResourceLoot>();
+            _container.InjectGameObject(lootPiece.gameObject);
+            return lootPiece;
+        }
+
+        public async Task<EquipmentLoot> CreateEquipmentLoot(EquipmentTypeId equipmentType, Vector3 at)
+        {
+            EquipmentStaticData equipment = _staticDataService.ForEquipment(equipmentType);
+            GameObject prefab = await _assets.Load<GameObject>(equipment.DropReference);
+            EquipmentLoot lootPiece = Object.Instantiate(prefab, at, prefab.transform.rotation).GetComponent<EquipmentLoot>();
+            _container.InjectGameObject(lootPiece.gameObject);
+            return lootPiece;
+        }
+
         public async Task<GameObject> CreateHud()
         {
-            GameObject hud = await InstantiateRegisteredAsync(AssetAddress.HudPath);
+           // GameObject hud = await InstantiateRegisteredAsync(AssetAddress.HudPath);
+            GameObject prefab = await _assets.Load<GameObject>(AssetAddress.HudPath);
+            GameObject hud = Object.Instantiate(prefab);
+            _container.InjectGameObject(hud);
             return hud;
         }
 
@@ -102,9 +126,10 @@ namespace CodeBase.Infrastructure.Factories
 
             enemy.GetComponent<RotateToHero>()?.Construct(_hero.transform);
 
-            /*LootSpawner lootSpawner = monster.GetComponentInChildren<LootSpawner>();
-            lootSpawner.Construct(this, _randomService);
-            lootSpawner.SetLootValue(monsterData.MinLoot, monsterData.MaxLoot);*/
+            LootSpawner lootSpawner = enemy.GetComponentInChildren<LootSpawner>();
+            lootSpawner.Initialize(enemyData.LootData);
+
+            _container.InjectGameObject(enemy.gameObject);
 
             return enemy;
         }

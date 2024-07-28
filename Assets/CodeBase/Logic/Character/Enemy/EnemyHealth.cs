@@ -31,10 +31,12 @@ namespace CodeBase.Enemy
         public void TakeDamage(float damage)
         {
             Current -= damage;
-
-            _animator.PlayHit();
-
             HealthChanged?.Invoke();
+            if (Current > 0)
+            {
+                _animator.PlayHit();
+            }
+
         }
 
     }

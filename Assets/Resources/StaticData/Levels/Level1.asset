@@ -15,7 +15,7 @@ MonoBehaviour:
   LevelKey: Location1
   EnemySpawners:
   - Id: Location1_c2aebca4-2e79-4326-b314-c645f467dfff
-    EnemyTypeId: 0
+    EnemyTypeId: 2
     Position: {x: 7.29, y: 0, z: -13.21}
   - Id: Location1_53d55753-6d94-40c1-84b2-46a1a4b20076
     EnemyTypeId: 3
