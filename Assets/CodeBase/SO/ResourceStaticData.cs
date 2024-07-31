@@ -7,7 +7,7 @@ namespace CodeBase.SO
     [CreateAssetMenu(fileName = "Resource", menuName = "Static Data/Resource")]
     public class ResourceStaticData : ScriptableObject
     {
-        public Texture2D Icon;
+        public Sprite Icon;
 
         public ResourceTypeId ResourceTypeId;
 

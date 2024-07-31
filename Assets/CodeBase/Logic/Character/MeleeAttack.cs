@@ -28,12 +28,12 @@ public class MeleeAttack : MonoBehaviour, IAttack
         }
     }
 
-    public void InitializeStats(EnemyStaticData enemyStaticData)
+    public void InitializeStats(CharacterStaticData characterStaticData)
     {
-        _damage = enemyStaticData.Damage;
-        _cleavage = enemyStaticData.Cleavage;
-        _effectiveDistance = enemyStaticData.EffectiveDistance;
-        _attackCooldown = enemyStaticData.AttackCooldown;
+        _damage = characterStaticData.Damage;
+        _cleavage = characterStaticData.Cleavage;
+        _effectiveDistance = characterStaticData.EffectiveDistance;
+        _attackCooldown = characterStaticData.AttackCooldown;
     }
 
     private void UpdateCooldown()

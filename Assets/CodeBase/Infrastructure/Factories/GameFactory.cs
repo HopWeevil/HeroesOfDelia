@@ -14,7 +14,7 @@ using CodeBase.UI;
 using CodeBase.Logic;
 using CodeBase.Logic.Loot;
 using CodeBase.SO;
-using Zenject.ReflectionBaking.Mono.Cecil;
+using CodeBase.Hero;
 
 namespace CodeBase.Infrastructure.Factories
 {
@@ -28,9 +28,6 @@ namespace CodeBase.Infrastructure.Factories
         private readonly DiContainer _container;
 
         private GameObject _hero;
-
-        public List<ISavedProgressReader> ProgressReaders { get; } = new List<ISavedProgressReader>();
-        public List<ISavedProgress> ProgressWriters { get; } = new List<ISavedProgress>();
    
         public GameFactory(DiContainer container, IAssetProvider assets, IStaticDataService staticDataService, IRandomService randomService, IPersistentProgressService persistentProgressService, IGameStateMachine stateMachine)
         {
@@ -43,12 +40,40 @@ namespace CodeBase.Infrastructure.Factories
 
         }
 
-        public async Task<GameObject> CreateHero(Vector3 at)
+        public async Task<GameObject> CreateHero(Vector3 at, HeroTypeId heroTypeId = HeroTypeId.Knight)
         {
-            GameObject prefab = await _assets.Load<GameObject>(AssetAddress.Knight);
-            _hero = InstantiateRegistered(prefab, at);
+            HeroStaticData heroData = _staticDataService.ForHero(heroTypeId);
+           
+
+            GameObject prefab = await _assets.Load<GameObject>(heroData.PrefabReference);
+            _hero = Object.Instantiate(prefab, at, Quaternion.identity);
             _container.InjectGameObject(_hero);
+           
+            IHealth health = _hero.GetComponent<IHealth>();
+            health.Current = heroData.Hp;
+            health.Max = heroData.Hp;
+            Debug.Log(health);
+            // hero.GetComponent<ActorUI>().Construct(health);
+
+            _hero.GetComponent<HeroMover>().SetStats(heroData.MoveSpeed);
+
+            IAttack attack = _hero.GetComponent<IAttack>();
+            attack.InitializeStats(heroData);
+
+
             return _hero;
+        }
+
+        public async Task<GameObject> CreateNonPlayableHero(HeroTypeId heroTypeId, Vector3 at, Vector3 eulers)
+        {
+            HeroStaticData heroData = _staticDataService.ForHero(heroTypeId);
+            GameObject prefab = await _assets.Load<GameObject>(heroData.PrefabReference);
+            GameObject hero = Object.Instantiate(prefab);
+            hero.transform.position = at;
+            hero.transform.Rotate(eulers);
+            hero.GetComponent<HeroMover>().enabled = false;
+            hero.GetComponent<HeroAttack>().enabled = false;
+            return hero;
         }
 
         public async Task<ResourceLoot> CreateResourceLoot(ResourceTypeId resourceType, Vector3 at)
@@ -71,7 +96,6 @@ namespace CodeBase.Infrastructure.Factories
 
         public async Task<GameObject> CreateHud()
         {
-           // GameObject hud = await InstantiateRegisteredAsync(AssetAddress.HudPath);
             GameObject prefab = await _assets.Load<GameObject>(AssetAddress.HudPath);
             GameObject hud = Object.Instantiate(prefab);
             _container.InjectGameObject(hud);
@@ -80,16 +104,13 @@ namespace CodeBase.Infrastructure.Factories
 
         public void Cleanup()
         {
-            ProgressReaders.Clear();
-            ProgressWriters.Clear();
-
             _assets.Cleanup();
         }
 
         public async Task CreateSpawner(string spawnerId, Vector3 at, EnemyTypeId enemyTypeId)
         {
             GameObject prefab = await _assets.Load<GameObject>(AssetAddress.Spawner);
-            EnemySpawner spawner = InstantiateRegistered(prefab, at).GetComponent<EnemySpawner>();
+            EnemySpawner spawner = Object.Instantiate(prefab, at, Quaternion.identity).GetComponent<EnemySpawner>();
 
             _container.InjectGameObject(spawner.gameObject);
             spawner.Initialize(spawnerId, enemyTypeId);
@@ -98,7 +119,7 @@ namespace CodeBase.Infrastructure.Factories
         public async Task<GameObject> CreateSaveTrigger(Vector3 at)
         {
             GameObject prefab = await _assets.Load<GameObject>(AssetAddress.SaveTrigger);
-            GameObject saveTrigger = InstantiateRegistered(prefab, at);
+            GameObject saveTrigger = Object.Instantiate(prefab, at, Quaternion.identity);
             _container.InjectGameObject(saveTrigger);
             return saveTrigger;
         }
@@ -132,55 +153,6 @@ namespace CodeBase.Infrastructure.Factories
             _container.InjectGameObject(enemy.gameObject);
 
             return enemy;
-        }
-
-
-        private GameObject InstantiateRegistered(GameObject prefab, Vector3 at)
-        {
-            GameObject gameObject = Object.Instantiate(prefab, at, Quaternion.identity);
-            RegisterProgressWatchers(gameObject);
-
-            return gameObject;
-        }
-
-        private GameObject InstantiateRegistered(GameObject prefab)
-        {
-            GameObject gameObject = Object.Instantiate(prefab);
-            RegisterProgressWatchers(gameObject);
-
-            return gameObject;
-        }
-
-        private async Task<GameObject> InstantiateRegisteredAsync(string prefabPath, Vector3 at)
-        {
-            GameObject gameObject = await _assets.Instantiate(path: prefabPath, at: at);
-            RegisterProgressWatchers(gameObject);
-
-            return gameObject;
-        }
-
-        private async Task<GameObject> InstantiateRegisteredAsync(string prefabPath)
-        {
-            GameObject gameObject = await _assets.Instantiate(path: prefabPath);
-            RegisterProgressWatchers(gameObject);
-
-            return gameObject;
-        }
-
-        private void RegisterProgressWatchers(GameObject gameObject)
-        {
-            foreach (ISavedProgressReader progressReader in gameObject.GetComponentsInChildren<ISavedProgressReader>())
-            {
-                Register(progressReader);
-            }
-        }
-
-        public void Register(ISavedProgressReader progressReader)
-        {
-            if (progressReader is ISavedProgress progressWriter)
-                ProgressWriters.Add(progressWriter);
-
-            ProgressReaders.Add(progressReader);
         }
     }
 }

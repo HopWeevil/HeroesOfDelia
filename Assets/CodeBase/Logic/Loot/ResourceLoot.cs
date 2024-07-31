@@ -13,7 +13,7 @@ namespace CodeBase.Logic.Loot
 
         public override void Collect(PlayerEconomyData playerEconomy)
         {
-            playerEconomy.IncreaseCoinsAmount(1);
+            playerEconomy.IncreaseResourceAmount(_resourceType, 1);
             Destroy(gameObject);
         }
     }

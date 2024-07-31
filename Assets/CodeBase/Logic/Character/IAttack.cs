@@ -2,6 +2,6 @@
 
 public interface IAttack
 {
-    void InitializeStats(EnemyStaticData enemyStaticData);
+    void InitializeStats(CharacterStaticData characterStaticData);
     void TryAttack();
 }

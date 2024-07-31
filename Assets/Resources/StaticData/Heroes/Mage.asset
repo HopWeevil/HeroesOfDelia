@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f88d317b9861a7b4ba0c849ef0a9721a, type: 3}
+  m_Name: Mage
+  m_EditorClassIdentifier: 
+  Hp: 50
+  Damage: 1
+  AttackCooldown: 0.2
+  EffectiveDistance: 1
+  Cleavage: 0.5
+  MoveSpeed: 2
+  PrefabReference:
+    m_AssetGUID: e7e530ec908955e40a037ef1705ab144
+    m_SubObjectName: 
+    m_SubObjectType: 
+    m_EditorAssetChanged: 0
+  HeroTypeId: 2
+  Price:
+    Resource: {fileID: 11400000, guid: bf6c1c8b018a310459cc0f3da048f0f9, type: 2}
+    Value: 100

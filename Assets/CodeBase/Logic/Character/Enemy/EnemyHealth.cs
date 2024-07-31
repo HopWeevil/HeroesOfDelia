@@ -10,9 +10,9 @@ namespace CodeBase.Enemy
     {
         [SerializeField] private CharacterAnimator _animator;
 
-        [SerializeField] private float _current;
+        private float _current;
 
-        [SerializeField] private float _max;
+        private float _max;
 
         public event Action HealthChanged;
 

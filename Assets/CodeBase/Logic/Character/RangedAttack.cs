@@ -27,10 +27,10 @@ public class RangedAttack : MonoBehaviour, IAttack
         }
     }
 
-    public void InitializeStats(EnemyStaticData enemyStaticData)
+    public void InitializeStats(CharacterStaticData characterStaticData)
     {
-        _damage = enemyStaticData.Damage;
-        _attackCooldown = enemyStaticData.AttackCooldown;
+        _damage = characterStaticData.Damage;
+        _attackCooldown = characterStaticData.AttackCooldown;
     }
 
     private void UpdateCooldown()

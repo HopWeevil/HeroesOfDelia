@@ -8,7 +8,7 @@ namespace CodeBase.Infrastructure.AssetManagement
     {
         Task<GameObject> Instantiate(string path, Vector3 at);
         Task<GameObject> Instantiate(string path);
-        Task<T> Load<T>(AssetReference monsterDataPrefabReference) where T : class;
+        Task<T> Load<T>(AssetReference assetReference) where T : class;
         void Cleanup();
         Task<T> Load<T>(string address) where T : class;
         void Initialize();

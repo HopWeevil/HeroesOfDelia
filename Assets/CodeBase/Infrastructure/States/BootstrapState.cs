@@ -27,7 +27,8 @@ namespace CodeBase.Infrastructure.States
 
         private void EnterLoadLevel()
         {
-            _stateMachine.Enter<LoadProgressState>();
+           // _stateMachine.Enter<LoadProgressState>();
+            //_stateMachine.Enter<LoadMetaState>();
         }
     }
 }

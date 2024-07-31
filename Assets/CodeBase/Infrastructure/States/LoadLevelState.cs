@@ -1,4 +1,5 @@
-﻿using CodeBase.Infrastructure.Factories;
+﻿using CodeBase.Enums;
+using CodeBase.Infrastructure.Factories;
 using CodeBase.Infrastructure.Sceneloader;
 using CodeBase.Logic;
 using CodeBase.Logic.Camera;
@@ -33,6 +34,7 @@ namespace CodeBase.Infrastructure.States
 
         public void Enter(string sceneName)
         {
+            Debug.Log("LoadLevelState");
             _loadingCurtain.Show();
             _sceneLoader.Load(sceneName, OnLoadedAsync);
         }
@@ -45,17 +47,8 @@ namespace CodeBase.Infrastructure.States
         private async void OnLoadedAsync()
         {
             await InitGameWorld();
-            InformProgressReaders();
 
             _stateMachine.Enter<GameLoopState>();
-        }
-
-        private void InformProgressReaders()
-        {
-            foreach (ISavedProgressReader progressReader in _gameFactory.ProgressReaders)
-            {
-                progressReader.LoadProgress(_progressService.Progress);
-            }
         }
 
         private async Task InitGameWorld()
@@ -76,7 +69,7 @@ namespace CodeBase.Infrastructure.States
 
         private async Task<GameObject> InitHero(LevelStaticData levelData)
         {
-            GameObject hero = await _gameFactory.CreateHero(levelData.InitialHeroPosition);
+            GameObject hero = await _gameFactory.CreateHero(levelData.InitialHeroPosition, HeroTypeId.Knight);
             return hero;
         }
 

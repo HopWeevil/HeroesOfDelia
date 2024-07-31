@@ -12,5 +12,6 @@ namespace CodeBase.Services.StaticData
         EquipmentStaticData ForEquipment(EquipmentTypeId id);
         ResourceStaticData ForResource(ResourceTypeId id);
         List<EquipmentStaticData> GetEquipmentByRarity(Rarity rarity);
+        HeroStaticData ForHero(HeroTypeId id);
     }
 }

@@ -29,6 +29,7 @@ namespace CodeBase.Infrastructure
         private void RegisterStates()
         {
             _gameStateMachine.RegisterState(_statesFactory.Create<LoadProgressState>());
+            _gameStateMachine.RegisterState(_statesFactory.Create<LoadMetaState>());
             _gameStateMachine.RegisterState(_statesFactory.Create<LoadLevelState>());
             _gameStateMachine.RegisterState(_statesFactory.Create<GameLoopState>());
         }

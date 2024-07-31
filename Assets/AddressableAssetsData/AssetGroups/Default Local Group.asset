@@ -17,7 +17,7 @@ MonoBehaviour:
     m_SerializedData: []
   m_GUID: 8b604b1773cce66449beef77495f2259
   m_SerializeEntries:
-  - m_GUID: cc2541273efe4b7478de16baf7290adf
+  - m_GUID: 1f7c67a4dd7b89c499f0319fdfebce23
     m_Address: Knight
     m_ReadOnly: 0
     m_SerializedLabels: []
@@ -79,6 +79,41 @@ MonoBehaviour:
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 491afadd642424b4d81f472858de5e7b
     m_Address: EpicEquipmentBox
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: eac928c666ea2c04e876760342a7c47d
+    m_Address: ResourcesBar
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 701cf098ce132d34595474b2b7aac2e2
+    m_Address: MainMenu
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: c8fae78faa742b140a56b10d34736a90
+    m_Address: UIRoot
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 51a9d4c5f54e90b4aa4719b3dea071c9
+    m_Address: Barbarian
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: e7e530ec908955e40a037ef1705ab144
+    m_Address: Mage
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 90fb56ee7d10dc4499702fccdd310531
+    m_Address: Rogue
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 8d1a80080ca924b4385763325669ea0a
+    m_Address: HeroesWindow
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0

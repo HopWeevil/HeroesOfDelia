@@ -1,6 +1,7 @@
 
 using CodeBase.Data;
 using CodeBase.Infrastructure.Services.SaveLoad;
+using CodeBase.Logic;
 using CodeBase.Services.PersistentProgress;
 using UnityEngine;
 
@@ -11,29 +12,34 @@ namespace CodeBase.Infrastructure.States
         private readonly IGameStateMachine _gameStateMachine;
         private readonly IPersistentProgressService _progressService;
         private readonly ISaveLoadService _saveLoadProgress;
+        private readonly ILoadingCurtain _loadingCurtain;
 
-        public LoadProgressState(IGameStateMachine gameStateMachine, IPersistentProgressService progressService, ISaveLoadService saveLoadProgress)
+        public LoadProgressState(IGameStateMachine gameStateMachine, IPersistentProgressService progressService, ISaveLoadService saveLoadProgress, ILoadingCurtain loadingCurtain)
         {
             _gameStateMachine = gameStateMachine;
             _progressService = progressService;
             _saveLoadProgress = saveLoadProgress;
+            _loadingCurtain = loadingCurtain;
         }
 
         public void Enter()
         {
+            //_loadingCurtain.Show();
             LoadProgressOrInitNew();
       
-            _gameStateMachine.Enter<LoadLevelState, string>("Location1");
+            //_gameStateMachine.Enter<LoadLevelState, string>("Location1");
+            _gameStateMachine.Enter<LoadMetaState>();
         }
 
         public void Exit()
         {
-
+            //_loadingCurtain.Hide();
         }
 
         private void LoadProgressOrInitNew()
         {
-            _progressService.Progress = _saveLoadProgress.LoadProgress() ?? NewProgress();
+            //_progressService.Progress = _saveLoadProgress.LoadProgress() ?? NewProgress();
+            _progressService.Progress =  NewProgress();
             _progressService.Economy = NewEconomy();
         }
 
@@ -41,10 +47,8 @@ namespace CodeBase.Infrastructure.States
         {
             var progress = new PlayerProgress(initialLevel: "Main");
 
-            progress.HeroState.MaxHP = 50;
-            progress.HeroStats.Damage = 1;
-            progress.HeroStats.DamageRadius = 0.5f;
-            progress.HeroState.ResetHP();
+            
+
             return progress;
         }
 
@@ -52,6 +56,9 @@ namespace CodeBase.Infrastructure.States
         private PlayerEconomyData NewEconomy()
         {
             var progress = new PlayerEconomyData();
+            progress.AddHeroItem(Enums.HeroTypeId.Knight);
+            progress.IncreaseResourceAmount(Enums.ResourceTypeId.Coin, 5000);
+            progress.IncreaseResourceAmount(Enums.ResourceTypeId.Gem, 2000);
             return progress;
         }
     }
