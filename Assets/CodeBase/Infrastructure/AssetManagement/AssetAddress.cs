@@ -13,5 +13,7 @@ namespace CodeBase.Infrastructure.AssetManagement
         public const string HeroesWindow = "HeroesWindow";
         public const string ShopWindow = "HeroesWindow";
         public const string InventoryWindow = "InventoryWindow";
+        public const string InventorySlot = "InventorySlot";
+        public const string EquipmentItemWindow = "EquipmentItemWindow";
     }
 }

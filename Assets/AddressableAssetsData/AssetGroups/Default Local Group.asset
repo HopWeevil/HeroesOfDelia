@@ -117,6 +117,21 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 8dd18a25b3b0ce441b2d00c29ddad77d
+    m_Address: InventoryWindow
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 8d74390f468a9c2408d229dc6975c98d
+    m_Address: InventorySlot
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: a3f31891527ce2446995fca94f3215c3
+    m_Address: EquipmentItemWindow
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 2b30344375a32544c8f024ab8bc654ca, type: 2}
   m_SchemaSet:

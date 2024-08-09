@@ -12,7 +12,7 @@ namespace CodeBase.Logic.Loot
 
         public override void Collect(PlayerEconomyData playerEconomy)
         {
-            playerEconomy.AddInventoryItem(_typeId);
+            //playerEconomy.AddInventoryItem(new InventoryItem(_typeId));
             Destroy(gameObject);
         }
     }

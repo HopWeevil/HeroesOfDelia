@@ -2,6 +2,8 @@
 {
     public enum EquipmentTypeId
     {
-        Sword
+        Sword,
+        Axe,
+        Helmet
     }
 }

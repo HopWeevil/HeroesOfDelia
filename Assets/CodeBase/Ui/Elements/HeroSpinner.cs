@@ -28,7 +28,6 @@ namespace CodeBase.UI.Elements
 
         private void OnEnable()
         {
-            Debug.Log("Sub");
             _showcaseHeroFactory.OnCreated += OnHeroCreated;
         }
 

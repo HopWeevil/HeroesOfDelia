@@ -41,24 +41,32 @@ namespace CodeBase.Infrastructure.States
             //_progressService.Progress = _saveLoadProgress.LoadProgress() ?? NewProgress();
             _progressService.Progress =  NewProgress();
             _progressService.Economy = NewEconomy();
+            _progressService.Inventory = NewInventory();
         }
 
         private PlayerProgress NewProgress()
         {
             var progress = new PlayerProgress(initialLevel: "Main");
-
             
 
             return progress;
         }
 
+        private PlayerInventory NewInventory()
+        {
+            var inventory = new PlayerInventory();
+            inventory.AddInventoryItem(new InventoryItem(Enums.EquipmentTypeId.Sword));
+            inventory.AddInventoryItem(new InventoryItem(Enums.EquipmentTypeId.Sword));
+            inventory.AddInventoryItem(new InventoryItem(Enums.EquipmentTypeId.Axe));
+            return inventory;
+        }
 
         private PlayerEconomyData NewEconomy()
         {
             var progress = new PlayerEconomyData();
             progress.AddHeroItem(Enums.HeroTypeId.Knight);
             progress.IncreaseResourceAmount(Enums.ResourceTypeId.Coin, 5000);
-            progress.IncreaseResourceAmount(Enums.ResourceTypeId.Gem, 2000);
+            progress.IncreaseResourceAmount(Enums.ResourceTypeId.Gem, 2000);           
             return progress;
         }
     }

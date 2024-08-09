@@ -66,7 +66,6 @@ namespace CodeBase.Infrastructure.States
 
         private async Task InitHeroSpinner(GameObject menu)
         {
-            Debug.Log("Crete");
             await _heroCreator.Create();
         }
     }

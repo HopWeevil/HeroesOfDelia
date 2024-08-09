@@ -11,11 +11,13 @@ namespace CodeBase.SO
 
         public string Description;
 
-        public Texture2D Icon;
+        public Sprite Icon;
 
         public EquipmentTypeId EquipmentTypeId;
 
         public Rarity Rarity;
+
+        public EquipmentCategory EquipmentClass;
 
         public AssetReferenceGameObject PrefabReference;
 

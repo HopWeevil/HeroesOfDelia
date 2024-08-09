@@ -1,4 +1,7 @@
-﻿using System;
+﻿using CodeBase.Enums;
+using CodeBase.SO;
+using CodeBase.UI.Windows;
+using System;
 using System.Threading.Tasks;
 using UnityEngine;
 
@@ -12,5 +15,7 @@ namespace CodeBase.Infrastructure.Factories
         Task<GameObject> CreateShop();
         Task<GameObject> CreateWindow(string address);
         Task<GameObject> CreateWindow(WindowId windowId);
+        Task<InventorySlotView> CreateInventorySlot(RectTransform parent, InventoryItem item);
+        Task<EquipmentItemWindow> CreateEquipmentInfoWindow(EquipmentStaticData data);
     }
 }
