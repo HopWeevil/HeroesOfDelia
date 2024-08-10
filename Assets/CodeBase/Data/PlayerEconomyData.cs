@@ -4,18 +4,18 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [SerializeField]
-public class InventoryItem
+public class EquipmentItem
 {
     public EquipmentTypeId EquipmentTypeId;
     public int Level;
 
-    public InventoryItem(EquipmentTypeId equipmentTypeId, int level)
+    public EquipmentItem(EquipmentTypeId equipmentTypeId, int level)
     {
         EquipmentTypeId = equipmentTypeId;
         Level = level;
     }
 
-    public InventoryItem(EquipmentTypeId equipmentTypeId)
+    public EquipmentItem(EquipmentTypeId equipmentTypeId)
     {
         EquipmentTypeId = equipmentTypeId;
         Level = UnityEngine.Random.Range(1,100);

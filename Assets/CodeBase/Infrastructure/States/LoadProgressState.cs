@@ -55,9 +55,9 @@ namespace CodeBase.Infrastructure.States
         private PlayerInventory NewInventory()
         {
             var inventory = new PlayerInventory();
-            inventory.AddInventoryItem(new InventoryItem(Enums.EquipmentTypeId.Sword));
-            inventory.AddInventoryItem(new InventoryItem(Enums.EquipmentTypeId.Sword));
-            inventory.AddInventoryItem(new InventoryItem(Enums.EquipmentTypeId.Axe));
+            inventory.AddInventoryItem(new EquipmentItem(Enums.EquipmentTypeId.Sword));
+            inventory.AddInventoryItem(new EquipmentItem(Enums.EquipmentTypeId.Sword));
+            inventory.AddInventoryItem(new EquipmentItem(Enums.EquipmentTypeId.Axe));
             return inventory;
         }
 

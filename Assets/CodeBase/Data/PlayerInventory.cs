@@ -4,34 +4,34 @@ using System.Collections.Generic;
 
 public class PlayerInventory
 {
-    private readonly List<InventoryItem> _inventoryItems;
-    private readonly Dictionary<HeroTypeId, Dictionary<EquipmentCategory, InventoryItem>> _heroesEquipment;
+    private readonly List<EquipmentItem> _inventoryItems;
+    private readonly Dictionary<HeroTypeId, Dictionary<EquipmentCategory, EquipmentItem>> _heroesEquipment;
 
-    public IReadOnlyList<InventoryItem> InventoryItems => _inventoryItems;
-    public IReadOnlyDictionary<HeroTypeId, Dictionary<EquipmentCategory, InventoryItem>> HeroesEquipment => _heroesEquipment;
+    public IReadOnlyList<EquipmentItem> InventoryItems => _inventoryItems;
+    public IReadOnlyDictionary<HeroTypeId, Dictionary<EquipmentCategory, EquipmentItem>> HeroesEquipment => _heroesEquipment;
 
-    public event Action<HeroTypeId, InventoryItem> OnHeroEquip;
-    public event Action<HeroTypeId, InventoryItem> OnHeroUnEquip;
+    public event Action<HeroTypeId, EquipmentItem> OnHeroEquip;
+    public event Action<HeroTypeId, EquipmentItem> OnHeroUnEquip;
     public event Action<int> OnInventoryItemRemove;
     public event Action<int> OnInventoryItemAdd;
 
     public PlayerInventory()
     {
-        _inventoryItems = new List<InventoryItem>();
-        _heroesEquipment = new Dictionary<HeroTypeId, Dictionary<EquipmentCategory, InventoryItem>>();
+        _inventoryItems = new List<EquipmentItem>();
+        _heroesEquipment = new Dictionary<HeroTypeId, Dictionary<EquipmentCategory, EquipmentItem>>();
     }
 
-    public void AddInventoryItem(InventoryItem item)
+    public void AddInventoryItem(EquipmentItem item)
     {
         _inventoryItems.Add(item);
         OnInventoryItemAdd?.Invoke(_inventoryItems.IndexOf(item));
     }
 
-    public void EquipHero(HeroTypeId hero, InventoryItem equipment, EquipmentCategory category)
+    public void EquipHero(HeroTypeId hero, EquipmentItem equipment, EquipmentCategory category)
     {
         if (!_heroesEquipment.TryGetValue(hero, out var equipmentDict))
         {
-            equipmentDict = new Dictionary<EquipmentCategory, InventoryItem>();
+            equipmentDict = new Dictionary<EquipmentCategory, EquipmentItem>();
             _heroesEquipment[hero] = equipmentDict;
         }
 
@@ -45,7 +45,7 @@ public class PlayerInventory
         OnHeroEquip?.Invoke(hero, equipment);
     }
 
-    public void UnequipHero(HeroTypeId hero, InventoryItem equipment, EquipmentCategory category)
+    public void UnequipHero(HeroTypeId hero, EquipmentItem equipment, EquipmentCategory category)
     {
         if (_heroesEquipment.TryGetValue(hero, out var equipmentDict) && equipmentDict.Remove(category))
         {
@@ -54,7 +54,7 @@ public class PlayerInventory
         }
     }
 
-    public void RemoveInventoryItem(InventoryItem item)
+    public void RemoveInventoryItem(EquipmentItem item)
     {
         int index = _inventoryItems.IndexOf(item);
         if (index >= 0)
@@ -64,7 +64,7 @@ public class PlayerInventory
         }
     }
 
-    public bool IsItemEquipped(HeroTypeId hero, InventoryItem equipment, EquipmentCategory category)
+    public bool IsItemEquipped(HeroTypeId hero, EquipmentItem equipment, EquipmentCategory category)
     {
         if (_heroesEquipment.TryGetValue(hero, out var equipmentDict))
         {
@@ -76,7 +76,7 @@ public class PlayerInventory
         return false;
     }
 
-    public InventoryItem GetEquippedItem(HeroTypeId hero, EquipmentCategory category)
+    public EquipmentItem GetEquippedItem(HeroTypeId hero, EquipmentCategory category)
     {
         if (_heroesEquipment.TryGetValue(hero, out var equipmentDict))
         {

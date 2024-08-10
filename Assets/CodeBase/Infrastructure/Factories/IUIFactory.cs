@@ -15,7 +15,7 @@ namespace CodeBase.Infrastructure.Factories
         Task<GameObject> CreateShop();
         Task<GameObject> CreateWindow(string address);
         Task<GameObject> CreateWindow(WindowId windowId);
-        Task<InventorySlotView> CreateInventorySlot(RectTransform parent, InventoryItem item);
-        Task<EquipmentItemWindow> CreateEquipmentInfoWindow(EquipmentStaticData data);
+        Task<EquipmentItemView> CreateEquipmentItemView(RectTransform parent, EquipmentItem item);
+        Task<EquipmentItemWindow> CreateEquipmentInfoWindow(EquipmentItem item);
     }
 }

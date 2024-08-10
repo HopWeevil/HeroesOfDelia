@@ -13,10 +13,11 @@ MonoBehaviour:
   m_Name: Axe
   m_EditorClassIdentifier: 
   Title: Axe
-  Description: 
+  Description: Super Axe
   Icon: {fileID: 21300000, guid: 763bdf500c5c24f698f8e1839ab00640, type: 3}
   EquipmentTypeId: 1
   Rarity: 0
+  EquipmentClass: 0
   PrefabReference:
     m_AssetGUID: e8668d01e8f36db458ad3892e58b8131
     m_SubObjectName: 

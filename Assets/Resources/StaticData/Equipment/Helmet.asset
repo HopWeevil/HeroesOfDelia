@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b7072ec19ee872341bf8ee86d8fb3283, type: 3}
   m_Name: Helmet
   m_EditorClassIdentifier: 
-  Title: Sword
-  Description: 
+  Title: Helmet
+  Description: Green helmet
   Icon: {fileID: 21300000, guid: 169d45648e00348038299fc345aa6b4f, type: 3}
   EquipmentTypeId: 2
   Rarity: 0

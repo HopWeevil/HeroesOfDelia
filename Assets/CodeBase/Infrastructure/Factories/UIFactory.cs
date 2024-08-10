@@ -1,9 +1,9 @@
-﻿using CodeBase.Enums;
-using CodeBase.Infrastructure.AssetManagement;
+﻿using CodeBase.Infrastructure.AssetManagement;
 using CodeBase.Services.PersistentProgress;
 using CodeBase.Services.StaticData;
 using CodeBase.SO;
 using CodeBase.UI.Windows;
+using DG.Tweening;
 using System.Threading.Tasks;
 using UnityEngine;
 using Zenject;
@@ -40,20 +40,26 @@ namespace CodeBase.Infrastructure.Factories
             return await CreateWindow(AssetAddress.MainMenu);
         }
 
-        public async Task<EquipmentItemWindow> CreateEquipmentInfoWindow(EquipmentStaticData data)
+        public async Task<EquipmentItemWindow> CreateEquipmentInfoWindow(EquipmentItem item)
         {
             GameObject prefab = await _assets.Load<GameObject>(AssetAddress.EquipmentItemWindow);
             EquipmentItemWindow window = _container.InstantiatePrefab(prefab, _uiRoot.transform).GetComponent<EquipmentItemWindow>();
-            window.SetEquipmentData(data);
+            EquipmentStaticData data = _staticData.ForEquipment(item.EquipmentTypeId);
+            window.SetEquipment(item, data);
             return window;
         }
 
-        public async Task<InventorySlotView> CreateInventorySlot(RectTransform parent, InventoryItem item)
+        public async Task<EquipmentItemView> CreateEquipmentItemView(RectTransform parent, EquipmentItem item)
         {
             GameObject prefab = await _assets.Load<GameObject>(AssetAddress.InventorySlot);
-            InventorySlotView slot = Object.Instantiate(prefab, parent).GetComponent<InventorySlotView>();
+            EquipmentItemView slot = _container.InstantiatePrefab(prefab, parent).GetComponent<EquipmentItemView>();
+
             EquipmentStaticData data = _staticData.ForEquipment(item.EquipmentTypeId);
-            slot.SetEquipmentdata(data, item);
+            slot.SetEquipmentData(data, item);
+
+            slot.transform.localScale = Vector3.zero;
+            slot.transform.DOScale(Vector3.one, 0.3f).SetEase(Ease.OutBack);
+
             return slot;
         }
 

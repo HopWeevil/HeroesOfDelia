@@ -2094,6 +2094,11 @@ PrefabInstance:
       propertyPath: _equipmentClass
       value: 5
       objectReference: {fileID: 0}
+    - target: {fileID: 811734883405160683, guid: 166929c8c72fc7c4690ce070ff80a059,
+        type: 3}
+      propertyPath: _equipmentCategory
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 1277827520373380280, guid: 166929c8c72fc7c4690ce070ff80a059,
         type: 3}
       propertyPath: m_Pivot.x
@@ -2227,6 +2232,11 @@ PrefabInstance:
     - target: {fileID: 811734883405160683, guid: 166929c8c72fc7c4690ce070ff80a059,
         type: 3}
       propertyPath: _equipmentClass
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 811734883405160683, guid: 166929c8c72fc7c4690ce070ff80a059,
+        type: 3}
+      propertyPath: _equipmentCategory
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 1277827520373380280, guid: 166929c8c72fc7c4690ce070ff80a059,
@@ -2967,6 +2977,11 @@ PrefabInstance:
       propertyPath: _equipmentClass
       value: 4
       objectReference: {fileID: 0}
+    - target: {fileID: 811734883405160683, guid: 166929c8c72fc7c4690ce070ff80a059,
+        type: 3}
+      propertyPath: _equipmentCategory
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 1277827520373380280, guid: 166929c8c72fc7c4690ce070ff80a059,
         type: 3}
       propertyPath: m_Pivot.x
@@ -3100,6 +3115,11 @@ PrefabInstance:
     - target: {fileID: 811734883405160683, guid: 166929c8c72fc7c4690ce070ff80a059,
         type: 3}
       propertyPath: _equipmentClass
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 811734883405160683, guid: 166929c8c72fc7c4690ce070ff80a059,
+        type: 3}
+      propertyPath: _equipmentCategory
       value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 1277827520373380280, guid: 166929c8c72fc7c4690ce070ff80a059,
@@ -3371,6 +3391,11 @@ PrefabInstance:
     - target: {fileID: 811734883405160683, guid: 166929c8c72fc7c4690ce070ff80a059,
         type: 3}
       propertyPath: _equipmentClass
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 811734883405160683, guid: 166929c8c72fc7c4690ce070ff80a059,
+        type: 3}
+      propertyPath: _equipmentCategory
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1277827520373380280, guid: 166929c8c72fc7c4690ce070ff80a059,

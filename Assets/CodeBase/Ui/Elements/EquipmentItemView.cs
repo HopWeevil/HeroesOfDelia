@@ -1,22 +1,29 @@
 using CodeBase.Data;
+using CodeBase.Infrastructure.Factories;
 using CodeBase.SO;
+using CodeBase.UI.Windows;
 using TMPro;
 using UnityEngine;
-using UnityEngine.Events;
 using UnityEngine.UI;
+using Zenject;
 
-public class InventorySlotView : MonoBehaviour
+public class EquipmentItemView : MonoBehaviour
 {
     [SerializeField] private Image _icon;
     [SerializeField] private Button _button;
     [SerializeField] private TMP_Text _levelText;
 
-    public UnityAction<EquipmentStaticData, InventoryItem> OnClick;
-
     private EquipmentStaticData _data;
-    private InventoryItem _item;
+    private EquipmentItem _item;
+    private IUIFactory _factory;
 
-    public void SetEquipmentdata(EquipmentStaticData data, InventoryItem item)
+    [Inject]
+    private void Construct(IUIFactory uIFactory)
+    {
+        _factory = uIFactory;
+    }
+
+    public void SetEquipmentData(EquipmentStaticData data, EquipmentItem item)
     {
         _data = data;
         _item = item;
@@ -25,7 +32,7 @@ public class InventorySlotView : MonoBehaviour
     private void Start()
     {
         _icon.sprite =_data.Icon;
-        _levelText.text = "Lv. " + _item.Level.ToString();
+        _levelText.text = string.Format(_levelText.text, _item.Level.ToString());
     }
 
     private void OnEnable()
@@ -40,6 +47,6 @@ public class InventorySlotView : MonoBehaviour
 
     private void HandleClick()
     {
-        OnClick?.Invoke(_data, _item);
+        _factory.CreateEquipmentInfoWindow(_item);
     }
 }

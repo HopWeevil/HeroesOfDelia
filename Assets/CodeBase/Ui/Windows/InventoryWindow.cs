@@ -1,11 +1,8 @@
-using CodeBase.Enums;
 using CodeBase.Infrastructure.Factories;
 using CodeBase.Services.PersistentProgress;
 using CodeBase.Services.StaticData;
-using CodeBase.SO;
-using System;
 using System.Collections.Generic;
-using System.Linq;
+using System.Threading.Tasks;
 using UnityEngine;
 using Zenject;
 
@@ -19,7 +16,7 @@ namespace CodeBase.UI.Windows
         private IPersistentProgressService _persistentProgressService;
         private IStaticDataService _staticDataService;
 
-        private List<InventorySlotView> _inventorySlots = new List<InventorySlotView>();
+        private List<EquipmentItemView> _inventorySlots = new List<EquipmentItemView>();
 
         [Inject]
         private void Construct(IUIFactory uIFactory, IPersistentProgressService persistentProgress, IStaticDataService staticDataService)
@@ -40,12 +37,15 @@ namespace CodeBase.UI.Windows
             _persistentProgressService.Inventory.OnInventoryItemAdd += OnInventoryItemAdd;
         }
 
+        private void OnDisable()
+        {
+            _persistentProgressService.Inventory.OnInventoryItemRemove -= OnInventoryItemRemove;
+            _persistentProgressService.Inventory.OnInventoryItemAdd -= OnInventoryItemAdd;
+        }
+
         private async void OnInventoryItemAdd(int id)
         {
-            InventoryItem item = _persistentProgressService.Inventory.InventoryItems[id];
-            InventorySlotView slot = await _uIFactory.CreateInventorySlot(_itemsContainer, item);
-            slot.OnClick += OnSlotClick;
-            _inventorySlots.Add(slot);
+            await CreateSlot(id);
         }
 
         private void OnInventoryItemRemove(int id)
@@ -54,41 +54,19 @@ namespace CodeBase.UI.Windows
             _inventorySlots.RemoveAt(id);
         }
 
-        private void OnDisable()
-        {
-            _persistentProgressService.Inventory.OnInventoryItemRemove -= OnInventoryItemRemove;
-        }
-
-        private void OnHeroEquip(HeroTypeId hero, EquipmentTypeId equipment)
-        {
-            //RefreshInventoryUI();
-        }
-
         private async void CreateSlots()
         {
             for (int i = 0; i < _persistentProgressService.Inventory.InventoryItems.Count; i++)
             {
-                InventoryItem item = _persistentProgressService.Inventory.InventoryItems[i];
-                InventorySlotView slot = await _uIFactory.CreateInventorySlot(_itemsContainer, item);
-                slot.OnClick += OnSlotClick;
-                _inventorySlots.Add(slot);
+                await CreateSlot(i);
             }
         }
 
-        private void RefreshInventoryUI()
+        private async Task CreateSlot(int id)
         {
-            foreach (Transform child in _itemsContainer)
-            {
-                Destroy(child.gameObject);
-            }
-
-            CreateSlots();
-        }
-
-        private async void OnSlotClick(EquipmentStaticData data, InventoryItem item)
-        {
-            EquipmentItemWindow window = await _uIFactory.CreateEquipmentInfoWindow(data);
-            window.SetItem(item);
+            EquipmentItem item = _persistentProgressService.Inventory.InventoryItems[id];
+            EquipmentItemView slot = await _uIFactory.CreateEquipmentItemView(_itemsContainer, item);
+            _inventorySlots.Add(slot);
         }
     }
 }

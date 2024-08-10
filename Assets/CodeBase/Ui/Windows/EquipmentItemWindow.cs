@@ -10,13 +10,17 @@ namespace CodeBase.UI.Windows
     public class EquipmentItemWindow : WindowBase
     {
         [SerializeField] private TMP_Text _title;
+        [SerializeField] private TMP_Text _description;
+        [SerializeField] private TMP_Text _level;
+        [SerializeField] private TMP_Text _rarity;
+
         [SerializeField] private Image _equipmentIcon;
         [SerializeField] private Button _equipButton;
         [SerializeField] private Button _unEquipButton;
 
         private IPersistentProgressService _progressService;
         private EquipmentStaticData _data;
-        private InventoryItem _item;
+        private EquipmentItem _item;
 
         [Inject] 
         private void Construct(IPersistentProgressService progressService)
@@ -24,31 +28,16 @@ namespace CodeBase.UI.Windows
             _progressService = progressService;
         }
 
-        public void SetEquipmentData(EquipmentStaticData data)
-        {
-            _data = data;
-        }
-
-        public void SetItem(InventoryItem item)
+        public void SetEquipment(EquipmentItem item, EquipmentStaticData data)
         {
             _item = item;
+            _data = data;
         }
 
         private void Start()
         {
-            _title.text = _data.Title;
-            _equipmentIcon.sprite = _data.Icon;
-
-            if (_progressService.Inventory.IsItemEquipped(_progressService.Progress.SelectedHero, _item, _data.EquipmentClass))
-            {
-                _unEquipButton.gameObject.SetActive(true);
-                _equipButton.gameObject.SetActive(false);
-            }
-            else
-            {               
-                _unEquipButton.gameObject.SetActive(false);
-                _equipButton.gameObject.SetActive(true);
-            }
+            SetEquipmentItemData();
+            UpdateButtons();
         }
 
         private void OnEnable()
@@ -61,6 +50,23 @@ namespace CodeBase.UI.Windows
         {
             _equipButton.onClick.RemoveListener(OnEquipButtonClick);
             _unEquipButton.onClick.RemoveListener(OnUnequipButtonClick);
+        }
+
+        private void SetEquipmentItemData()
+        {
+            _title.text = _data.Title;
+            _equipmentIcon.sprite = _data.Icon;
+            _level.text = string.Format(_level.text, _item.Level, 100);
+            _description.text = _data.Description;
+            _rarity.text = string.Format(_rarity.text, ColorUtility.ToHtmlStringRGBA(Color.green), _data.Rarity.ToString());
+        }
+
+        private void UpdateButtons()
+        {
+            bool isEquipped = _progressService.Inventory.IsItemEquipped(_progressService.Progress.SelectedHero, _item, _data.EquipmentClass);
+
+            _unEquipButton.gameObject.SetActive(isEquipped);
+            _equipButton.gameObject.SetActive(!isEquipped);
         }
 
         private void OnUnequipButtonClick()
