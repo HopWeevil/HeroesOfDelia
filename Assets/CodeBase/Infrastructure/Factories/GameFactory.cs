@@ -64,11 +64,18 @@ namespace CodeBase.Infrastructure.Factories
             return _hero;
         }
 
+        public async Task<GameObject> CreateEquipment(EquipmentTypeId equipmentType, Transform parent)
+        {
+            EquipmentStaticData equipment = _staticDataService.ForEquipment(equipmentType);
+            GameObject prefab = await _assets.Load<GameObject>(equipment.PrefabReference);
+            return Object.Instantiate(prefab, parent);
+        }
+
         public async Task<GameObject> CreateNonPlayableHero(HeroTypeId heroTypeId, Vector3 at, Vector3 eulers)
         {
             HeroStaticData heroData = _staticDataService.ForHero(heroTypeId);
             GameObject prefab = await _assets.Load<GameObject>(heroData.PrefabReference);
-            GameObject hero = Object.Instantiate(prefab);
+            GameObject hero = _container.InstantiatePrefab(prefab);
             hero.transform.position = at;
             hero.transform.Rotate(eulers);
             hero.GetComponent<HeroMover>().enabled = false;

@@ -18,5 +18,6 @@ namespace CodeBase.Infrastructure.Factories
         Task<ResourceLoot> CreateResourceLoot(ResourceTypeId resourceType, Vector3 at);
         Task<EquipmentLoot> CreateEquipmentLoot(EquipmentTypeId equipmentType, Vector3 at);
         Task<GameObject> CreateNonPlayableHero(HeroTypeId heroTypeId, Vector3 at, Vector3 eulers);
+        Task<GameObject> CreateEquipment(EquipmentTypeId equipmentType, Transform parent);
     }
 }

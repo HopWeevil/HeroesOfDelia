@@ -33,14 +33,14 @@ namespace CodeBase.UI.Windows
 
         private void OnEnable()
         {
-            _persistentProgressService.Inventory.OnInventoryItemRemove += OnInventoryItemRemove;
-            _persistentProgressService.Inventory.OnInventoryItemAdd += OnInventoryItemAdd;
+            _persistentProgressService.Inventory.InventoryItemRemove += OnInventoryItemRemove;
+            _persistentProgressService.Inventory.InventoryItemAdd += OnInventoryItemAdd;
         }
 
         private void OnDisable()
         {
-            _persistentProgressService.Inventory.OnInventoryItemRemove -= OnInventoryItemRemove;
-            _persistentProgressService.Inventory.OnInventoryItemAdd -= OnInventoryItemAdd;
+            _persistentProgressService.Inventory.InventoryItemRemove -= OnInventoryItemRemove;
+            _persistentProgressService.Inventory.InventoryItemAdd -= OnInventoryItemAdd;
         }
 
         private async void OnInventoryItemAdd(int id)

@@ -30,14 +30,14 @@ public class EquipmentSlot : MonoBehaviour
 
     private void OnEnable()
     {
-        _progressService.Inventory.OnHeroEquip += OnHeroEquip;
-        _progressService.Inventory.OnHeroUnEquip += OnHeroUnEquip;
+        _progressService.Inventory.HeroEquip += OnHeroEquip;
+        _progressService.Inventory.HeroUnEquip += OnHeroUnEquip;
     }
 
     private void OnDisable()
     {
-        _progressService.Inventory.OnHeroEquip -= OnHeroEquip;
-        _progressService.Inventory.OnHeroUnEquip -= OnHeroUnEquip;
+        _progressService.Inventory.HeroEquip -= OnHeroEquip;
+        _progressService.Inventory.HeroUnEquip -= OnHeroUnEquip;
     }
 
     private async void Start()

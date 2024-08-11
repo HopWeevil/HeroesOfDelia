@@ -132,6 +132,76 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: c85b24ef6fc6c824480cf80f7a3d967b
+    m_Address: Axe3
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: f1dac537e47a9b643b06367b8587c36a
+    m_Address: Crossbow2
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: d0d83abcefe61704bbc107463b7f6be8
+    m_Address: Wand1
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 8a065d79124cd8e4192e2378d79ed687
+    m_Address: Axe1
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 6bfda8bc91d07fd4d92e01343bf6ebc8
+    m_Address: Dagger2
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 539d04e5f8c389747b8995cdf84baf38
+    m_Address: Axe2
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 2e2f76832ff6ecc4fb62528db0506691
+    m_Address: Staff2
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: c08d77bed90c353478c3ff5060b81dfd
+    m_Address: Crossbow1
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: e095eb5096f56834286e92108daffd49
+    m_Address: Staff1
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: bf89572fcae8e44458b8d9b83be30623
+    m_Address: Dagger1
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: a5f3284bd46da384699233b39fb528b9
+    m_Address: Crossbow3
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 91f235a01507c9941a3ad7e254557ee0
+    m_Address: Sword1
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 7b77f77505c2c174bbcb5594ed29011c
+    m_Address: Sword2
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: a85c7ffa7294fdc4bb2109b4b283d172
+    m_Address: Sword3
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 2b30344375a32544c8f024ab8bc654ca, type: 2}
   m_SchemaSet:

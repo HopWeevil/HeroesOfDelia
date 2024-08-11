@@ -10,10 +10,10 @@ public class PlayerInventory
     public IReadOnlyList<EquipmentItem> InventoryItems => _inventoryItems;
     public IReadOnlyDictionary<HeroTypeId, Dictionary<EquipmentCategory, EquipmentItem>> HeroesEquipment => _heroesEquipment;
 
-    public event Action<HeroTypeId, EquipmentItem> OnHeroEquip;
-    public event Action<HeroTypeId, EquipmentItem> OnHeroUnEquip;
-    public event Action<int> OnInventoryItemRemove;
-    public event Action<int> OnInventoryItemAdd;
+    public event Action<HeroTypeId, EquipmentItem> HeroEquip;
+    public event Action<HeroTypeId, EquipmentItem> HeroUnEquip;
+    public event Action<int> InventoryItemRemove;
+    public event Action<int> InventoryItemAdd;
 
     public PlayerInventory()
     {
@@ -24,7 +24,7 @@ public class PlayerInventory
     public void AddInventoryItem(EquipmentItem item)
     {
         _inventoryItems.Add(item);
-        OnInventoryItemAdd?.Invoke(_inventoryItems.IndexOf(item));
+        InventoryItemAdd?.Invoke(_inventoryItems.IndexOf(item));
     }
 
     public void EquipHero(HeroTypeId hero, EquipmentItem equipment, EquipmentCategory category)
@@ -42,7 +42,7 @@ public class PlayerInventory
 
         equipmentDict[category] = equipment;
         RemoveInventoryItem(equipment);
-        OnHeroEquip?.Invoke(hero, equipment);
+        HeroEquip?.Invoke(hero, equipment);
     }
 
     public void UnequipHero(HeroTypeId hero, EquipmentItem equipment, EquipmentCategory category)
@@ -50,7 +50,7 @@ public class PlayerInventory
         if (_heroesEquipment.TryGetValue(hero, out var equipmentDict) && equipmentDict.Remove(category))
         {
             AddInventoryItem(equipment);
-            OnHeroUnEquip?.Invoke(hero, equipment);
+            HeroUnEquip?.Invoke(hero, equipment);
         }
     }
 
@@ -60,7 +60,7 @@ public class PlayerInventory
         if (index >= 0)
         {
             _inventoryItems.RemoveAt(index);
-            OnInventoryItemRemove?.Invoke(index);
+            InventoryItemRemove?.Invoke(index);
         }
     }
 

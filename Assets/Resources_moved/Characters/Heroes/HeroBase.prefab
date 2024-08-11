@@ -68,6 +68,7 @@ GameObject:
   - component: {fileID: 1056869654084143866}
   - component: {fileID: 4212133549581857703}
   - component: {fileID: 6710779959955596337}
+  - component: {fileID: 2497114407707566338}
   m_Layer: 6
   m_Name: HeroBase
   m_TagString: Untagged
@@ -232,3 +233,16 @@ MonoBehaviour:
   _cleavage: 0.5
   _effectiveDistance: 1
   _damage: 1
+--- !u!114 &2497114407707566338
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7266242011810866208}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 26bab3a91bc589c4fbeb1fecb12a1ed9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _weaponContainer: {fileID: 0}
