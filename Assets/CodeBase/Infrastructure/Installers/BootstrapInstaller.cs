@@ -32,6 +32,7 @@ namespace CodeBase.Infrastructure.Installers
             BindBindRandomizeService();
             BindHeroShowcaseFactory();
             BindGameFactory();
+            BindCharacterFactory();
             BindUIFactory();
             BindSceneLoader();
         }
@@ -61,6 +62,11 @@ namespace CodeBase.Infrastructure.Installers
         private void BindGameFactory()
         {
             Container.Bind<IGameFactory>().To<GameFactory>().AsSingle();
+        }
+
+        private void BindCharacterFactory()
+        {
+            Container.Bind<ICharacterFactory>().To<CharacterFactory>().AsSingle();
         }
 
         private void BindUIFactory()

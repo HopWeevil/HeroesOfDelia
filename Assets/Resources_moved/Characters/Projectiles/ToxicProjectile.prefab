@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 2841573574878853615}
   - component: {fileID: 2667574568910887135}
   - component: {fileID: 152595267003425851}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: FireGlowTrail
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4781,7 +4781,7 @@ GameObject:
   - component: {fileID: 3241405131005539755}
   - component: {fileID: 8957247312409793309}
   - component: {fileID: 8020125881355587152}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: SparkTrail
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9587,7 +9587,7 @@ GameObject:
   - component: {fileID: 4413000755680580328}
   - component: {fileID: 8051589458728080435}
   - component: {fileID: 5778187820055347081}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: SmokeTrail
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -14344,7 +14344,7 @@ GameObject:
   - component: {fileID: 3847674040601222505}
   - component: {fileID: 1901868157905740211}
   - component: {fileID: 1996012609076177152}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: ToxicProjectile
   m_TagString: Untagged
   m_Icon: {fileID: 0}

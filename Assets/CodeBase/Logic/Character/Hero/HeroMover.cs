@@ -9,7 +9,7 @@ using Zenject;
 namespace CodeBase.Hero
 {
     [RequireComponent(typeof(CharacterAnimator))]
-    public class HeroMover : MonoBehaviour
+    public class HeroMover : MonoBehaviour, IStatsReceiver
     {
         [SerializeField] private CharacterAnimator _animator;
         [SerializeField] private CharacterController _characterController;
@@ -34,10 +34,6 @@ namespace CodeBase.Hero
         {
             Move();
         }
-        public void SetStats(float speed)
-        {
-            _movementSpeed = speed;
-        }
 
         private void Move()
         {
@@ -60,6 +56,11 @@ namespace CodeBase.Hero
             movementVector += Physics.gravity;
 
             _characterController.Move(_movementSpeed * movementVector * Time.deltaTime);
+        }
+
+        public void Receive(Stats stats)
+        {
+            _movementSpeed = stats.MoveSpeed;
         }
     }
 }

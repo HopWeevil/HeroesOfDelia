@@ -12,15 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 33d3edf984fca1348b3a145243b93c7a, type: 3}
   m_Name: Skeleton
   m_EditorClassIdentifier: 
-  EnemyTypeId: 0
   Hp: 2
   Damage: 1
+  MoveSpeed: 2
+  Armor: 3
   AttackCooldown: 1
   EffectiveDistance: 1
   Cleavage: 0.5
-  MoveSpeed: 2
-  MaxGold: 1
-  MinGold: 1
   PrefabReference:
     m_AssetGUID: fcddae9d5251e8541a2e0abed240b4b8
     m_SubObjectName: 
@@ -35,3 +33,5 @@ MonoBehaviour:
     EpicDropChance: 0
     LegendaryDropChance: 0
     MythicDropChance: 0
+  EnemyTypeId: 0
+  Equipments: []

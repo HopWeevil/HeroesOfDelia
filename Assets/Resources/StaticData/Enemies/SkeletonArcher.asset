@@ -12,15 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 33d3edf984fca1348b3a145243b93c7a, type: 3}
   m_Name: SkeletonArcher
   m_EditorClassIdentifier: 
-  EnemyTypeId: 3
   Hp: 2
   Damage: 1
+  MoveSpeed: 2
+  Armor: 3
   AttackCooldown: 3
   EffectiveDistance: 1
   Cleavage: 0.5
-  MoveSpeed: 2
-  MaxGold: 1
-  MinGold: 1
   PrefabReference:
     m_AssetGUID: b58bea1ed69fa17419217afb58216187
     m_SubObjectName: 
@@ -35,3 +33,6 @@ MonoBehaviour:
     EpicDropChance: 0
     LegendaryDropChance: 0
     MythicDropChance: 0
+  EnemyTypeId: 3
+  Equipments:
+  - {fileID: 11400000, guid: 6fa96429a7501bc49baf8f116f935dc8, type: 2}

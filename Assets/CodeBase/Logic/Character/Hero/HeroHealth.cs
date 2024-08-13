@@ -1,4 +1,5 @@
 ﻿using CodeBase.Character;
+using CodeBase.Data;
 using CodeBase.Logic;
 using System;
 using UnityEngine;
@@ -6,7 +7,7 @@ using UnityEngine;
 namespace CodeBase.Hero
 {
     [RequireComponent(typeof(CharacterAnimator))]
-    public class HeroHealth : MonoBehaviour, IHealth
+    public class HeroHealth : MonoBehaviour, IHealth, IStatsReceiver
     {
         [SerializeField] private CharacterAnimator _animator;
 
@@ -36,6 +37,22 @@ namespace CodeBase.Hero
             {
                 _animator.PlayHit();
             }
+        }
+
+        public float GetCurrent()
+        {
+            return _current;
+        }
+
+        public float GetMax()
+        {
+            return _max;
+        }
+
+        public void Receive(Stats stats)
+        {
+            _current = stats.Hp;
+            _max = stats.Hp;
         }
     }
 }

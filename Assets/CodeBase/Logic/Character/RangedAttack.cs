@@ -1,17 +1,17 @@
 using CodeBase.Character;
+using CodeBase.Data;
 using CodeBase.SO;
 using UnityEngine;
 
-public class RangedAttack : MonoBehaviour, IAttack
+public class RangedAttack : MonoBehaviour, IAttack, IStatsReceiver
 {
     [SerializeField] private CharacterAnimator _animator;
     [SerializeField] private Transform _projectileSpawnPoint;
     [SerializeField] private Projectile _projectile;
-    [SerializeField] private float _damage;
-    [SerializeField] private float _attackCooldown;
     [SerializeField] private LayerMask _targetsLayer;
 
     private float _cooldownTimer;
+    private Stats _stats;
 
     private void Update()
     {
@@ -23,14 +23,8 @@ public class RangedAttack : MonoBehaviour, IAttack
         if (CooldownIsUp() && !_animator.IsAttacking)
         {
             _animator.PlayAttack();
-            _cooldownTimer = _attackCooldown;
+            _cooldownTimer = _stats.AttackCooldown;
         }
-    }
-
-    public void InitializeStats(CharacterStaticData characterStaticData)
-    {
-        _damage = characterStaticData.Damage;
-        _attackCooldown = characterStaticData.AttackCooldown;
     }
 
     private void UpdateCooldown()
@@ -50,6 +44,11 @@ public class RangedAttack : MonoBehaviour, IAttack
     {
         Vector3 direction = transform.forward;
         Projectile projectile = Instantiate(_projectile, _projectileSpawnPoint.position, Quaternion.LookRotation(direction));
-        projectile.Initialize(_damage, direction, _targetsLayer);
+        projectile.Initialize(_stats.Damage, direction, _targetsLayer);
+    }
+
+    public void Receive(Stats stats)
+    {
+        _stats = stats;
     }
 }

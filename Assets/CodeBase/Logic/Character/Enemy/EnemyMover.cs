@@ -7,7 +7,7 @@ using UnityEngine.AI;
 namespace CodeBase.Enemy
 {
     [RequireComponent(typeof(CharacterAnimator))]
-    public class EnemyMover : MonoBehaviour
+    public class EnemyMover : MonoBehaviour, IStatsReceiver
     {
         [SerializeField] private NavMeshAgent _agent;
         [SerializeField] private CharacterAnimator _animator;
@@ -16,11 +16,6 @@ namespace CodeBase.Enemy
         private Vector3 _target;
 
         public float StoppingDistance => _agent.stoppingDistance;
-
-        public void SetStats(float speed)
-        {
-            _agent.speed = speed;
-        }
 
         public void Execute()
         {
@@ -50,6 +45,11 @@ namespace CodeBase.Enemy
         private bool IsTargetNotReached()
         {
             return transform.position.SqrMagnitudeTo(_target) >= MinimalDistance;
-        }    
+        }
+
+        public void Receive(Stats stats)
+        {
+            _agent.speed = stats.MoveSpeed;
+        }
     }
 }

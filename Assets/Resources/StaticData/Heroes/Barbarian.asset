@@ -14,10 +14,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Hp: 50
   Damage: 1
+  MoveSpeed: 2
+  Armor: 3
   AttackCooldown: 0.2
   EffectiveDistance: 1
   Cleavage: 0.5
-  MoveSpeed: 2
   PrefabReference:
     m_AssetGUID: 51a9d4c5f54e90b4aa4719b3dea071c9
     m_SubObjectName: 

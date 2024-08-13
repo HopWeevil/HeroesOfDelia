@@ -67,7 +67,6 @@ GameObject:
   - component: {fileID: -2508548938711243310}
   - component: {fileID: 1056869654084143866}
   - component: {fileID: 4212133549581857703}
-  - component: {fileID: 6710779959955596337}
   - component: {fileID: 2497114407707566338}
   m_Layer: 6
   m_Name: HeroBase
@@ -151,9 +150,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 68531f5bcaae42045a8bb2a16af0854f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _targetsLayer:
-    serializedVersion: 2
-    m_Bits: 128
   _animator: {fileID: -2508548938711243310}
 --- !u!114 &-8579961670342220693
 MonoBehaviour:
@@ -213,26 +209,6 @@ MonoBehaviour:
   _attack: {fileID: -6848954671653441371}
   _animator: {fileID: -2508548938711243310}
   DeathFx: {fileID: 100004, guid: 7867af58a6ec48846ae807eb4022fbaa, type: 3}
---- !u!114 &6710779959955596337
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7266242011810866208}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cc2108e4bca507d43a8ff7e754722f42, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _animator: {fileID: -2508548938711243310}
-  _targetsLayer:
-    serializedVersion: 2
-    m_Bits: 128
-  _attackCooldown: 2
-  _cleavage: 0.5
-  _effectiveDistance: 1
-  _damage: 1
 --- !u!114 &2497114407707566338
 MonoBehaviour:
   m_ObjectHideFlags: 0

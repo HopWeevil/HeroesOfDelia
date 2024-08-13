@@ -18,18 +18,20 @@ namespace CodeBase.Infrastructure.States
         private readonly IGameStateMachine _stateMachine;
         private readonly ISceneLoader _sceneLoader;
         private readonly ILoadingCurtain _loadingCurtain;
+        private readonly ICharacterFactory _characterFactory;
         private readonly IGameFactory _gameFactory;
         private readonly IPersistentProgressService _progressService;
         private readonly IStaticDataService _staticDataService;
 
-        public LoadLevelState(IGameStateMachine gameStateMachine, ISceneLoader sceneLoader, ILoadingCurtain loadingCurtain, IGameFactory gameFactory, IPersistentProgressService progressService, IStaticDataService staticDataService)
+        public LoadLevelState(IGameStateMachine gameStateMachine, ISceneLoader sceneLoader, ILoadingCurtain loadingCurtain, ICharacterFactory factory, IPersistentProgressService progressService, IStaticDataService staticDataService, IGameFactory gameFactory)
         {
             _stateMachine = gameStateMachine;
             _sceneLoader = sceneLoader;
             _loadingCurtain = loadingCurtain;
-            _gameFactory = gameFactory;
+            _characterFactory = factory;
             _progressService = progressService;
             _staticDataService = staticDataService;
+            _gameFactory = gameFactory;
         }
 
         public void Enter(string sceneName)
@@ -69,7 +71,7 @@ namespace CodeBase.Infrastructure.States
 
         private async Task<GameObject> InitHero(LevelStaticData levelData)
         {
-            GameObject hero = await _gameFactory.CreateHero(levelData.InitialHeroPosition, HeroTypeId.Knight);
+            GameObject hero = await _characterFactory.CreateHero(levelData.InitialHeroPosition, _progressService.Progress.SelectedHero);
             return hero;
         }
 

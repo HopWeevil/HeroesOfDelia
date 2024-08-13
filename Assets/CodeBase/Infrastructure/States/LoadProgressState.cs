@@ -46,7 +46,7 @@ namespace CodeBase.Infrastructure.States
 
         private PlayerProgress NewProgress()
         {
-            var progress = new PlayerProgress(initialLevel: "Main");
+            var progress = new PlayerProgress();
             
 
             return progress;
@@ -58,6 +58,8 @@ namespace CodeBase.Infrastructure.States
             inventory.AddInventoryItem(new EquipmentItem(Enums.EquipmentTypeId.Sword));
             inventory.AddInventoryItem(new EquipmentItem(Enums.EquipmentTypeId.Sword));
             inventory.AddInventoryItem(new EquipmentItem(Enums.EquipmentTypeId.Axe));
+            inventory.AddInventoryItem(new EquipmentItem(Enums.EquipmentTypeId.SkeletonCrossbow));
+           // inventory.EquipHero(Enums.HeroTypeId.Mage, new EquipmentItem(Enums.EquipmentTypeId.SkeletonStaff), Enums.EquipmentCategory.Weapon);
             return inventory;
         }
 
@@ -65,6 +67,7 @@ namespace CodeBase.Infrastructure.States
         {
             var progress = new PlayerEconomyData();
             progress.AddHeroItem(Enums.HeroTypeId.Knight);
+           // progress.AddHeroItem(Enums.HeroTypeId.Mage);
             progress.IncreaseResourceAmount(Enums.ResourceTypeId.Coin, 5000);
             progress.IncreaseResourceAmount(Enums.ResourceTypeId.Gem, 2000);           
             return progress;

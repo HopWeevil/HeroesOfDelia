@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-[SerializeField]
+[Serializable]
 public class EquipmentItem
 {
     public EquipmentTypeId EquipmentTypeId;
@@ -18,7 +18,7 @@ public class EquipmentItem
     public EquipmentItem(EquipmentTypeId equipmentTypeId)
     {
         EquipmentTypeId = equipmentTypeId;
-        Level = UnityEngine.Random.Range(1,100);
+        Level = 1;//UnityEngine.Random.Range(1,100);
     }
 }
 

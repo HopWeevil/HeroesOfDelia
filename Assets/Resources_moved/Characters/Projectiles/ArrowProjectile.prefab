@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 2749163008525128793}
   - component: {fileID: 7780311412784304081}
   - component: {fileID: 2615570339392565879}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: ArrowProjectile
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -107,7 +107,7 @@ GameObject:
   - component: {fileID: 6386894683438807243}
   - component: {fileID: 3561313973760291220}
   - component: {fileID: 1089088974462672678}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Mesh
   m_TagString: Untagged
   m_Icon: {fileID: 0}

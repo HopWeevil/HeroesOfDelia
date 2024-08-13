@@ -8,7 +8,6 @@ namespace CodeBase.Hero
     [RequireComponent(typeof(CharacterController))]
     public class HeroAttack : MonoBehaviour
     {
-        [SerializeField] private LayerMask _targetsLayer;
         [SerializeField] private CharacterAnimator _animator;
 
         private IAttack _attack;

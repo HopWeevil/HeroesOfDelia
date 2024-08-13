@@ -31,7 +31,7 @@ namespace CodeBase.Logic.Loot
             _staticDataService = staticDataService;
         }
 
-        public void Initialize(LootData lootData)
+        public void SetLootData(LootData lootData)
         {
             _lootData = lootData;
         }

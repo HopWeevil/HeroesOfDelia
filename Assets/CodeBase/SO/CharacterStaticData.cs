@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CodeBase.SO;
+using System;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 
@@ -12,6 +13,12 @@ namespace CodeBase.SO
         [Range(1, 30)]
         public float Damage = 10;
 
+        [Range(0, 10)]
+        public float MoveSpeed = 3;
+
+        [Range(0, 10)]
+        public float Armor = 3;
+
         [Range(0.2f, 3)]
         public float AttackCooldown = 1;
 
@@ -20,9 +27,6 @@ namespace CodeBase.SO
 
         [Range(0.5f, 1)]
         public float Cleavage = 0.5f;
-
-        [Range(0, 10)]
-        public float MoveSpeed = 3;
 
         public AssetReferenceGameObject PrefabReference;
     }

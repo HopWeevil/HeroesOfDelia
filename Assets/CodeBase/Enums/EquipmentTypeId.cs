@@ -4,6 +4,8 @@
     {
         Sword,
         Axe,
-        Helmet
+        Helmet,
+        SkeletonStaff,
+        SkeletonCrossbow,
     }
 }

@@ -1,16 +1,14 @@
 using CodeBase.Character;
+using CodeBase.Data;
 using CodeBase.Logic;
-using CodeBase.SO;
 using UnityEngine;
 
-public class MeleeAttack : MonoBehaviour, IAttack
+public class MeleeAttack : MonoBehaviour, IAttack, IStatsReceiver
 {
     [SerializeField] private CharacterAnimator _animator;
     [SerializeField] private LayerMask _targetsLayer;
-    [SerializeField] private float _attackCooldown = 2f;
-    [SerializeField] private float _cleavage = 0.5f;
-    [SerializeField] private float _effectiveDistance = 1f;
-    [SerializeField] private float _damage = 10f;
+
+    private Stats _stats;
 
     private float _cooldownTimer;
 
@@ -24,16 +22,8 @@ public class MeleeAttack : MonoBehaviour, IAttack
         if (CooldownIsUp() && !_animator.IsAttacking)
         {
             _animator.PlayAttack();
-            _cooldownTimer = _attackCooldown;
+            _cooldownTimer = _stats.AttackCooldown;
         }
-    }
-
-    public void InitializeStats(CharacterStaticData characterStaticData)
-    {
-        _damage = characterStaticData.Damage;
-        _cleavage = characterStaticData.Cleavage;
-        _effectiveDistance = characterStaticData.EffectiveDistance;
-        _attackCooldown = characterStaticData.AttackCooldown;
     }
 
     private void UpdateCooldown()
@@ -55,19 +45,24 @@ public class MeleeAttack : MonoBehaviour, IAttack
         {
             foreach (Collider hit in hits)
             {
-                hit.transform.GetComponentInChildren<IHealth>()?.TakeDamage(_damage);
+                hit.transform.GetComponentInChildren<IHealth>()?.TakeDamage(_stats.Damage);
             }
         }
     }
 
     private bool TryGetTargets(out Collider[] targets)
     {
-        targets = Physics.OverlapSphere(CalculateStartPoint(), _cleavage, _targetsLayer);
+        targets = Physics.OverlapSphere(CalculateStartPoint(), _stats.AttackSplash, _targetsLayer);
         return targets.Length > 0;
     }
 
     private Vector3 CalculateStartPoint()
     {
-        return new Vector3(transform.position.x, transform.position.y + 0.5f, transform.position.z) + transform.forward * _effectiveDistance;
+        return new Vector3(transform.position.x, transform.position.y + 0.5f, transform.position.z) + transform.forward * _stats.AttackDistance;
+    }
+
+    public void Receive(Stats stats)
+    {
+        _stats = stats;
     }
 }

@@ -1,22 +1,20 @@
-using CodeBase.Data;
 using CodeBase.Enemy;
 using CodeBase.Enums;
 using CodeBase.Infrastructure.Factories;
-using CodeBase.Services.PersistentProgress;
 using UnityEngine;
 using Zenject;
 
-public class EnemySpawner : MonoBehaviour, ISavedProgress
+public class EnemySpawner : MonoBehaviour
 {
     private EnemyTypeId _enemyId;
-    private IGameFactory _factory;
+    private ICharacterFactory _factory;
     private EnemyDeath _enemyDeath;
     private string _id;
     private bool _slain;
     public EnemyTypeId EnemyTypeId => _enemyId;
 
     [Inject]
-    private void Construct(IGameFactory factory)
+    private void Construct(ICharacterFactory factory)
     {
         _factory = factory;
     }
@@ -27,29 +25,14 @@ public class EnemySpawner : MonoBehaviour, ISavedProgress
         _enemyId = enemyTypeId;
     }
 
-    public void LoadProgress(PlayerProgress progress)
+    private void Start()
     {
-        if (progress.KillData.ClearedSpawners.Contains(_id))
-        {
-            _slain = true;
-        }
-        else
-        {
-            Spawn();
-        }
-    }
-
-    public void UpdateProgress(PlayerProgress progress)
-    {
-        if (_slain)
-        {
-            progress.KillData.ClearedSpawners.Add(_id);
-        }
+        Spawn();
     }
 
     private async void Spawn()
     {
-        var monster = await _factory.CreateMonster(EnemyTypeId, transform);
+        var monster = await _factory.CreateEnemy(EnemyTypeId, transform);
         _enemyDeath = monster.GetComponent<EnemyDeath>();
         _enemyDeath.Happened += Slay;
     }

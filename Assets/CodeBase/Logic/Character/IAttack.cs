@@ -2,6 +2,5 @@
 
 public interface IAttack
 {
-    void InitializeStats(CharacterStaticData characterStaticData);
     void TryAttack();
 }

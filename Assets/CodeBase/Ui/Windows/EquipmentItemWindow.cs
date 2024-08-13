@@ -1,5 +1,6 @@
 using CodeBase.Services.PersistentProgress;
 using CodeBase.SO;
+using System.Text;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -13,6 +14,7 @@ namespace CodeBase.UI.Windows
         [SerializeField] private TMP_Text _description;
         [SerializeField] private TMP_Text _level;
         [SerializeField] private TMP_Text _rarity;
+        [SerializeField] private TMP_Text _bonusesText;
 
         [SerializeField] private Image _equipmentIcon;
         [SerializeField] private Button _equipButton;
@@ -59,6 +61,19 @@ namespace CodeBase.UI.Windows
             _level.text = string.Format(_level.text, _item.Level, 100);
             _description.text = _data.Description;
             _rarity.text = string.Format(_rarity.text, ColorUtility.ToHtmlStringRGBA(Color.green), _data.Rarity.ToString());
+            _bonusesText.text = GetBonusesText();
+        }
+
+        private string GetBonusesText()
+        {
+            StringBuilder bonusesBuilder = new StringBuilder();
+
+            foreach (var bonus in (_data.Bonuses))
+            {
+                bonusesBuilder.AppendLine($"{bonus.Type}: +{bonus.Value}");
+            }
+
+            return bonusesBuilder.ToString();
         }
 
         private void UpdateButtons()

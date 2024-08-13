@@ -23,10 +23,10 @@ public class Projectile : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+      
         if ((_targetLayer.value & (1 << other.gameObject.layer)) > 0)
         {
             other.transform.GetComponentInChildren<IHealth>()?.TakeDamage(_damage);
-            //other.transform.parent.GetComponent<IHealth>().TakeDamage(_damage);
         }
         Destroy(gameObject);
     }

@@ -34,7 +34,7 @@ namespace CodeBase.UI
 
         private void UpdateHpBar()
         {
-            HpBar.SetValue(_health.Current, _health.Max);
+            HpBar.SetValue(_health.GetCurrent(), _health.GetMax());
         }
     }
 }

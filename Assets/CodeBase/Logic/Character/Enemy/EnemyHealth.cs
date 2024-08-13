@@ -1,12 +1,13 @@
 using System;
 using CodeBase.Character;
+using CodeBase.Data;
 using CodeBase.Logic;
 using UnityEngine;
 
 namespace CodeBase.Enemy
 {
     [RequireComponent(typeof(CharacterAnimator))]
-    public class EnemyHealth : MonoBehaviour, IHealth
+    public class EnemyHealth : MonoBehaviour, IHealth, IStatsReceiver
     {
         [SerializeField] private CharacterAnimator _animator;
 
@@ -39,5 +40,20 @@ namespace CodeBase.Enemy
 
         }
 
+        public float GetCurrent()
+        {
+            return _current;
+        }
+            
+        public float GetMax()
+        {
+            return _max;
+        }
+
+        public void Receive(Stats stats)
+        {
+            _current = stats.Hp;
+            _max = stats.Hp;
+        }
     }
 }

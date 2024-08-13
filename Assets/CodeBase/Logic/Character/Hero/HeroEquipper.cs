@@ -1,6 +1,8 @@
 ﻿using CodeBase.Enums;
 using CodeBase.Infrastructure.Factories;
 using CodeBase.Services.PersistentProgress;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 using UnityEngine;
 using Zenject;
 
@@ -20,13 +22,26 @@ namespace CodeBase.Hero
             _progressService = progressService;
         }
 
-        private void OnEnable()
+        private void Start()
         {
             _progressService.Inventory.HeroEquip += OnHeroEquip;
             _progressService.Inventory.HeroUnEquip += OnHeroUnequip;
+
+            //Dictionary<EquipmentCategory, EquipmentItem> equipment = _progressService.Inventory.HeroesEquipment[_progressService.Progress.SelectedHero];
+
+            
+          
         }
 
-        private void OnDisable()
+        public async Task TryEquip(HeroTypeId hero)
+        {
+            if (_progressService.Inventory.HeroesEquipment.TryGetValue(hero, out var equipment))
+            {
+                await _gameFactory.CreateEquipment(equipment[EquipmentCategory.Weapon].EquipmentTypeId, _weaponContainer);
+            }
+        }
+
+        private void OnDestroy()
         {
             _progressService.Inventory.HeroEquip -= OnHeroEquip;
             _progressService.Inventory.HeroUnEquip -= OnHeroUnequip;
@@ -50,11 +65,6 @@ namespace CodeBase.Hero
             }
 
             _gameFactory.CreateEquipment(item.EquipmentTypeId, _weaponContainer);
-        }
-
-        private void Start()
-        {
-            
         }
     }
 }
