@@ -1,4 +1,7 @@
+using CodeBase.Enums;
+using CodeBase.Services.Notification;
 using CodeBase.Services.PersistentProgress;
+using CodeBase.Services.StaticData;
 using CodeBase.SO;
 using System.Text;
 using TMPro;
@@ -21,13 +24,17 @@ namespace CodeBase.UI.Windows
         [SerializeField] private Button _unEquipButton;
 
         private IPersistentProgressService _progressService;
+        private IPopupMessageService _messageService;
+        private IStaticDataService _staticData;
         private EquipmentStaticData _data;
         private EquipmentItem _item;
 
         [Inject] 
-        private void Construct(IPersistentProgressService progressService)
+        private void Construct(IPersistentProgressService progressService, IPopupMessageService messageService, IStaticDataService staticData)
         {
             _progressService = progressService;
+            _messageService = messageService;
+            _staticData = staticData;
         }
 
         public void SetEquipment(EquipmentItem item, EquipmentStaticData data)
@@ -78,7 +85,7 @@ namespace CodeBase.UI.Windows
 
         private void UpdateButtons()
         {
-            bool isEquipped = _progressService.Inventory.IsItemEquipped(_progressService.Progress.SelectedHero, _item, _data.EquipmentClass);
+            bool isEquipped = _progressService.Equipments.IsItemEquipped(_progressService.Progress.SelectedHero, _item, _data.Category);
 
             _unEquipButton.gameObject.SetActive(isEquipped);
             _equipButton.gameObject.SetActive(!isEquipped);
@@ -86,14 +93,29 @@ namespace CodeBase.UI.Windows
 
         private void OnUnequipButtonClick()
         {
-            _progressService.Inventory.UnequipHero(_progressService.Progress.SelectedHero, _item, _data.EquipmentClass);
+            _progressService.Equipments.UnequipHero(_progressService.Progress.SelectedHero, _item, _data.Category);
             Destroy(gameObject);
+           
         }
 
         private void OnEquipButtonClick()
         {
-            _progressService.Inventory.EquipHero(_progressService.Progress.SelectedHero, _item, _data.EquipmentClass);
-            Destroy(gameObject);
+
+            TryEquip(_progressService.Progress.SelectedHero, _data.TypeId);
+
+        }
+
+        private void TryEquip(HeroTypeId hero, EquipmentTypeId equipment)
+        {
+            if (_staticData.ForHero(hero).HeroClass == _staticData.ForEquipment(equipment).HeroClass)
+            {
+                _progressService.Equipments.EquipHero(_progressService.Progress.SelectedHero, _item, _data.Category);
+                Destroy(gameObject);
+            }
+            else
+            {
+                _messageService.ShowMessage("Unable to equip, mismatch of hero and weapon classes", Color.red);
+            }
         }
     }
 }

@@ -1,10 +1,10 @@
 using CodeBase.Data;
+using CodeBase.Enums;
 using CodeBase.Services.PersistentProgress;
-using CodeBase.Services.StaticData;
 using CodeBase.SO;
-using System;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.UI;
 using Zenject;
 
@@ -15,51 +15,44 @@ namespace CodeBase.UI.Elements
         [SerializeField] private TMP_Text _text;
         [SerializeField] private Button _button;
         [SerializeField] private Image _icon;
-        [SerializeField] private HeroSelectionCarousel _carousel;
+
+        public UnityAction Click;
 
         private IPersistentProgressService _persistentProgressService;
-        private IStaticDataService _staticDataService;
 
         [Inject]
-        private void Construct(IPersistentProgressService persistentProgressService, IStaticDataService staticData)
+        private void Construct(IPersistentProgressService persistentProgressService)
         {
             _persistentProgressService = persistentProgressService;
-            _staticDataService = staticData;
         }
 
-        private void Start()
+        private void OnEnable()
         {
-            _carousel.OnHeroChanged += OnHeroChanged;
             _button.onClick.AddListener(OnButtonClick);
         }
 
-
-        private void OnDestroy()
+        private void OnDisable()
         {
-            _carousel.OnHeroChanged -= OnHeroChanged;
             _button.onClick.RemoveListener(OnButtonClick);
         }
 
         private void OnButtonClick()
         {
-       //     _persistentProgressService.Economy.AddHeroItem(_carousel.CurrentHeroId);
+            Click?.Invoke();
         }
 
-        private void OnHeroChanged(HeroStaticData obj)
+        public void RefreshButton(HeroTypeId hero)
         {
-            
-        }
-
-        public void UpdateButton()
-        {
-            Price price = _staticDataService.ForHero(_carousel.CurrentHeroId).Price;
-            _text.text = price.Value.ToString();
-            _icon.sprite = price.Resource.Icon;
-
-            bool isHeroSelected = _persistentProgressService.Progress.SelectedHero == _carousel.CurrentHeroId;
-            bool isHeroBought = _persistentProgressService.Economy.IsHeroBuyed(_carousel.CurrentHeroId);
+            bool isHeroSelected = _persistentProgressService.Progress.SelectedHero == hero;
+            bool isHeroBought = _persistentProgressService.Economy.IsHeroBuyed(hero);
 
             gameObject.SetActive(!isHeroSelected && !isHeroBought);
+        }
+
+        public void SetHeroPrice(Price price)
+        {
+            _text.text = price.Value.ToString();
+            _icon.sprite = price.Resource.Icon;
         }
     }
 }

@@ -8,7 +8,7 @@ using Zenject;
 
 namespace CodeBase.UI.Windows
 {
-    public class InventoryWindow : WindowBase
+    public class HeroEquipmentWindow : WindowBase
     {
         [SerializeField] private RectTransform _itemsContainer;
 
@@ -33,14 +33,14 @@ namespace CodeBase.UI.Windows
 
         private void OnEnable()
         {
-            _persistentProgressService.Inventory.InventoryItemRemove += OnInventoryItemRemove;
-            _persistentProgressService.Inventory.InventoryItemAdd += OnInventoryItemAdd;
+            _persistentProgressService.Equipments.EquipmentItemRemove += OnInventoryItemRemove;
+            _persistentProgressService.Equipments.EquipmentItemAdd += OnInventoryItemAdd;
         }
 
         private void OnDisable()
         {
-            _persistentProgressService.Inventory.InventoryItemRemove -= OnInventoryItemRemove;
-            _persistentProgressService.Inventory.InventoryItemAdd -= OnInventoryItemAdd;
+            _persistentProgressService.Equipments.EquipmentItemRemove -= OnInventoryItemRemove;
+            _persistentProgressService.Equipments.EquipmentItemAdd -= OnInventoryItemAdd;
         }
 
         private async void OnInventoryItemAdd(int id)
@@ -56,7 +56,7 @@ namespace CodeBase.UI.Windows
 
         private async void CreateSlots()
         {
-            for (int i = 0; i < _persistentProgressService.Inventory.InventoryItems.Count; i++)
+            for (int i = 0; i < _persistentProgressService.Equipments.EquipmentItems.Count; i++)
             {
                 await CreateSlot(i);
             }
@@ -64,7 +64,7 @@ namespace CodeBase.UI.Windows
 
         private async Task CreateSlot(int id)
         {
-            EquipmentItem item = _persistentProgressService.Inventory.InventoryItems[id];
+            EquipmentItem item = _persistentProgressService.Equipments.EquipmentItems[id];
             EquipmentItemView slot = await _uIFactory.CreateEquipmentItemView(_itemsContainer, item);
             _inventorySlots.Add(slot);
         }

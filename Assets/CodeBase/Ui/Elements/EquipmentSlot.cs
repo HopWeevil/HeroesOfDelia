@@ -30,14 +30,14 @@ public class EquipmentSlot : MonoBehaviour
 
     private void OnEnable()
     {
-        _progressService.Inventory.HeroEquip += OnHeroEquip;
-        _progressService.Inventory.HeroUnEquip += OnHeroUnEquip;
+        _progressService.Equipments.HeroEquip += OnHeroEquip;
+        _progressService.Equipments.HeroUnEquip += OnHeroUnEquip;
     }
 
     private void OnDisable()
     {
-        _progressService.Inventory.HeroEquip -= OnHeroEquip;
-        _progressService.Inventory.HeroUnEquip -= OnHeroUnEquip;
+        _progressService.Equipments.HeroEquip -= OnHeroEquip;
+        _progressService.Equipments.HeroUnEquip -= OnHeroUnEquip;
     }
 
     private async void Start()
@@ -63,7 +63,7 @@ public class EquipmentSlot : MonoBehaviour
 
     private async Task LoadEquippedItem()
     {
-        EquipmentItem item = _progressService.Inventory.GetEquippedItem(_progressService.Progress.SelectedHero, _equipmentCategory);
+        EquipmentItem item = _progressService.Equipments.GetEquippedItem(_progressService.Progress.SelectedHero, _equipmentCategory);
         if (item != null)
         {
             _currentItemView = await _factory.CreateEquipmentItemView(_itemContainer, item);
@@ -73,7 +73,7 @@ public class EquipmentSlot : MonoBehaviour
     private bool IsMatchingCategory(EquipmentItem equipment)
     {
         EquipmentStaticData data = _staticDataService.ForEquipment(equipment.EquipmentTypeId);
-        return data != null && data.EquipmentClass == _equipmentCategory;
+        return data != null && data.Category == _equipmentCategory;
     }
 
     private void DestroyCurrentView()

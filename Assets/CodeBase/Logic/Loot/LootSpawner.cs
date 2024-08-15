@@ -77,8 +77,8 @@ namespace CodeBase.Logic.Loot
                 List<EquipmentStaticData> equipments = _staticDataService.GetEquipmentByRarity(rarity);
                 EquipmentStaticData equipment = equipments[_randomizer.Next(0, equipments.Count)];
 
-                EquipmentLoot loot = await _factory.CreateEquipmentLoot(equipment.EquipmentTypeId, transform.position);
-                loot.Initialize(equipment.EquipmentTypeId);
+                EquipmentLoot loot = await _factory.CreateEquipmentLoot(equipment.TypeId, transform.position);
+                loot.Initialize(equipment.TypeId);
                 PlayBurstEffect(loot.transform, 1.5f, 1.5f, 1f, 0.5f);
             }
         }

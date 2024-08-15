@@ -10,6 +10,7 @@ using CodeBase.Services.Randomizer;
 using CodeBase.Infrastructure.Sceneloader;
 using CodeBase.Infrastructure.Factories;
 using CodeBase.Logic;
+using CodeBase.Services.Notification;
 
 namespace CodeBase.Infrastructure.Installers
 {
@@ -34,6 +35,7 @@ namespace CodeBase.Infrastructure.Installers
             BindGameFactory();
             BindCharacterFactory();
             BindUIFactory();
+            BindPopupMessageService();
             BindSceneLoader();
         }
 
@@ -86,6 +88,11 @@ namespace CodeBase.Infrastructure.Installers
         private void BindPersistentProgressService()
         {
             Container.Bind<IPersistentProgressService>().To<PersistentProgressService>().AsSingle();
+        }
+
+        private void BindPopupMessageService()
+        {
+            Container.Bind<IPopupMessageService>().To<PopupMessageService>().AsSingle();
         }
 
         private void BindStateMachine()

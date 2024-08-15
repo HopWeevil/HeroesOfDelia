@@ -3727,7 +3727,7 @@ PrefabInstance:
     - target: {fileID: 4982439746437625821, guid: 91c6de4c6dd50184cba1b32edb5e8065,
         type: 3}
       propertyPath: m_Name
-      value: 'Spawner : Skeleton'
+      value: 'Spawner : SkeletonArcher'
       objectReference: {fileID: 0}
     - target: {fileID: 5262585596166813362, guid: 91c6de4c6dd50184cba1b32edb5e8065,
         type: 3}

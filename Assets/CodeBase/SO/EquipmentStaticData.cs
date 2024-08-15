@@ -3,7 +3,6 @@ using CodeBase.Enums;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
-using UnityEngine.XR;
 
 namespace CodeBase.SO
 {
@@ -16,17 +15,19 @@ namespace CodeBase.SO
 
         public Sprite Icon;
 
-        public EquipmentTypeId EquipmentTypeId;
+        public EquipmentTypeId TypeId;
 
         public Rarity Rarity;
 
-        public EquipmentCategory EquipmentClass;
+        public EquipmentCategory Category;
 
         public AssetReferenceGameObject PrefabReference;
 
         public AssetReferenceGameObject DropReference;
 
         public List<StatsBonus> Bonuses;
+
+        public HeroClass HeroClass;
     }
 }
 
@@ -39,6 +40,13 @@ public enum BonusType
     Damage,
     MoveSpeed,
     Armor,
+}
+
+public enum HeroClass 
+{ 
+    Warrior,
+    Wizard,
+    Archer
 }
 
 [System.Serializable]

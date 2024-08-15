@@ -27,7 +27,7 @@ namespace CodeBase.Infrastructure.Factories
 
         public async Task<GameObject> CreateInventory()
         {
-            return await CreateWindow(AssetAddress.InventoryWindow);
+            return await CreateWindow(AssetAddress.HeroEquipmentWindow);
         }
 
         public async Task<GameObject> CreateShop()
@@ -75,6 +75,15 @@ namespace CodeBase.Infrastructure.Factories
             GameObject prefab = await _assets.Load<GameObject>(windowId.ToString());
             GameObject window = _container.InstantiatePrefab(prefab, _uiRoot.transform);
             return window;
+        }
+
+        public async Task<PopupMessage> CreatePopupMessage(Color color, string text)
+        {
+            GameObject prefab = await _assets.Load<GameObject>(AssetAddress.PopupMessage);
+            PopupMessage message = Object.Instantiate(prefab, _uiRoot.transform).GetComponent<PopupMessage>();
+            message.SetColor(color);
+            message.SetText(text);
+            return message;
         }
 
         public async Task CreateUIRoot()

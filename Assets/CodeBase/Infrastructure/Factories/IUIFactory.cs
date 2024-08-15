@@ -17,5 +17,6 @@ namespace CodeBase.Infrastructure.Factories
         Task<GameObject> CreateWindow(WindowId windowId);
         Task<EquipmentItemView> CreateEquipmentItemView(RectTransform parent, EquipmentItem item);
         Task<EquipmentItemWindow> CreateEquipmentInfoWindow(EquipmentItem item);
+        Task<PopupMessage> CreatePopupMessage(Color color, string text);
     }
 }

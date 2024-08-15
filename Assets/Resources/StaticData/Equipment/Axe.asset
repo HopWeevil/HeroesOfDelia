@@ -15,9 +15,9 @@ MonoBehaviour:
   Title: Axe
   Description: Super Axe
   Icon: {fileID: 21300000, guid: 763bdf500c5c24f698f8e1839ab00640, type: 3}
-  EquipmentTypeId: 1
+  TypeId: 1
   Rarity: 0
-  EquipmentClass: 0
+  Category: 0
   PrefabReference:
     m_AssetGUID: 8a065d79124cd8e4192e2378d79ed687
     m_SubObjectName: 
@@ -31,3 +31,4 @@ MonoBehaviour:
   Bonuses:
   - Type: 0
     Value: 1
+  HeroClass: 0

@@ -6,7 +6,7 @@ namespace CodeBase.Services.PersistentProgress
     {
         public PlayerProgress Progress { get; set; }
         public PlayerEconomyData Economy { get; set; }
-        public PlayerInventory Inventory { get; set; }
+        public PlayerEquipment Equipments { get; set; }
 
     }
 }

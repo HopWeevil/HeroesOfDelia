@@ -15,9 +15,9 @@ MonoBehaviour:
   Title: Helmet
   Description: Green helmet
   Icon: {fileID: 21300000, guid: 169d45648e00348038299fc345aa6b4f, type: 3}
-  EquipmentTypeId: 2
+  TypeId: 2
   Rarity: 0
-  EquipmentClass: 1
+  Category: 0
   PrefabReference:
     m_AssetGUID: e8668d01e8f36db458ad3892e58b8131
     m_SubObjectName: 
@@ -28,3 +28,5 @@ MonoBehaviour:
     m_SubObjectName: 
     m_SubObjectType: 
     m_EditorAssetChanged: 0
+  Bonuses: []
+  HeroClass: 0

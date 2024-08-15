@@ -30,7 +30,7 @@ namespace CodeBase.UI.Elements
         private bool _isAnimating;
 
         public HeroTypeId CurrentHeroId => _currentHeroTypeId;
-        public event Action<HeroStaticData> OnHeroChanged;
+        public event Action<HeroStaticData> HeroChanged;
 
 
         [Inject]
@@ -77,7 +77,7 @@ namespace CodeBase.UI.Elements
         private async Task InitializeCurrentHero()
         {
             _currentHero = await _demonstationHeroCreator.GetOrCreate();
-            OnHeroChanged?.Invoke(_staticData.ForHero(_currentHeroTypeId));
+            HeroChanged?.Invoke(_staticData.ForHero(_currentHeroTypeId));
         }
 
         private async void OnNextButtonClick()
@@ -116,7 +116,7 @@ namespace CodeBase.UI.Elements
         private async Task UpdateHeroScroll(Vector3 targetPositionOffset)
         {
             GameObject nextHero = await _demonstationHeroCreator.Create(_currentHeroTypeId, targetPositionOffset, _heroViewAngle);
-            OnHeroChanged?.Invoke(_staticData.ForHero(_currentHeroTypeId));
+            HeroChanged?.Invoke(_staticData.ForHero(_currentHeroTypeId));
             MoveCurrentHeroTo(-targetPositionOffset);
             MoveNextHeroTo(nextHero, Vector3.zero);
         }

@@ -33,7 +33,7 @@ namespace CodeBase.Hero
 
         private void Start()
         {
-            if (_progressService.Inventory.HeroesEquipment.TryGetValue(_progressService.Progress.SelectedHero, out var heroEquipment))
+            if (_progressService.Equipments.HeroesEquipment.TryGetValue(_progressService.Progress.SelectedHero, out var heroEquipment))
             {
                 foreach (var item in heroEquipment.Values)
                 {
@@ -41,8 +41,8 @@ namespace CodeBase.Hero
                 }
             }
 
-            _progressService.Inventory.HeroEquip += OnEquip;
-            _progressService.Inventory.HeroUnEquip += OnUnequip;
+            _progressService.Equipments.HeroEquip += OnEquip;
+            _progressService.Equipments.HeroUnEquip += OnUnequip;
         }
 
         private void OnUnequip(HeroTypeId id, EquipmentItem item)

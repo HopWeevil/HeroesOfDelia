@@ -38,14 +38,14 @@ public class HeroStatsInfo : MonoBehaviour
 
     private void OnEnable()
     {
-        _progressService.Inventory.HeroEquip += OnHeroEquip;
-        _progressService.Inventory.HeroUnEquip += OnHeroUnequip;
+        _progressService.Equipments.HeroEquip += OnHeroEquip;
+        _progressService.Equipments.HeroUnEquip += OnHeroUnequip;
     }
 
     private void OnDisable()
     {
-        _progressService.Inventory.HeroEquip -= OnHeroEquip;
-        _progressService.Inventory.HeroUnEquip -= OnHeroUnequip;
+        _progressService.Equipments.HeroEquip -= OnHeroEquip;
+        _progressService.Equipments.HeroUnEquip -= OnHeroUnequip;
     }
 
     private void Start()
@@ -80,7 +80,7 @@ public class HeroStatsInfo : MonoBehaviour
 
         Stats stats = new Stats(data.Hp, data.Damage, data.MoveSpeed, data.Armor, data.AttackCooldown, data.Cleavage, data.EffectiveDistance);
 
-        if (_progressService.Inventory.HeroesEquipment.TryGetValue(id, out var items))
+        if (_progressService.Equipments.HeroesEquipment.TryGetValue(id, out var items))
         {
             foreach (var item in items)
             {

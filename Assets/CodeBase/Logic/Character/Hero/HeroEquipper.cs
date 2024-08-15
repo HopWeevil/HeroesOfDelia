@@ -24,27 +24,21 @@ namespace CodeBase.Hero
 
         private void Start()
         {
-            _progressService.Inventory.HeroEquip += OnHeroEquip;
-            _progressService.Inventory.HeroUnEquip += OnHeroUnequip;
-
-            //Dictionary<EquipmentCategory, EquipmentItem> equipment = _progressService.Inventory.HeroesEquipment[_progressService.Progress.SelectedHero];
-
-            
-          
+            _progressService.Equipments.HeroEquip += OnHeroEquip;
+            _progressService.Equipments.HeroUnEquip += OnHeroUnequip;
+        }
+        private void OnDestroy()
+        {
+            _progressService.Equipments.HeroEquip -= OnHeroEquip;
+            _progressService.Equipments.HeroUnEquip -= OnHeroUnequip;
         }
 
         public async Task TryEquip(HeroTypeId hero)
         {
-            if (_progressService.Inventory.HeroesEquipment.TryGetValue(hero, out var equipment))
+            if (_progressService.Equipments.HeroesEquipment.TryGetValue(hero, out var equipment))
             {
                 await _gameFactory.CreateEquipment(equipment[EquipmentCategory.Weapon].EquipmentTypeId, _weaponContainer);
             }
-        }
-
-        private void OnDestroy()
-        {
-            _progressService.Inventory.HeroEquip -= OnHeroEquip;
-            _progressService.Inventory.HeroUnEquip -= OnHeroUnequip;
         }
 
         private void OnHeroUnequip(HeroTypeId id, EquipmentItem item)

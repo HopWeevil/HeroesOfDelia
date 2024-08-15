@@ -24,7 +24,8 @@ MonoBehaviour:
     m_SubObjectName: 
     m_SubObjectType: 
     m_EditorAssetChanged: 0
-  HeroTypeId: 0
+  TypeId: 0
+  HeroClass: 0
   Price:
     Resource: {fileID: 11400000, guid: 1faf8a55867a681429c6b4e865939987, type: 2}
     Value: 2000

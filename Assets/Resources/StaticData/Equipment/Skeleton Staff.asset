@@ -15,9 +15,9 @@ MonoBehaviour:
   Title: Skeleton Staff
   Description: Skeleton Staff
   Icon: {fileID: 21300000, guid: 79b47bb526f2f407ea5a899bf93524fc, type: 3}
-  EquipmentTypeId: 3
+  TypeId: 3
   Rarity: 0
-  EquipmentClass: 0
+  Category: 0
   PrefabReference:
     m_AssetGUID: e095eb5096f56834286e92108daffd49
     m_SubObjectName: 
@@ -29,3 +29,4 @@ MonoBehaviour:
     m_SubObjectType: 
     m_EditorAssetChanged: 0
   Bonuses: []
+  HeroClass: 1

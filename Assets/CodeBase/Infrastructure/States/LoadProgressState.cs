@@ -41,7 +41,7 @@ namespace CodeBase.Infrastructure.States
             //_progressService.Progress = _saveLoadProgress.LoadProgress() ?? NewProgress();
             _progressService.Progress =  NewProgress();
             _progressService.Economy = NewEconomy();
-            _progressService.Inventory = NewInventory();
+            _progressService.Equipments = NewInventory();
         }
 
         private PlayerProgress NewProgress()
@@ -52,9 +52,9 @@ namespace CodeBase.Infrastructure.States
             return progress;
         }
 
-        private PlayerInventory NewInventory()
+        private PlayerEquipment NewInventory()
         {
-            var inventory = new PlayerInventory();
+            var inventory = new PlayerEquipment();
             inventory.AddInventoryItem(new EquipmentItem(Enums.EquipmentTypeId.Sword));
             inventory.AddInventoryItem(new EquipmentItem(Enums.EquipmentTypeId.Sword));
             inventory.AddInventoryItem(new EquipmentItem(Enums.EquipmentTypeId.Axe));

@@ -45,7 +45,7 @@ namespace CodeBase.Infrastructure.Factories
 
             Stats stats = new Stats(data.Hp, data.Damage, data.MoveSpeed, data.Armor, data.AttackCooldown, data.Cleavage, data.EffectiveDistance);
 
-            if (_progressService.Inventory.HeroesEquipment.TryGetValue(data.HeroTypeId, out var equipments))
+            if (_progressService.Equipments.HeroesEquipment.TryGetValue(data.TypeId, out var equipments))
             {
                 foreach (var item in equipments)
                 {

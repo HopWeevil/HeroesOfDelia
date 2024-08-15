@@ -2,29 +2,29 @@ using CodeBase.Enums;
 using System;
 using System.Collections.Generic;
 
-public class PlayerInventory
+public class PlayerEquipment
 {
-    private readonly List<EquipmentItem> _inventoryItems;
+    private readonly List<EquipmentItem> _equipmentItems;
     private readonly Dictionary<HeroTypeId, Dictionary<EquipmentCategory, EquipmentItem>> _heroesEquipment;
 
-    public IReadOnlyList<EquipmentItem> InventoryItems => _inventoryItems;
+    public IReadOnlyList<EquipmentItem> EquipmentItems => _equipmentItems;
     public IReadOnlyDictionary<HeroTypeId, Dictionary<EquipmentCategory, EquipmentItem>> HeroesEquipment => _heroesEquipment;
 
     public event Action<HeroTypeId, EquipmentItem> HeroEquip;
     public event Action<HeroTypeId, EquipmentItem> HeroUnEquip;
-    public event Action<int> InventoryItemRemove;
-    public event Action<int> InventoryItemAdd;
+    public event Action<int> EquipmentItemRemove;
+    public event Action<int> EquipmentItemAdd;
 
-    public PlayerInventory()
+    public PlayerEquipment()
     {
-        _inventoryItems = new List<EquipmentItem>();
+        _equipmentItems = new List<EquipmentItem>();
         _heroesEquipment = new Dictionary<HeroTypeId, Dictionary<EquipmentCategory, EquipmentItem>>();
     }
 
     public void AddInventoryItem(EquipmentItem item)
     {
-        _inventoryItems.Add(item);
-        InventoryItemAdd?.Invoke(_inventoryItems.IndexOf(item));
+        _equipmentItems.Add(item);
+        EquipmentItemAdd?.Invoke(_equipmentItems.IndexOf(item));
     }
 
     public void EquipHero(HeroTypeId hero, EquipmentItem equipment, EquipmentCategory category)
@@ -56,11 +56,11 @@ public class PlayerInventory
 
     public void RemoveInventoryItem(EquipmentItem item)
     {
-        int index = _inventoryItems.IndexOf(item);
+        int index = _equipmentItems.IndexOf(item);
         if (index >= 0)
         {
-            _inventoryItems.RemoveAt(index);
-            InventoryItemRemove?.Invoke(index);
+            _equipmentItems.RemoveAt(index);
+            EquipmentItemRemove?.Invoke(index);
         }
     }
 
@@ -87,4 +87,9 @@ public class PlayerInventory
         }
         return null;
     }
+}
+
+public class PlayerEquipmentService
+{
+    public PlayerEquipment Equipment {  get; set; }
 }

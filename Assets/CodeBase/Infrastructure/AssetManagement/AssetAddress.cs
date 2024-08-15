@@ -11,9 +11,10 @@ namespace CodeBase.Infrastructure.AssetManagement
         public const string HudPath = "Hud";
         public const string MainMenu = "MainMenu";
         public const string HeroesWindow = "HeroesWindow";
-        public const string ShopWindow = "HeroesWindow";
-        public const string InventoryWindow = "InventoryWindow";
+        public const string ShopWindow = "ShopWindow";
+        public const string HeroEquipmentWindow = "HeroEquipmentWindow";
         public const string InventorySlot = "InventorySlot";
         public const string EquipmentItemWindow = "EquipmentItemWindow";
+        public const string PopupMessage = "PopupMessage";
     }
 }

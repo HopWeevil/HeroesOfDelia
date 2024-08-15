@@ -24,10 +24,10 @@ namespace CodeBase.Services.StaticData
 
         public void Load()
         {
-            _heroes = Resources.LoadAll<HeroStaticData>(HeroesDataPath).ToDictionary(x => x.HeroTypeId, x => x);
+            _heroes = Resources.LoadAll<HeroStaticData>(HeroesDataPath).ToDictionary(x => x.TypeId, x => x);
             _enemies = Resources.LoadAll<EnemyStaticData>(EnemiesDataPath).ToDictionary(x => x.EnemyTypeId, x => x);
             _levels = Resources.LoadAll<LevelStaticData>(LevelsDataPath).ToDictionary(x => x.LevelKey, x => x);
-            _equipment = Resources.LoadAll<EquipmentStaticData>(EquipmentDataPath).ToDictionary(x => x.EquipmentTypeId, x => x);
+            _equipment = Resources.LoadAll<EquipmentStaticData>(EquipmentDataPath).ToDictionary(x => x.TypeId, x => x);
             _resources = Resources.LoadAll<ResourceStaticData>(ResourceDataPath).ToDictionary(x => x.ResourceTypeId, x => x);
         }
 

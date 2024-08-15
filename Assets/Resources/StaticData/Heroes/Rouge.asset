@@ -14,16 +14,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Hp: 50
   Damage: 1
+  MoveSpeed: 2
+  Armor: 3
   AttackCooldown: 0.2
   EffectiveDistance: 1
   Cleavage: 0.5
-  MoveSpeed: 2
   PrefabReference:
     m_AssetGUID: 90fb56ee7d10dc4499702fccdd310531
     m_SubObjectName: 
     m_SubObjectType: 
     m_EditorAssetChanged: 0
-  HeroTypeId: 3
+  TypeId: 3
+  HeroClass: 2
   Price:
     Resource: {fileID: 11400000, guid: 1faf8a55867a681429c6b4e865939987, type: 2}
-    Value: 5400
+    Value: 4400
