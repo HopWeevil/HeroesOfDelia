@@ -13,7 +13,7 @@ using UnityEngine.SceneManagement;
 
 namespace CodeBase.Infrastructure.States
 {
-    public class LoadLevelState : IPayloadedState<string>
+    public class LoadLevelState : IPayloadedState<LevelStaticData>
     {
         private readonly IGameStateMachine _stateMachine;
         private readonly ISceneLoader _sceneLoader;
@@ -22,6 +22,9 @@ namespace CodeBase.Infrastructure.States
         private readonly IGameFactory _gameFactory;
         private readonly IPersistentProgressService _progressService;
         private readonly IStaticDataService _staticDataService;
+
+        private const string sceneName = "Location1";
+        private LevelStaticData _levelToLoad;
 
         public LoadLevelState(IGameStateMachine gameStateMachine, ISceneLoader sceneLoader, ILoadingCurtain loadingCurtain, ICharacterFactory factory, IPersistentProgressService progressService, IStaticDataService staticDataService, IGameFactory gameFactory)
         {
@@ -34,9 +37,9 @@ namespace CodeBase.Infrastructure.States
             _gameFactory = gameFactory;
         }
 
-        public void Enter(string sceneName)
+        public void Enter(LevelStaticData levelStaticData)
         {
-            Debug.Log("LoadLevelState");
+            _levelToLoad = levelStaticData;
             _loadingCurtain.Show();
             _sceneLoader.Load(sceneName, OnLoadedAsync);
         }
@@ -55,11 +58,11 @@ namespace CodeBase.Infrastructure.States
 
         private async Task InitGameWorld()
         {
-            LevelStaticData levelData = _staticDataService.ForLevel(SceneManager.GetActiveScene().name);
+            //LevelStaticData levelData = _staticDataService.ForLevel(SceneManager.GetActiveScene().name);
 
-            GameObject hero = await InitHero(levelData);
-            await InitSpawners(levelData);
-            await InitSaveTrigger(levelData);
+            GameObject hero = await InitHero(_levelToLoad);
+            await InitSpawners(_levelToLoad);
+            await InitSaveTrigger(_levelToLoad);
             await InitHud(hero);
             CameraFollow(hero);
         }

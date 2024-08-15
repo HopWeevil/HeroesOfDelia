@@ -1,7 +1,4 @@
-using CodeBase.Enums;
 using CodeBase.Infrastructure.Factories;
-using CodeBase.Services.PersistentProgress;
-using System;
 using UnityEngine;
 using UnityEngine.UI;
 using Zenject;

@@ -22,7 +22,7 @@ public class HeroStatsInfo : MonoBehaviour
     private IStaticDataService _staticData;
 
     private string _healthFormat;
-    private string _attackSpeedFormat;
+    private string _attackCooldownFormat;
     private string _attackDistanceFormat;
     private string _attackDamageFormat;
     private string _attackSplashFormat;
@@ -51,7 +51,7 @@ public class HeroStatsInfo : MonoBehaviour
     private void Start()
     {
         _healthFormat = _health.text;
-        _attackSpeedFormat = _attackCooldown.text;
+        _attackCooldownFormat = _attackCooldown.text;
         _attackDistanceFormat = _attackDistance.text;
         _attackDamageFormat = _attackDamage.text;
         _attackSplashFormat = _attackSplash.text;
@@ -96,7 +96,7 @@ public class HeroStatsInfo : MonoBehaviour
     {
         _attackDistance.text = string.Format(_attackDistanceFormat, stats.AttackDistance);
         _attackDamage.text = string.Format(_attackDamageFormat, stats.Damage);
-        _attackCooldown.text = string.Format(_attackSpeedFormat, stats.AttackCooldown);
+        _attackCooldown.text = string.Format(_attackCooldownFormat, stats.AttackCooldown);
         _attackSplash.text = string.Format(_attackSplashFormat, stats.AttackSplash);
         _health.text = string.Format(_healthFormat, stats.Hp);
         _moveSpeed.text = string.Format(_moveSpeedFormat, stats.MoveSpeed);

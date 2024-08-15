@@ -7,6 +7,9 @@ namespace CodeBase.SO
     [CreateAssetMenu(fileName = "LevelData", menuName = "Static Data/Level")]
     public class LevelStaticData : ScriptableObject
     {
+        public string Title;
+        public string Description;
+
         public string LevelKey;
 
         public List<EnemySpawnerData> EnemySpawners;

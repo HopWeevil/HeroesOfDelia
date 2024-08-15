@@ -235,7 +235,7 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 3778892338641769263, guid: 6ff27bd2352857c46a0b9c25f7d426ab,
         type: 3}
       insertIndex: -1
-      addedObject: {fileID: 276027070043177650}
+      addedObject: {fileID: 2559543204834777416}
   m_SourcePrefab: {fileID: 100100000, guid: 6ff27bd2352857c46a0b9c25f7d426ab, type: 3}
 --- !u!1 &470819029595263402 stripped
 GameObject:
@@ -243,7 +243,7 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 3673246136282710661}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &276027070043177650
+--- !u!114 &2559543204834777416
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -252,15 +252,29 @@ MonoBehaviour:
   m_GameObject: {fileID: 470819029595263402}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 77e0299060c06e64da45cc5fdf6163fc, type: 3}
+  m_Script: {fileID: 11500000, guid: 6ea73116ef790e041a8f839b25d2c094, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _button: {fileID: 4279102839353021706}
+  _windowId: 3
 --- !u!224 &1182513997981883764 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 2490736684591095793, guid: 6ff27bd2352857c46a0b9c25f7d426ab,
     type: 3}
   m_PrefabInstance: {fileID: 3673246136282710661}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &4279102839353021706 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 692306098093660047, guid: 6ff27bd2352857c46a0b9c25f7d426ab,
+    type: 3}
+  m_PrefabInstance: {fileID: 3673246136282710661}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 470819029595263402}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &5027668673584419358
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -357,7 +371,7 @@ PrefabInstance:
     - target: {fileID: 3756750120186912051, guid: eac928c666ea2c04e876760342a7c47d,
         type: 3}
       propertyPath: m_SizeDelta.x
-      value: 309
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3756750120186912051, guid: eac928c666ea2c04e876760342a7c47d,
         type: 3}
@@ -507,7 +521,7 @@ PrefabInstance:
     - target: {fileID: 5878463659663007353, guid: eac928c666ea2c04e876760342a7c47d,
         type: 3}
       propertyPath: m_SizeDelta.x
-      value: 267
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5878463659663007353, guid: eac928c666ea2c04e876760342a7c47d,
         type: 3}

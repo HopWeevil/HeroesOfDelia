@@ -207,6 +207,16 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: abc89eb6c2a81a04f975cac6cba7c49b
+    m_Address: LevelSelectionWindow
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 239c64e6df141054491fd4fbfbc17859
+    m_Address: LevelCard
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 2b30344375a32544c8f024ab8bc654ca, type: 2}
   m_SchemaSet:

@@ -13,5 +13,6 @@ namespace CodeBase.Services.StaticData
         ResourceStaticData ForResource(ResourceTypeId id);
         List<EquipmentStaticData> GetEquipmentByRarity(Rarity rarity);
         HeroStaticData ForHero(HeroTypeId id);
+        List<LevelStaticData> GetAllLevels();
     }
 }

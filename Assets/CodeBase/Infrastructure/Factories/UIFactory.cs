@@ -1,4 +1,5 @@
-﻿using CodeBase.Infrastructure.AssetManagement;
+﻿using CodeBase.Enums;
+using CodeBase.Infrastructure.AssetManagement;
 using CodeBase.Services.PersistentProgress;
 using CodeBase.Services.StaticData;
 using CodeBase.SO;
@@ -61,6 +62,15 @@ namespace CodeBase.Infrastructure.Factories
             slot.transform.DOScale(Vector3.one, 0.3f).SetEase(Ease.OutBack);
 
             return slot;
+        }
+
+        public async Task<LevelCard> CreateLevelCard(LevelStaticData data, RectTransform parent)
+        {
+            GameObject prefab = await _assets.Load<GameObject>(AssetAddress.LevelCard);
+            LevelCard card = _container.InstantiatePrefab(prefab, parent).GetComponent<LevelCard>();
+            card.SetLevelData(data);
+            card.SetInfo();
+            return card;
         }
 
         public async Task<GameObject> CreateWindow(string address)

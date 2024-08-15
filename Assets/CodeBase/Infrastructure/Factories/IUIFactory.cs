@@ -18,5 +18,6 @@ namespace CodeBase.Infrastructure.Factories
         Task<EquipmentItemView> CreateEquipmentItemView(RectTransform parent, EquipmentItem item);
         Task<EquipmentItemWindow> CreateEquipmentInfoWindow(EquipmentItem item);
         Task<PopupMessage> CreatePopupMessage(Color color, string text);
+        Task<LevelCard> CreateLevelCard(LevelStaticData data, RectTransform parent);
     }
 }

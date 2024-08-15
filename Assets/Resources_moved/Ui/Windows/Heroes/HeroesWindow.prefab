@@ -59,8 +59,6 @@ MonoBehaviour:
   _closeButton: {fileID: 8967832130550111289}
   _buyHero: {fileID: 1474536272796400126}
   _heroSelect: {fileID: 4339005378627082094}
-  _selectHeroButton: {fileID: 8017364074227125513}
-  _buyHeroButton: {fileID: 8787939179212609262}
   _carousel: {fileID: 2108105903533203333}
 --- !u!114 &2108105903533203333
 MonoBehaviour:
@@ -213,7 +211,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _button: {fileID: 8017364074227125513}
-  _carousel: {fileID: 2108105903533203333}
   _text: {fileID: 608893697628215423}
 --- !u!1 &2142927553646339927
 GameObject:
@@ -1551,7 +1548,6 @@ MonoBehaviour:
   _text: {fileID: 8787939177303735312}
   _button: {fileID: 8787939179212609262}
   _icon: {fileID: 8144411893198371968}
-  _carousel: {fileID: 2108105903533203333}
 --- !u!1001 &1335188731902170129
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -15,6 +15,7 @@ namespace CodeBase.Infrastructure.AssetManagement
         public const string HeroEquipmentWindow = "HeroEquipmentWindow";
         public const string InventorySlot = "InventorySlot";
         public const string EquipmentItemWindow = "EquipmentItemWindow";
-        public const string PopupMessage = "PopupMessage";
+        public const string PopupMessage = "PopupMessage";       
+        public const string LevelCard = "LevelCard";
     }
 }

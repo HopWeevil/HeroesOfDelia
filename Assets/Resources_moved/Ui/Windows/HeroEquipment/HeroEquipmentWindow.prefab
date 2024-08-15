@@ -429,7 +429,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _health: {fileID: 1371224877215482844}
-  _attackCooldown: {fileID: 6330050388229643396}
+  _attackCooldown: {fileID: 7452122467259791387}
   _attackDistance: {fileID: 6330050388229643396}
   _attackDamage: {fileID: 6621751081218982746}
   _attackSplash: {fileID: 870988899059916550}
@@ -2371,6 +2371,18 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 6313851646877203617}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &7452122467259791387 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3527461417334293690, guid: 3bdcc6f3f5bf3e141bd75bee04d042d2,
+    type: 3}
+  m_PrefabInstance: {fileID: 6313851646877203617}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &6584684054207680805
 PrefabInstance:
   m_ObjectHideFlags: 0

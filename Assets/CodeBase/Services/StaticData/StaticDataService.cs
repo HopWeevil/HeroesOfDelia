@@ -82,6 +82,11 @@ namespace CodeBase.Services.StaticData
             return _equipment.Values.Where(e => e.Rarity == rarity).ToList();
         }
 
+        public List<LevelStaticData> GetAllLevels()
+        {
+            return _levels.Values.ToList();
+        }
+
         public ResourceStaticData ForResource(ResourceTypeId id)
         {
             if (_resources.TryGetValue(id, out ResourceStaticData staticData))
