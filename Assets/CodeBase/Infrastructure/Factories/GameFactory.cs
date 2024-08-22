@@ -64,13 +64,13 @@ namespace CodeBase.Infrastructure.Factories
             _assets.Cleanup();
         }
 
-        public async Task CreateSpawner(string spawnerId, Vector3 at, EnemyTypeId enemyTypeId)
+        public async Task CreateSpawner(Vector3 at, EnemyTypeId enemyTypeId)
         {
             GameObject prefab = await _assets.Load<GameObject>(AssetAddress.Spawner);
             EnemySpawner spawner = Object.Instantiate(prefab, at, Quaternion.identity).GetComponent<EnemySpawner>();
 
             _container.InjectGameObject(spawner.gameObject);
-            spawner.Initialize(spawnerId, enemyTypeId);
+            spawner.Initialize(enemyTypeId);
         }
 
         public async Task<GameObject> CreateSaveTrigger(Vector3 at)

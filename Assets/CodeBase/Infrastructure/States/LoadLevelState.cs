@@ -88,8 +88,7 @@ namespace CodeBase.Infrastructure.States
         {
             foreach (EnemySpawnerData spawnerData in levelData.EnemySpawners)
             {
-                Debug.Log(spawnerData.Id);
-                await _gameFactory.CreateSpawner(spawnerData.Id, spawnerData.Position, spawnerData.EnemyTypeId);
+                await _gameFactory.CreateSpawner(spawnerData.Position, spawnerData.EnemyTypeId);
             }
         }
 

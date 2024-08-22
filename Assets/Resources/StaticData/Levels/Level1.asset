@@ -12,16 +12,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 030b7be21665aa1489a30a0b62f687f9, type: 3}
   m_Name: Level1
   m_EditorClassIdentifier: 
-  LevelKey: Location1
+  Title: Location1
+  Description: Location1
+  LevelKey: Location2
   EnemySpawners:
-  - Id: Location1_c2aebca4-2e79-4326-b314-c645f467dfff
-    EnemyTypeId: 2
-    Position: {x: 7.29, y: 0, z: -13.21}
-  - Id: Location1_53d55753-6d94-40c1-84b2-46a1a4b20076
-    EnemyTypeId: 3
-    Position: {x: 7.35, y: 0, z: -16.34}
-  InitialHeroPosition: {x: 8.38, y: 0, z: -4.01}
+  - EnemyTypeId: 3
+    Position: {x: 1.09, y: 0, z: -23.87}
+  - EnemyTypeId: 2
+    Position: {x: 16.25, y: 0, z: -4}
+  - EnemyTypeId: 0
+    Position: {x: 15.79, y: 0, z: -14.59}
+  - EnemyTypeId: 0
+    Position: {x: -3.87, y: 0, z: -14.73}
+  - EnemyTypeId: 0
+    Position: {x: 5.22, y: 0, z: -14.73}
+  - EnemyTypeId: 2
+    Position: {x: 16.25, y: 0, z: -22.64}
+  InitialHeroPosition: {x: 2, y: 0, z: 0}
   LevelTransfer:
     TransferTo: 
-    Position: {x: -3.86, y: 0.050001144, z: -15.963214}
+    Position: {x: 16, y: 0.050001144, z: -2}
   SaveTriggerMarker: {x: -3.2, y: 0, z: -16.52}

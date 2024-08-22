@@ -4,28 +4,22 @@ using UnityEditor;
 using UnityEditor.SceneManagement;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using UnityEngine.Tilemaps;
-using Unity.Plastic.Newtonsoft.Json;
 using CodeBase.Enums;
-using System;
-using CodeBase.Logic.EnemySpawners;
+using CodeBase.Logic;
 using CodeBase.SO;
+using CodeBase.Logic.EnemySpawners;
 
 public class LevelDataEditor : EditorWindow
 {
-    private const string EditorScenePath = "Assets/ECR/Gameplay/Board/Editor/StageEditor.unity";
     private const string EnemySpawnMarkerPrefabPath = "Assets/SceneAssets/SpawnMarker.prefab";
-
-    private Tilemap _tilemap;
     private Transform _playerSpawner;
-
-    private string _output;
-    private Vector2 _scroll;
 
     private string stageKey, stageTitle, stageDescription;
     private Vector3 playerSpawnPoint;
     private List<EnemySpawnerEditor> enemySpawners = new List<EnemySpawnerEditor>();
-    private string jsonOutput;
+
+    private List<LevelStaticData> levels = new List<LevelStaticData>();
+    private LevelStaticData selectedLevel;
 
     [MenuItem("Tools/Level editor")]
     private static void ShowWindow() =>
@@ -35,17 +29,89 @@ public class LevelDataEditor : EditorWindow
     {
         EditorSceneManager.activeSceneChangedInEditMode += ResetWindow;
         EditorApplication.hierarchyChanged += OnHierarchyChanged;
+        LoadAllLevels();
         ResetWindow();
     }
 
-    private void OnDestroy()
+    private void OnDisable()
     {
         EditorSceneManager.activeSceneChangedInEditMode -= ResetWindow;
         EditorApplication.hierarchyChanged -= OnHierarchyChanged;
-        ResetWindow();
     }
 
     private void OnGUI()
+    {
+        //enemySpawners.Clear();
+        DrawLevelSelection();
+        if (selectedLevel != null)
+        {
+            DrawStageProperties();
+            DrawPlayerSpawnerSection();
+            DrawEnemySpawnersSection();
+
+            if (GUILayout.Button("Save Level Data"))
+            {
+                SaveLevelData();
+            }
+
+            UpdateEnemySpawners();
+        }
+    }
+    private void ShowLoadLevelConfirmation(LevelStaticData level)
+    {
+        bool saveChanges = EditorSceneManager.SaveCurrentModifiedScenesIfUserWantsTo();
+        if (saveChanges)
+        {
+            bool result = EditorUtility.DisplayDialog(
+                "Confirm Load Level",
+                $"Are you sure you want to load the level \"{level.Title}\"? This will switch to the corresponding scene.",
+                "Yes",
+                "No"
+            );
+
+            if (result)
+            {
+                LoadLevel(level);
+                LoadLevelData(level); //
+            }
+        }
+    }
+
+
+    private void LoadLevel(LevelStaticData level)
+    {
+        string scenePath = $"Assets/Scenes/{level.LevelKey}.unity";
+
+        if (System.IO.File.Exists(scenePath))
+        {
+            EditorSceneManager.OpenScene(scenePath);
+            selectedLevel = level;
+        }
+        else
+        {
+            EditorUtility.DisplayDialog(
+                "Error",
+                $"The scene \"{scenePath}\" does not exist.",
+                "OK"
+            );
+        }
+    }
+
+    private void DrawLevelSelection()
+    {
+        EditorGUILayout.LabelField("Select Level to Edit", EditorStyles.boldLabel);
+        foreach (var level in levels)
+        {
+            if (GUILayout.Button(level.Title))
+            {
+                ShowLoadLevelConfirmation(level); // Call the confirmation dialog
+            }
+        }
+
+        EditorGUILayout.Space();
+    }
+
+    private void DrawStageProperties()
     {
         EditorGUILayout.LabelField("Stage properties", EditorStyles.boldLabel);
         stageKey = EditorGUILayout.TextField("Stage Key", stageKey);
@@ -53,7 +119,10 @@ public class LevelDataEditor : EditorWindow
         stageDescription = EditorGUILayout.TextArea(stageDescription, GUILayout.Height(75));
 
         EditorGUILayout.Space();
+    }
 
+    private void DrawPlayerSpawnerSection()
+    {
         EditorGUILayout.LabelField("Player spawn", EditorStyles.boldLabel);
         if (GUILayout.Button("Select Player Spawner"))
         {
@@ -62,16 +131,24 @@ public class LevelDataEditor : EditorWindow
         EditorGUILayout.Vector3Field("Player Spawn Point", playerSpawnPoint);
 
         EditorGUILayout.Space();
+    }
 
+    private void DrawEnemySpawnersSection()
+    {
         EditorGUILayout.LabelField("Enemy spawners", EditorStyles.boldLabel);
         if (GUILayout.Button("Add Enemy Spawner"))
         {
-            var data = new EnemySpawnerEditor();
-            OnAddMarker(new CollectionChangeInfo { ChangeType = CollectionChangeType.Add, Value = data }, data);
-            enemySpawners.Add(data);
+            AddEnemySpawner();
         }
 
         EditorGUILayout.Space();
+
+        DrawEnemySpawnerList();
+    }
+
+    private void DrawEnemySpawnerList()
+    {
+        EditorGUILayout.BeginVertical(); // Ensure vertical layout starts and ends correctly
 
         EditorGUILayout.BeginHorizontal();
         EditorGUILayout.LabelField("Select", EditorStyles.boldLabel, GUILayout.Width(50));
@@ -79,158 +156,179 @@ public class LevelDataEditor : EditorWindow
         EditorGUILayout.LabelField("Position", EditorStyles.boldLabel);
         EditorGUILayout.EndHorizontal();
 
-        for (int i = 0; i < enemySpawners.Count; i++)
+        foreach (var spawner in enemySpawners)
         {
-            var spawner = enemySpawners[i];
+            if (spawner == null || spawner.GameObject == null)
+            {
+                continue; // Skip if spawner or its game object is null
+            }
+
             EditorGUILayout.BeginHorizontal();
 
             if (GUILayout.Button("Select", GUILayout.Width(50)))
             {
-                Selection.SetActiveObjectWithContext(spawner.gameObject, null);
+                Selection.SetActiveObjectWithContext(spawner.GameObject, null);
             }
 
-            var newEnemyType = (EnemyTypeId)EditorGUILayout.EnumPopup(spawner.enemyType, GUILayout.Width(200));
-            if (newEnemyType != spawner.enemyType)
+            var newEnemyType = (EnemyTypeId)EditorGUILayout.EnumPopup(spawner.EnemyType, GUILayout.Width(200));
+            if (newEnemyType != spawner.EnemyType)
             {
                 UpdateSpawnerType(spawner, newEnemyType);
             }
 
-            spawner.gameObject.transform.position = EditorGUILayout.Vector3Field("", spawner.gameObject.transform.position);
+            spawner.GameObject.transform.position = EditorGUILayout.Vector3Field("", spawner.GameObject.transform.position);
 
             if (GUILayout.Button("Remove", GUILayout.Width(60)))
             {
-                OnRemoveMarker(new CollectionChangeInfo { ChangeType = CollectionChangeType.RemoveIndex, Index = i }, enemySpawners);
-                enemySpawners.RemoveAt(i);
+                RemoveEnemySpawner(enemySpawners.IndexOf(spawner)); // Use index for removal
             }
 
             EditorGUILayout.EndHorizontal();
         }
 
-        EditorGUILayout.Space();
-
-        if (GUILayout.Button("Generate stage JSON", GUILayout.Height(40)))
-        {
-            var staticData = GenerateStageStaticData();
-            GenerateOutput(staticData);
-        }
-
-        if (!string.IsNullOrEmpty(_output))
-        {
-            EditorGUILayout.LabelField("Generated stage static data", EditorStyles.boldLabel);
-            EditorGUILayout.TextArea(jsonOutput, GUILayout.Height(150));
-        }
-
-        UpdateEnemySpawners();
+        EditorGUILayout.EndVertical(); // Ensure vertical layout ends correctly
     }
 
-    private LevelStaticData GenerateStageStaticData()
+
+    private void LoadAllLevels()
     {
-        var staticData = new LevelStaticData();
-
-        /* staticData.StageKey = stageKey;
-            staticData.StageTitle = stageTitle;
-            staticData.StageDescription = stageDescription;
-
-            staticData.PlayerSpawnPoint = _playerSpawner.position;
-            staticData.BoardTiles = board;*/
-
-        /*    staticData.EnemySpawners = enemySpawners
-                .Select(x => new EnemySpawnerData(x.)
-                {
-                    EnemyType = x.enemyType,
-                    Position = x.gameObject.transform.position
-                })
-                .ToArray();*/
-
-
-        return staticData;
+        levels = AssetDatabase.FindAssets("t:LevelStaticData")
+            .Select(guid => AssetDatabase.LoadAssetAtPath<LevelStaticData>(AssetDatabase.GUIDToAssetPath(guid)))
+            .ToList();
     }
 
-    private void ResetWindow(Scene previous, Scene current) =>
-        ResetWindow();
+    private void LoadLevelData(LevelStaticData level)
+    {
+        selectedLevel = level;
+        stageKey = level.LevelKey;
+        stageTitle = level.Title;
+        stageDescription = level.Description;
+        playerSpawnPoint = level.InitialHeroPosition;
+
+        SpawnMarker[] markers = FindObjectsOfType<SpawnMarker>();
+        foreach(SpawnMarker marker in markers)
+        {
+            Debug.Log(marker.gameObject.name);
+            var spawner = new EnemySpawnerEditor
+            {
+                EnemyType = marker.EnemyTypeId,
+                GameObject = new GameObject($"Spawner: {marker.EnemyTypeId}")
+            };
+            enemySpawners.Add(spawner);
+        }
+    }
+
+    private void SaveLevelData()
+    {
+        if (selectedLevel == null) return;
+
+        selectedLevel.LevelKey = stageKey;
+        selectedLevel.Title = stageTitle;
+        selectedLevel.Description = stageDescription;
+        selectedLevel.InitialHeroPosition = playerSpawnPoint;
+
+        List<EnemySpawnerData> spawners = new List<EnemySpawnerData>();
+        foreach (var spawner in enemySpawners)
+        {
+            spawners.Add(new EnemySpawnerData(spawner.EnemyType, spawner.GameObject.transform.position));
+        }
+        selectedLevel.EnemySpawners = spawners;
+
+        EditorUtility.SetDirty(selectedLevel);
+        AssetDatabase.SaveAssets();
+
+       // EditorUtility.SetDirty(Efidir);
+        // Save the current scene after making modifications
+       //if (EditorSceneManager.GetActiveScene().isDirty)
+        {
+            EditorSceneManager.SaveOpenScenes();
+        }
+    }
+
+    private void ResetWindow(Scene previous, Scene current) => ResetWindow();
 
     private void ResetWindow()
     {
-        if (SceneManager.GetActiveScene().name != "StageEditor")
-            return;
-
-        _tilemap = FindObjectOfType<Tilemap>();
-        _playerSpawner = GameObject.FindGameObjectWithTag("Player").transform;
-        enemySpawners.ForEach(sp => DestroyImmediate(sp.gameObject));
-        enemySpawners.Clear();
-
-        stageKey = stageTitle = stageDescription = string.Empty;
-        _output = string.Empty;
-        jsonOutput = _output;
-
+        ClearEnemySpawners();
         Repaint();
     }
 
-    private void GenerateOutput<T>(T obj)
+    private void ClearEnemySpawners()
     {
-        _output = JsonConvert.SerializeObject(obj, Formatting.Indented);
-        jsonOutput = _output;
+        enemySpawners.ForEach(sp => DestroyImmediate(sp.GameObject));
+        enemySpawners.Clear();
     }
 
-    private void UpdatePlayerSpawner() =>
-        playerSpawnPoint = _playerSpawner.position;
-
-    private void OnAddMarker(CollectionChangeInfo info, object value)
+    private void AddEnemySpawner()
     {
-        if (info.ChangeType != CollectionChangeType.Add)
-            return;
+        var spawnerData = new EnemySpawnerEditor();
+        InstantiateEnemySpawner(spawnerData);
+        enemySpawners.Add(spawnerData);
+    }
 
-        var data = (EnemySpawnerEditor)info.Value;
-
+    private void InstantiateEnemySpawner(EnemySpawnerEditor spawnerData)
+    {
         var prefab = AssetDatabase.LoadAssetAtPath<GameObject>(EnemySpawnMarkerPrefabPath);
-        var marker = PrefabUtility.InstantiatePrefab(prefab) as GameObject;
-        data.gameObject = marker;
-        UpdateSpawnerName(data);
+        if (prefab != null)
+        {
+            spawnerData.GameObject = PrefabUtility.InstantiatePrefab(prefab) as GameObject;
+            Undo.RegisterCreatedObjectUndo(spawnerData.GameObject, "Create Enemy Spawner");
+            UpdateSpawnerName(spawnerData);
+        }
+        else
+        {
+            Debug.LogError("Prefab not found at path: " + EnemySpawnMarkerPrefabPath);
+        }
     }
 
-    private void OnRemoveMarker(CollectionChangeInfo info, object value)
+    private void RemoveEnemySpawner(int index)
     {
-        if (info.ChangeType != CollectionChangeType.RemoveIndex)
-            return;
-
-        DestroyImmediate(((List<EnemySpawnerEditor>)value)[info.Index].gameObject);
+        DestroyImmediate(enemySpawners[index].GameObject);
+        enemySpawners.RemoveAt(index);
     }
 
     private void UpdateEnemySpawners()
     {
-        var currentMarkers = GameObject.FindGameObjectsWithTag("SpawnMarker")
+        var currentMarkers = FindCurrentMarkers();
+
+        AddNewSpawners(currentMarkers);
+        RemoveDeletedSpawners(currentMarkers);
+        UpdateExistingSpawners(currentMarkers);
+    }
+
+    private List<EnemySpawnerEditor> FindCurrentMarkers() =>
+        GameObject.FindGameObjectsWithTag("SpawnMarker")
             .Select(marker => new EnemySpawnerEditor
             {
-                enemyType = marker.GetComponent<SpawnMarker>().EnemyTypeId, // Assuming there's a component that holds the enemy type
-                gameObject = marker
+                EnemyType = marker.GetComponent<SpawnMarker>().EnemyTypeId,
+                GameObject = marker
             }).ToList();
 
-        // Add new markers
+    private void AddNewSpawners(List<EnemySpawnerEditor> currentMarkers)
+    {
         foreach (var marker in currentMarkers)
         {
-            if (!enemySpawners.Any(es => es.gameObject == marker.gameObject))
+            if (!enemySpawners.Any(es => es.GameObject == marker.GameObject))
             {
                 enemySpawners.Add(marker);
                 UpdateSpawnerName(marker);
             }
         }
+    }
 
-        // Remove deleted markers
-        for (int i = enemySpawners.Count - 1; i >= 0; i--)
-        {
-            if (!currentMarkers.Any(cm => cm.gameObject == enemySpawners[i].gameObject))
-            {
-                enemySpawners.RemoveAt(i);
-            }
-        }
+    private void RemoveDeletedSpawners(List<EnemySpawnerEditor> currentMarkers)
+    {
+        enemySpawners.RemoveAll(es => !currentMarkers.Any(cm => cm.GameObject == es.GameObject));
+    }
 
-        // Update existing markers
+    private void UpdateExistingSpawners(List<EnemySpawnerEditor> currentMarkers)
+    {
         foreach (var marker in currentMarkers)
         {
-            var existingSpawner = enemySpawners.First(es => es.gameObject == marker.gameObject);
-            if (existingSpawner.enemyType != marker.enemyType)
+            var existingSpawner = enemySpawners.First(es => es.GameObject == marker.GameObject);
+            if (existingSpawner.EnemyType != marker.EnemyType)
             {
-                existingSpawner.enemyType = marker.enemyType;
+                existingSpawner.EnemyType = marker.EnemyType;
                 UpdateSpawnerName(existingSpawner);
             }
         }
@@ -238,12 +336,12 @@ public class LevelDataEditor : EditorWindow
 
     private void UpdateSpawnerType(EnemySpawnerEditor spawner, EnemyTypeId newType)
     {
-        if (spawner.gameObject != null)
+        if (spawner.GameObject != null)
         {
-            spawner.enemyType = newType;
+            spawner.EnemyType = newType;
             UpdateSpawnerName(spawner);
-            // Update the scene object as well
-            var spawnMarker = spawner.gameObject.GetComponent<SpawnMarker>();
+
+            var spawnMarker = spawner.GameObject.GetComponent<SpawnMarker>();
             if (spawnMarker != null)
             {
                 spawnMarker.EnemyTypeId = newType;
@@ -253,9 +351,11 @@ public class LevelDataEditor : EditorWindow
 
     private void UpdateSpawnerName(EnemySpawnerEditor spawner)
     {
-        if (spawner.gameObject != null)
+        if (spawner.GameObject != null)
         {
-            spawner.gameObject.name = $"Spawner : {spawner.enemyType}";
+            spawner.GameObject.name = $"Spawner : {spawner.EnemyType}";
+            Undo.RegisterCreatedObjectUndo(spawner.GameObject, "Change spawner type");
+            //EditorUtility.SetDirty(spawner.GameObject);
         }
     }
 
@@ -265,24 +365,10 @@ public class LevelDataEditor : EditorWindow
         Repaint();
     }
 
-    private class CollectionChangeInfo
-    {
-        public CollectionChangeType ChangeType { get; set; }
-        public int Index { get; set; }
-        public object Value { get; set; }
-    }
-
-    private enum CollectionChangeType
-    {
-        Add,
-        RemoveIndex
-    }
-
-    [Serializable]
+    [System.Serializable]
     private class EnemySpawnerEditor
     {
-        public EnemyTypeId enemyType;
-        public GameObject gameObject;
+        public EnemyTypeId EnemyType;
+        public GameObject GameObject;
     }
 }
-

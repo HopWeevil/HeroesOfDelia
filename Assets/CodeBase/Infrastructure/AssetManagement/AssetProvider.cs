@@ -8,7 +8,7 @@ namespace CodeBase.Infrastructure.AssetManagement
 {
     public class AssetProvider : IAssetProvider
     {
-        private readonly Dictionary<string, AsyncOperationHandle> _completedCashe = new Dictionary<string, AsyncOperationHandle>();
+        private readonly Dictionary<string, AsyncOperationHandle> _completedCache = new Dictionary<string, AsyncOperationHandle>();
         private readonly Dictionary<string, List<AsyncOperationHandle>> _handles = new Dictionary<string, List<AsyncOperationHandle>>();
 
         public void Initialize()
@@ -18,7 +18,7 @@ namespace CodeBase.Infrastructure.AssetManagement
 
         public async Task<T> Load<T>(AssetReference assetReference) where T : class
         {
-            if (_completedCashe.TryGetValue(assetReference.AssetGUID, out AsyncOperationHandle completedHandle))
+            if (_completedCache.TryGetValue(assetReference.AssetGUID, out AsyncOperationHandle completedHandle))
             {
                 return completedHandle.Result as T;
             }
@@ -28,7 +28,7 @@ namespace CodeBase.Infrastructure.AssetManagement
 
         public async Task<T> Load<T>(string address) where T : class
         {
-            if (_completedCashe.TryGetValue(address, out AsyncOperationHandle completedHandle))
+            if (_completedCache.TryGetValue(address, out AsyncOperationHandle completedHandle))
             {
                 return completedHandle.Result as T;
             }
@@ -58,7 +58,7 @@ namespace CodeBase.Infrastructure.AssetManagement
                 }
             }
 
-            _completedCashe.Clear();
+            _completedCache.Clear();
             _handles.Clear();
         }
 
@@ -66,7 +66,7 @@ namespace CodeBase.Infrastructure.AssetManagement
         {
             handle.Completed += completeHandle =>
             {
-                _completedCashe[cacheKey] = completeHandle;
+                _completedCache[cacheKey] = completeHandle;
             };
 
             AddHandle<T>(cacheKey, handle);

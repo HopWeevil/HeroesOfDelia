@@ -26,7 +26,7 @@ namespace CodeBase.Editor
             {
                 SpawnMarker[] spawnMarkers = FindObjectsOfType<SpawnMarker>();
 
-                List<EnemySpawnerData> spawnersList = spawnMarkers.Select(x => new EnemySpawnerData(x.GetComponent<UniqueId>().Id, x.EnemyTypeId, x.transform.position)).ToList();
+                List<EnemySpawnerData> spawnersList = spawnMarkers.Select(x => new EnemySpawnerData(x.EnemyTypeId, x.transform.position)).ToList();
                 levelData.EnemySpawners = spawnersList;
 
                 levelData.LevelKey = SceneManager.GetActiveScene().name;

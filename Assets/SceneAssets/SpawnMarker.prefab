@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 5262585596166813362}
   - component: {fileID: 5737925719251549820}
-  - component: {fileID: 8736869427101046855}
   m_Layer: 0
   m_Name: SpawnMarker
   m_TagString: SpawnMarker
@@ -45,17 +44,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 47c56289a3b61104abcd6e8d0ec2657b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _enemyTypeId: 0
---- !u!114 &8736869427101046855
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4982439746437625821}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5e0bee4767e515940aac5b1946012c75, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Id: Location1_53d55753-6d94-40c1-84b2-46a1a4b20076
+  EnemyTypeId: 1

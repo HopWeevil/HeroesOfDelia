@@ -12,7 +12,7 @@ namespace CodeBase.Infrastructure.Factories
     {
         Task<GameObject> CreateHud();
         Task<GameObject> CreateSaveTrigger(Vector3 at);
-        Task CreateSpawner(string spawnerId, Vector3 at, EnemyTypeId enemyTypeId);
+        Task CreateSpawner(Vector3 at, EnemyTypeId enemyTypeId);
         Task<ResourceLoot> CreateResourceLoot(ResourceTypeId resourceType, Vector3 at);
         Task<EquipmentLoot> CreateEquipmentLoot(EquipmentTypeId equipmentType, Vector3 at);
         Task<GameObject> CreateEquipment(EquipmentTypeId equipmentType, Transform parent);
