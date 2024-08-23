@@ -22,7 +22,7 @@ namespace CodeBase.Services.StaticData
         private Dictionary<EquipmentTypeId, EquipmentStaticData> _equipment;
         private Dictionary<ResourceTypeId, ResourceStaticData> _resources;
 
-        public void Load()
+        public void Initialize()
         {
             _heroes = Resources.LoadAll<HeroStaticData>(HeroesDataPath).ToDictionary(x => x.TypeId, x => x);
             _enemies = Resources.LoadAll<EnemyStaticData>(EnemiesDataPath).ToDictionary(x => x.EnemyTypeId, x => x);

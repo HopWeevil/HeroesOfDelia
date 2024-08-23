@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Title: Location1
   Description: Location1
-  LevelKey: Location2
+  LevelKey: Location1
   EnemySpawners:
   - EnemyTypeId: 3
     Position: {x: 1.09, y: 0, z: -23.87}

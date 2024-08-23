@@ -51,9 +51,7 @@ namespace CodeBase.Infrastructure.Installers
 
         private void BindStaticDataService()
         {
-            IStaticDataService staticDataService = new StaticDataService();
-            staticDataService.Load();
-            Container.BindInstance(staticDataService).AsSingle();
+            Container.Bind<IStaticDataService>().To<StaticDataService>().AsSingle();
         }
 
         private void BindAssetProvider()

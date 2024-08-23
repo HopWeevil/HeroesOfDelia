@@ -1,5 +1,4 @@
-﻿using CodeBase.Enums;
-using CodeBase.Infrastructure.Factories;
+﻿using CodeBase.Infrastructure.Factories;
 using CodeBase.Infrastructure.Sceneloader;
 using CodeBase.Logic;
 using CodeBase.Logic.Camera;
@@ -9,7 +8,6 @@ using CodeBase.SO;
 using CodeBase.UI;
 using System.Threading.Tasks;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 namespace CodeBase.Infrastructure.States
 {
@@ -23,7 +21,6 @@ namespace CodeBase.Infrastructure.States
         private readonly IPersistentProgressService _progressService;
         private readonly IStaticDataService _staticDataService;
 
-        private const string sceneName = "Location1";
         private LevelStaticData _levelToLoad;
 
         public LoadLevelState(IGameStateMachine gameStateMachine, ISceneLoader sceneLoader, ILoadingCurtain loadingCurtain, ICharacterFactory factory, IPersistentProgressService progressService, IStaticDataService staticDataService, IGameFactory gameFactory)
@@ -41,7 +38,7 @@ namespace CodeBase.Infrastructure.States
         {
             _levelToLoad = levelStaticData;
             _loadingCurtain.Show();
-            _sceneLoader.Load(sceneName, OnLoadedAsync);
+            _sceneLoader.Load(_levelToLoad.LevelKey, OnLoadedAsync);
         }
 
         public void Exit()
@@ -58,8 +55,6 @@ namespace CodeBase.Infrastructure.States
 
         private async Task InitGameWorld()
         {
-            //LevelStaticData levelData = _staticDataService.ForLevel(SceneManager.GetActiveScene().name);
-
             GameObject hero = await InitHero(_levelToLoad);
             await InitSpawners(_levelToLoad);
             await InitSaveTrigger(_levelToLoad);

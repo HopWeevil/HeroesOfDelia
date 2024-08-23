@@ -1,23 +1,26 @@
-﻿using CodeBase.Infrastructure.Sceneloader;
+﻿using CodeBase.Infrastructure.AssetManagement;
+using CodeBase.Services.StaticData;
 
 namespace CodeBase.Infrastructure.States
 {
     public class BootstrapState : IState
     {
-        private const string Initial = "Initial";
-        private readonly GameStateMachine _stateMachine;
-        private readonly ISceneLoader _sceneLoader;
+        private readonly IGameStateMachine _stateMachine;
+        private readonly IStaticDataService _staticData;
+        private readonly IAssetProvider _assetProvider;
 
-        public BootstrapState(GameStateMachine stateMachine, ISceneLoader sceneLoader)
+        public BootstrapState(IGameStateMachine stateMachine, IStaticDataService staticData, IAssetProvider assetProvider)
         {
             _stateMachine = stateMachine;
-            _sceneLoader = sceneLoader;
-
+            _staticData = staticData;
+            _assetProvider = assetProvider;
         }
 
         public void Enter()
         {
-            _sceneLoader.Load(Initial, onLoaded: EnterLoadLevel);
+            InitializeServices();
+
+            _stateMachine.Enter<LoadProgressState>();
         }
 
         public void Exit()
@@ -25,10 +28,10 @@ namespace CodeBase.Infrastructure.States
 
         }
 
-        private void EnterLoadLevel()
+        private void InitializeServices()
         {
-           // _stateMachine.Enter<LoadProgressState>();
-            //_stateMachine.Enter<LoadMetaState>();
+            _staticData.Initialize();
+            _assetProvider.Initialize();
         }
     }
 }

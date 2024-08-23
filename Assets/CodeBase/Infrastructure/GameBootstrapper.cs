@@ -22,12 +22,12 @@ namespace CodeBase.Infrastructure
             DontDestroyOnLoad(this);
             RegisterStates();
 
-            _gameStateMachine.Enter<LoadProgressState>();
-
+            _gameStateMachine.Enter<BootstrapState>();
         }
 
         private void RegisterStates()
         {
+            _gameStateMachine.RegisterState(_statesFactory.Create<BootstrapState>());
             _gameStateMachine.RegisterState(_statesFactory.Create<LoadProgressState>());
             _gameStateMachine.RegisterState(_statesFactory.Create<LoadMetaState>());
             _gameStateMachine.RegisterState(_statesFactory.Create<LoadLevelState>());
