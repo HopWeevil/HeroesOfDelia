@@ -7443,7 +7443,7 @@ PrefabInstance:
     - target: {fileID: 4982439746437625821, guid: 91c6de4c6dd50184cba1b32edb5e8065,
         type: 3}
       propertyPath: m_Name
-      value: SpawnMarker
+      value: 'Spawner : SkeletonWizzard'
       objectReference: {fileID: 0}
     - target: {fileID: 5262585596166813362, guid: 91c6de4c6dd50184cba1b32edb5e8065,
         type: 3}
@@ -8828,7 +8828,7 @@ PrefabInstance:
     - target: {fileID: 4982439746437625821, guid: 91c6de4c6dd50184cba1b32edb5e8065,
         type: 3}
       propertyPath: m_Name
-      value: SpawnMarker (2)
+      value: 'Spawner : Skeleton'
       objectReference: {fileID: 0}
     - target: {fileID: 5262585596166813362, guid: 91c6de4c6dd50184cba1b32edb5e8065,
         type: 3}
@@ -10703,7 +10703,7 @@ PrefabInstance:
     - target: {fileID: 4982439746437625821, guid: 91c6de4c6dd50184cba1b32edb5e8065,
         type: 3}
       propertyPath: m_Name
-      value: SpawnMarker (3)
+      value: 'Spawner : Skeleton'
       objectReference: {fileID: 0}
     - target: {fileID: 5262585596166813362, guid: 91c6de4c6dd50184cba1b32edb5e8065,
         type: 3}
@@ -11891,7 +11891,7 @@ PrefabInstance:
     - target: {fileID: 4982439746437625821, guid: 91c6de4c6dd50184cba1b32edb5e8065,
         type: 3}
       propertyPath: m_Name
-      value: SpawnMarker (1)
+      value: 'Spawner : Skeleton'
       objectReference: {fileID: 0}
     - target: {fileID: 5262585596166813362, guid: 91c6de4c6dd50184cba1b32edb5e8065,
         type: 3}
