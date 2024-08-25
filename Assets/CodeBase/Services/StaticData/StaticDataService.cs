@@ -1,20 +1,19 @@
-﻿using CodeBase.Data;
-using CodeBase.Enums;
-using CodeBase.Logic.Loot;
+﻿using CodeBase.Enums;
 using CodeBase.SO;
 using System.Collections.Generic;
 using System.Linq;
-using UnityEngine;
+using System.Threading.Tasks;
+using CodeBase.Infrastructure.AssetManagement;
 
 namespace CodeBase.Services.StaticData
 {
     public class StaticDataService : IStaticDataService
     {
-        private const string HeroesDataPath = "StaticData/Heroes";
-        private const string EnemiesDataPath = "StaticData/Enemies";
-        private const string LevelsDataPath = "StaticData/Levels";
-        private const string EquipmentDataPath = "StaticData/Equipment";
-        private const string ResourceDataPath = "StaticData/Resource";
+        private const string HeroLabel = "HeroStaticData";
+        private const string EnemyLabel = "EnemyStaticData";
+        private const string LevelLabel = "LevelStaticData";
+        private const string EquipmentLabel = "EquipmentStaticData";
+        private const string ResourceLabel = "ResourceStaticData";
 
         private Dictionary<string, LevelStaticData> _levels;
         private Dictionary<HeroTypeId, HeroStaticData> _heroes;
@@ -22,13 +21,20 @@ namespace CodeBase.Services.StaticData
         private Dictionary<EquipmentTypeId, EquipmentStaticData> _equipment;
         private Dictionary<ResourceTypeId, ResourceStaticData> _resources;
 
-        public void Initialize()
+        private readonly IAssetProvider _assetProvider;
+
+        public StaticDataService(IAssetProvider assetProvider)
         {
-            _heroes = Resources.LoadAll<HeroStaticData>(HeroesDataPath).ToDictionary(x => x.TypeId, x => x);
-            _enemies = Resources.LoadAll<EnemyStaticData>(EnemiesDataPath).ToDictionary(x => x.EnemyTypeId, x => x);
-            _levels = Resources.LoadAll<LevelStaticData>(LevelsDataPath).ToDictionary(x => x.LevelKey, x => x);
-            _equipment = Resources.LoadAll<EquipmentStaticData>(EquipmentDataPath).ToDictionary(x => x.TypeId, x => x);
-            _resources = Resources.LoadAll<ResourceStaticData>(ResourceDataPath).ToDictionary(x => x.ResourceTypeId, x => x);
+            _assetProvider = assetProvider;
+        }
+
+        public async Task Initialize()
+        {
+            _heroes = (await _assetProvider.LoadAll<HeroStaticData>(HeroLabel)).ToDictionary(x => x.TypeId, x => x);
+            _enemies = (await _assetProvider.LoadAll<EnemyStaticData>(EnemyLabel)).ToDictionary(x => x.EnemyTypeId, x => x);
+            _levels = (await _assetProvider.LoadAll<LevelStaticData>(LevelLabel)).ToDictionary(x => x.LevelKey, x => x);
+            _equipment = (await _assetProvider.LoadAll<EquipmentStaticData>(EquipmentLabel)).ToDictionary(x => x.TypeId, x => x);
+            _resources = (await _assetProvider.LoadAll<ResourceStaticData>(ResourceLabel)).ToDictionary(x => x.ResourceTypeId, x => x);
         }
 
         public LevelStaticData ForLevel(string sceneKey)
@@ -42,6 +48,7 @@ namespace CodeBase.Services.StaticData
                 return null;
             }
         }
+
         public HeroStaticData ForHero(HeroTypeId id)
         {
             if (_heroes.TryGetValue(id, out HeroStaticData staticData))
@@ -77,15 +84,6 @@ namespace CodeBase.Services.StaticData
                 return null;
             }
         }
-        public List<EquipmentStaticData> GetEquipmentByRarity(Rarity rarity)
-        {
-            return _equipment.Values.Where(e => e.Rarity == rarity).ToList();
-        }
-
-        public List<LevelStaticData> GetAllLevels()
-        {
-            return _levels.Values.ToList();
-        }
 
         public ResourceStaticData ForResource(ResourceTypeId id)
         {
@@ -97,6 +95,21 @@ namespace CodeBase.Services.StaticData
             {
                 return null;
             }
+        }
+
+        public List<EquipmentStaticData> GetEquipmentByRarity(Rarity rarity)
+        {
+            return _equipment.Values.Where(e => e.Rarity == rarity).ToList();
+        }
+
+        public List<LevelStaticData> GetAllLevels()
+        {
+            return _levels.Values.ToList();
+        }
+
+        public List<HeroStaticData> GetAllHeroes()
+        {
+            return _heroes.Values.ToList();
         }
     }
 }

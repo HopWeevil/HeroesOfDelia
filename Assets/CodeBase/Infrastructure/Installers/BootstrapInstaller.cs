@@ -17,7 +17,7 @@ namespace CodeBase.Infrastructure.Installers
     public class BootstrapInstaller : MonoInstaller
     {
         [SerializeField] private GameObject _coroutineRunnerPrefab;
-        [SerializeField] private GameObject _loadingScreenPrebab;
+        [SerializeField] private GameObject _loadingCurtainPrefab;
 
         public override void InstallBindings()
         {
@@ -104,7 +104,7 @@ namespace CodeBase.Infrastructure.Installers
         }
         private void BindLoadingCurtain()
         {
-            Container.Bind<ILoadingCurtain>().To<LoadingCurtain>().FromComponentInNewPrefab(_loadingScreenPrebab).AsSingle().NonLazy();
+            Container.Bind<ILoadingCurtain>().To<LoadingCurtain>().FromComponentInNewPrefab(_loadingCurtainPrefab).AsSingle().NonLazy();
         }
 
         private void BindCoroutineRunner()

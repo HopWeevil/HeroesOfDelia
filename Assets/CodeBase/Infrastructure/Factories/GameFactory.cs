@@ -26,6 +26,18 @@ namespace CodeBase.Infrastructure.Factories
             _container = container;
         }
 
+        public async Task WarmUp()
+        {
+            await _assets.Load<GameObject>(_staticData.ForResource(ResourceTypeId.Coin).PrefabReference);
+            await _assets.Load<GameObject>(_staticData.ForResource(ResourceTypeId.Gem).PrefabReference);
+            await _assets.Load<GameObject>(AssetAddress.Spawner);
+        }
+
+        public void CleanUp()
+        {
+            _assets.CleanUp();
+        }
+
         public async Task<GameObject> CreateEquipment(EquipmentTypeId equipmentType, Transform parent)
         {
             EquipmentStaticData equipment = _staticData.ForEquipment(equipmentType);
@@ -51,19 +63,8 @@ namespace CodeBase.Infrastructure.Factories
             return lootPiece;
         }
 
-        public async Task<GameObject> CreateHud()
-        {
-            GameObject prefab = await _assets.Load<GameObject>(AssetAddress.HudPath);
-            GameObject hud = Object.Instantiate(prefab);
-            _container.InjectGameObject(hud);
-            return hud;
-        }
-
-        public void Cleanup()
-        {
-            _assets.Cleanup();
-        }
-
+   
+   
         public async Task CreateSpawner(Vector3 at, EnemyTypeId enemyTypeId)
         {
             GameObject prefab = await _assets.Load<GameObject>(AssetAddress.Spawner);

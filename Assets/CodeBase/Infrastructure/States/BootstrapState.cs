@@ -1,5 +1,6 @@
 ﻿using CodeBase.Infrastructure.AssetManagement;
 using CodeBase.Services.StaticData;
+using System.Threading.Tasks;
 
 namespace CodeBase.Infrastructure.States
 {
@@ -16,9 +17,9 @@ namespace CodeBase.Infrastructure.States
             _assetProvider = assetProvider;
         }
 
-        public void Enter()
+        public async void Enter()
         {
-            InitializeServices();
+            await InitializeServices();
 
             _stateMachine.Enter<LoadProgressState>();
         }
@@ -28,9 +29,9 @@ namespace CodeBase.Infrastructure.States
 
         }
 
-        private void InitializeServices()
+        private async Task InitializeServices()
         {
-            _staticData.Initialize();
+            await _staticData.Initialize();
             _assetProvider.Initialize();
         }
     }

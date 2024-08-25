@@ -19,5 +19,6 @@ namespace CodeBase.Infrastructure.Factories
         Task<EquipmentItemWindow> CreateEquipmentInfoWindow(EquipmentItem item);
         Task<PopupMessage> CreatePopupMessage(Color color, string text);
         Task<LevelCard> CreateLevelCard(LevelStaticData data, RectTransform parent);
+        Task<GameObject> CreateHud();
     }
 }

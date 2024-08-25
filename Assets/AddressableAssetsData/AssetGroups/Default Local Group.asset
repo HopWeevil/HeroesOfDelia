@@ -17,16 +17,6 @@ MonoBehaviour:
     m_SerializedData: []
   m_GUID: 8b604b1773cce66449beef77495f2259
   m_SerializeEntries:
-  - m_GUID: 1f7c67a4dd7b89c499f0319fdfebce23
-    m_Address: Knight
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 62239803700486d4f9ca5191fbb0ec32
-    m_Address: Hud
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: c46d047ada62a524eb947f683972f193
     m_Address: EnemySpawner
     m_ReadOnly: 0
@@ -37,78 +27,8 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: fdf0211393deb1e469376627d6b83248
-    m_Address: SkeletonWizzard
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: fcddae9d5251e8541a2e0abed240b4b8
-    m_Address: Skeleton
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: b58bea1ed69fa17419217afb58216187
-    m_Address: SkeletonArcher
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: b7e63dd832022634eb291b820fe3860a
-    m_Address: Coin
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 9343dc83a0ab1794db33dd932e752032
-    m_Address: CommonEquipmentBox
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 5d08fd8e7b79b054495ba2e3ae0072b0
-    m_Address: LegendaryEquipmentBox
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 52a99d2d4142c6c418f27b844bf3e68f
-    m_Address: RareEquipmentBox
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 7cb271f3d2f82ea4abf107f722542b98
-    m_Address: MythicEquipmentBox
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 491afadd642424b4d81f472858de5e7b
-    m_Address: EpicEquipmentBox
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: eac928c666ea2c04e876760342a7c47d
     m_Address: ResourcesBar
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 701cf098ce132d34595474b2b7aac2e2
-    m_Address: MainMenu
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: c8fae78faa742b140a56b10d34736a90
-    m_Address: UIRoot
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 51a9d4c5f54e90b4aa4719b3dea071c9
-    m_Address: Barbarian
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: e7e530ec908955e40a037ef1705ab144
-    m_Address: Mage
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 90fb56ee7d10dc4499702fccdd310531
-    m_Address: Rogue
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
@@ -132,76 +52,6 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: c85b24ef6fc6c824480cf80f7a3d967b
-    m_Address: Axe3
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: f1dac537e47a9b643b06367b8587c36a
-    m_Address: Crossbow2
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: d0d83abcefe61704bbc107463b7f6be8
-    m_Address: Wand1
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 8a065d79124cd8e4192e2378d79ed687
-    m_Address: Axe1
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 6bfda8bc91d07fd4d92e01343bf6ebc8
-    m_Address: Dagger2
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 539d04e5f8c389747b8995cdf84baf38
-    m_Address: Axe2
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 2e2f76832ff6ecc4fb62528db0506691
-    m_Address: Staff2
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: c08d77bed90c353478c3ff5060b81dfd
-    m_Address: Crossbow1
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: e095eb5096f56834286e92108daffd49
-    m_Address: Staff1
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: bf89572fcae8e44458b8d9b83be30623
-    m_Address: Dagger1
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: a5f3284bd46da384699233b39fb528b9
-    m_Address: Crossbow3
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 91f235a01507c9941a3ad7e254557ee0
-    m_Address: Sword1
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 7b77f77505c2c174bbcb5594ed29011c
-    m_Address: Sword2
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: a85c7ffa7294fdc4bb2109b4b283d172
-    m_Address: Sword3
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 7b08a1ba0ec467940a81f3e372d7cee1
     m_Address: PopupMessage
     m_ReadOnly: 0
@@ -214,6 +64,71 @@ MonoBehaviour:
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 239c64e6df141054491fd4fbfbc17859
     m_Address: LevelCard
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: ed18ede60ef051440b43b67597abd3f9
+    m_Address: StaticData/Heroes
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - HeroStaticData
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 26e04efaa32989547ab3439c9f40b97a
+    m_Address: Weapons
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 2371b1bc549e27a42906df3057b36f5e
+    m_Address: Loot
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: bd101b5f5cf1f55468165f0e4028a3bd
+    m_Address: Heroes
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 6f7f384ce20fb9b4b8aa530ea873a197
+    m_Address: StaticData/Enemies
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - EnemyStaticData
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 15f86b1386a2aec47b6ba09c779dd657
+    m_Address: StaticData/Levels
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - LevelStaticData
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 65f880f68d3066b43b71160b35e4d03a
+    m_Address: StaticData/Equipment
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - EquipmentStaticData
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 3c0474b00e8d20749a14eaa5fc40e064
+    m_Address: StaticData/Resource
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - ResourceStaticData
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 4c55ef07d285d3f4ab6afeea524b5dfb
+    m_Address: Assets/Resources_moved/Characters/Enemies
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 62239803700486d4f9ca5191fbb0ec32
+    m_Address: Hud
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 701cf098ce132d34595474b2b7aac2e2
+    m_Address: MainMenu
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: c8fae78faa742b140a56b10d34736a90
+    m_Address: UIRoot
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0

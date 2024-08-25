@@ -19,25 +19,27 @@ namespace CodeBase.Infrastructure.States
         private readonly ICharacterFactory _characterFactory;
         private readonly IGameFactory _gameFactory;
         private readonly IPersistentProgressService _progressService;
-        private readonly IStaticDataService _staticDataService;
+        private readonly IUIFactory _uIFactory;
 
         private LevelStaticData _levelToLoad;
 
-        public LoadLevelState(IGameStateMachine gameStateMachine, ISceneLoader sceneLoader, ILoadingCurtain loadingCurtain, ICharacterFactory factory, IPersistentProgressService progressService, IStaticDataService staticDataService, IGameFactory gameFactory)
+        public LoadLevelState(IGameStateMachine gameStateMachine, ISceneLoader sceneLoader, ILoadingCurtain loadingCurtain, ICharacterFactory factory, IPersistentProgressService progressService, IGameFactory gameFactory, IUIFactory uIFactory)
         {
             _stateMachine = gameStateMachine;
             _sceneLoader = sceneLoader;
             _loadingCurtain = loadingCurtain;
             _characterFactory = factory;
             _progressService = progressService;
-            _staticDataService = staticDataService;
             _gameFactory = gameFactory;
+            _uIFactory = uIFactory;
         }
 
         public void Enter(LevelStaticData levelStaticData)
         {
             _levelToLoad = levelStaticData;
             _loadingCurtain.Show();
+            _gameFactory.CleanUp();
+            _gameFactory.WarmUp();
             _sceneLoader.Load(_levelToLoad.LevelKey, OnLoadedAsync);
         }
 
@@ -75,7 +77,7 @@ namespace CodeBase.Infrastructure.States
 
         private async Task InitHud(GameObject hero)
         {
-            GameObject hud = await _gameFactory.CreateHud();
+            GameObject hud = await _uIFactory.CreateHud();
             hud.GetComponentInChildren<ActorUI>().Construct(hero.GetComponent<IHealth>());
         }
 

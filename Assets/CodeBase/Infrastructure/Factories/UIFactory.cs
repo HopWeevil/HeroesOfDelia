@@ -102,5 +102,12 @@ namespace CodeBase.Infrastructure.Factories
             _uiRoot = Object.Instantiate(prefab).GetComponent<Canvas>();
         }
 
+        public async Task<GameObject> CreateHud()
+        {
+            GameObject prefab = await _assets.Load<GameObject>(AssetAddress.HudPath);
+            GameObject hud = Object.Instantiate(prefab);
+            _container.InjectGameObject(hud);
+            return hud;
+        }
     }
 }

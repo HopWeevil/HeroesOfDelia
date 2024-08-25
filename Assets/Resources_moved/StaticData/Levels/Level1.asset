@@ -33,3 +33,4 @@ MonoBehaviour:
     TransferTo: 
     Position: {x: 16, y: 0.050001144, z: -2}
   SaveTriggerMarker: {x: -3.2, y: 0, z: -16.52}
+  Preview: {fileID: 21300000, guid: 5c82d6dd195052e41b25c6df8909c2cb, type: 3}

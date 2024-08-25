@@ -17,5 +17,7 @@ namespace CodeBase.SO
         public Vector3 InitialHeroPosition;
         public LevelTransferData LevelTransfer;
         public Vector3 SaveTriggerMarker;
+
+        public Sprite Preview;
     }
 }

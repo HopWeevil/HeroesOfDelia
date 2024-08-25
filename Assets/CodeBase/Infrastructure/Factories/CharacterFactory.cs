@@ -34,10 +34,25 @@ namespace CodeBase.Infrastructure.Factories
             _container = container;
         }
 
+        public async Task WarmUp()
+        {
+            foreach (HeroStaticData data in _staticData.GetAllHeroes())
+            {
+                await _assets.Load<GameObject>(data.PrefabReference);
+            }
+        }
+
+        public void CleanUp()
+        {
+            foreach (HeroStaticData data in _staticData.GetAllHeroes())
+            {
+                _assets.Release(data.PrefabReference);
+            }
+        }
+
         public async Task<GameObject> CreateHero(Vector3 at, HeroTypeId heroTypeId = HeroTypeId.Knight)
         {
             HeroStaticData data = _staticData.ForHero(heroTypeId);
-
             GameObject prefab = await _assets.Load<GameObject>(data.PrefabReference);
 
             _hero = Object.Instantiate(prefab, at, Quaternion.identity);

@@ -1,8 +1,12 @@
+using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
+using UnityEditor.VersionControl;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 using UnityEngine.ResourceManagement.AsyncOperations;
+using UnityEngine.ResourceManagement.ResourceLocations;
 
 namespace CodeBase.Infrastructure.AssetManagement
 {
@@ -38,17 +42,23 @@ namespace CodeBase.Infrastructure.AssetManagement
             return await RunWithCacheOnComplete(Addressables.LoadAssetAsync<T>(address),cacheKey: address);
         }
 
-        public Task<GameObject> Instantiate(string address, Vector3 at)
+        public async Task<List<T>> LoadAll<T>(string label) where T : class
         {
-            return Addressables.InstantiateAsync(address, at, Quaternion.identity).Task;
+            AsyncOperationHandle<IList<T>> handle = Addressables.LoadAssetsAsync<T>(label, null);
+            IList<T> results = await handle.Task;
+
+            string cacheKey = label;
+            foreach (var result in results)
+            {
+                _completedCache[cacheKey] = handle;
+            }
+
+            AddHandle<T>(cacheKey, handle);
+
+            return new List<T>(results);
         }
 
-        public Task<GameObject> Instantiate(string address)
-        {
-            return Addressables.InstantiateAsync(address).Task;
-        }
-
-        public void Cleanup()
+        public void CleanUp()
         {
             foreach (List<AsyncOperationHandle> resourceHandles in _handles.Values)
             {
@@ -83,6 +93,32 @@ namespace CodeBase.Infrastructure.AssetManagement
             }
 
             resourceHandles.Add(handle);
+        }
+
+        public void Release(string key)
+        {
+            if (!_handles.ContainsKey(key))
+                return;
+
+            foreach (var handle in _handles[key])
+                Addressables.Release(handle);
+
+            _completedCache.Remove(key);
+            _handles.Remove(key);
+        }
+
+        public void Release(AssetReference assetReference)
+        {
+            string key = assetReference.AssetGUID;
+
+            if (!_handles.ContainsKey(key))
+                return;
+
+            foreach (var handle in _handles[key])
+                Addressables.Release(handle);
+
+            _completedCache.Remove(key);
+            _handles.Remove(key);
         }
     }
 }

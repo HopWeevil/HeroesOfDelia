@@ -23,7 +23,7 @@ MonoBehaviour:
     m_AssetGUID: 51a9d4c5f54e90b4aa4719b3dea071c9
     m_SubObjectName: 
     m_SubObjectType: 
-    m_EditorAssetChanged: 1
+    m_EditorAssetChanged: 0
   TypeId: 1
   HeroClass: 0
   Price:

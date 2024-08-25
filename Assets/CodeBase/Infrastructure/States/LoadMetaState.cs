@@ -1,10 +1,7 @@
-using CodeBase.Hero;
-using CodeBase.Infrastructure.AssetManagement;
 using CodeBase.Infrastructure.Factories;
 using CodeBase.Infrastructure.Sceneloader;
 using CodeBase.Logic;
 using System.Threading.Tasks;
-using UnityEditor;
 using UnityEngine;
 
 namespace CodeBase.Infrastructure.States
@@ -13,20 +10,16 @@ namespace CodeBase.Infrastructure.States
     {
         private readonly IUIFactory _uiFactory;
         private readonly ISceneLoader _sceneLoader;
-        private readonly IAssetProvider _assetProvider;
-        private readonly IGameStateMachine _stateMachine;
         private readonly ILoadingCurtain _curtain;
-        private readonly IGameFactory _gameFactory;
+        private readonly ICharacterFactory _characterFactory;
         private readonly IShowcaseHeroFactory _heroCreator;
 
-        public LoadMetaState(IUIFactory factory, ISceneLoader sceneLoader, IAssetProvider assetProvider, IGameStateMachine stateMachine, ILoadingCurtain curtain, IGameFactory gameFactory, IShowcaseHeroFactory heroCreator)
+        public LoadMetaState(IUIFactory factory, ISceneLoader sceneLoader, ILoadingCurtain curtain, ICharacterFactory characterFactory, IShowcaseHeroFactory heroCreator)
         {
             _uiFactory = factory;
             _sceneLoader = sceneLoader;
-            _assetProvider = assetProvider;
-            _stateMachine = stateMachine;
             _curtain = curtain;
-            _gameFactory = gameFactory;
+            _characterFactory = characterFactory;
             _heroCreator = heroCreator;
         }
 
@@ -34,12 +27,10 @@ namespace CodeBase.Infrastructure.States
         {
             _curtain.Show();
             _sceneLoader.Load("Meta", OnLoadedAsync);
-
-            await _assetProvider.Load<GameObject>("Knight");
-            await _assetProvider.Load<GameObject>("Barbarian");
-            await _assetProvider.Load<GameObject>("Rogue");
-            await _assetProvider.Load<GameObject>("Mage");
+            _characterFactory.CleanUp();
+            await _characterFactory.WarmUp();
         }
+
         public void Exit()
         {
             

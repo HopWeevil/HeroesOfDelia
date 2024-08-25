@@ -15,9 +15,9 @@ MonoBehaviour:
   Title: Sword
   Description: Sharp sword
   Icon: {fileID: 21300000, guid: 169d45648e00348038299fc345aa6b4f, type: 3}
-  EquipmentTypeId: 0
+  TypeId: 0
   Rarity: 0
-  EquipmentClass: 0
+  Category: 0
   PrefabReference:
     m_AssetGUID: a85c7ffa7294fdc4bb2109b4b283d172
     m_SubObjectName: 
@@ -31,3 +31,4 @@ MonoBehaviour:
   Bonuses:
   - Type: 0
     Value: 10
+  HeroClass: 0
