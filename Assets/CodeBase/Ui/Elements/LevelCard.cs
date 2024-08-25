@@ -22,6 +22,7 @@ public class LevelCard : MonoBehaviour
     public void SetInfo()
     {
         _title.text = _data.Title;
+        _preview.sprite = _data.Preview;
     }
 
     [Inject]
