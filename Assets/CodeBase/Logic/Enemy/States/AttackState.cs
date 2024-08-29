@@ -17,7 +17,7 @@ namespace CodeBase.Enemy.States
 
         public override void Execute()
         {
-            _enemyAttack.Execute();
+           // _enemyAttack.Execute();
             _rotateToHero.Execute();
         }
 

@@ -1,9 +1,6 @@
 using CodeBase.Character;
-using CodeBase.Logic;
 using System;
 using System.Collections;
-using System.Linq;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -20,36 +17,64 @@ namespace CodeBase.Enemy
         private bool _isMoving;
         private float _currentCooldown;
 
-        public void Execute()
+        public void Update()
         {
             UpdateCooldown();
+           /* if (CanMove())
+            {
+                if (TryGetRandomPosition(transform.position, _patrolRadius, _enemyMover.StoppingDistance, out Vector3 position))
+                {
+                    StartCoroutine(MoveToTarget(position, ResetPatrol));
+
+                }
+            }*/
+
             if (CanMove())
             {
                 if (TryGetRandomPosition(transform.position, _patrolRadius, _enemyMover.StoppingDistance, out Vector3 position))
                 {
-                    StartCoroutine(MoveToTarget(position, DisablePatrol));
+                    _isMoving = true;
+                    _enemyMover.StartMoveToTarget(position, ResetPatrol);
+
                 }
             }
         }
-        public void DisablePatrol()
+
+        public void StartPatrol()
         {
+            enabled = true;
+        }
+
+        public void StopPatrol()
+        {
+            enabled = false;
             _enemyMover.StopMove();
+            ResetPatrol();
+        }
+
+        private void ResetPatrol()
+        {
+            //_enemyMover.StopMove();
             _isMoving = false;
-            _currentCooldown = _patrolCooldown;
+            _currentCooldown = _patrolCooldown;        
         }
 
         private IEnumerator MoveToTarget(Vector3 destination, Action onTargetReach)
         {
+            Debug.Log("Start");
             _isMoving = true;
-            _enemyMover.SetDestination(destination);
+          //  _enemyMover.SetDestination(destination);
 
-            while (IsDestinationReached(destination))
+            /*while (IsDestinationReached(destination))
             {
                 _enemyMover.Execute();
                 yield return null;
-            }
+            }*/
+            _enemyMover.StartMove();
 
-            //yield return new WaitUntil(() => !IsDestinationReached(destination));
+            Debug.Log("End");
+
+            yield return new WaitUntil(() => !IsDestinationReached(destination));
 
             onTargetReach?.Invoke();
         }

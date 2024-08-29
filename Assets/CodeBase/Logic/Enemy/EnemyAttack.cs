@@ -14,7 +14,7 @@ namespace CodeBase.Enemy
             _attack = GetComponent<IAttack>();
         }
 
-        public void Execute()
+        public void Update()
         {
             if (_attackIsActive)
             {

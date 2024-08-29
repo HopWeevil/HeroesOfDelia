@@ -1,6 +1,7 @@
-using System;
 using CodeBase.Character;
 using CodeBase.Data;
+using System;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -12,39 +13,78 @@ namespace CodeBase.Enemy
         [SerializeField] private NavMeshAgent _agent;
         [SerializeField] private CharacterAnimator _animator;
 
-        private const float MinimalDistance = 1;
-        private Vector3 _target;
+        private const float MinimalDistance = 1f;
 
         public float StoppingDistance => _agent.stoppingDistance;
+        private Vector3 test;
 
-        public void Execute()
+        private Coroutine _currentMoveCoroutine;
+
+
+        public void StartMove()
         {
-            if (IsInitialized())
-            {
-                _agent.destination = _target;
-                _animator.Move(_agent.velocity.magnitude);
-            }
+            enabled = true;
         }
 
         public void StopMove()
         {
             _agent.ResetPath();
             _animator.StopMoving();
+
+            if (_currentMoveCoroutine != null)
+            {
+                StopCoroutine(_currentMoveCoroutine);
+                _currentMoveCoroutine = null;
+            }
         }
 
-        public void SetDestination(Vector3 target)
+        public void StartMoveToTarget(Vector3 destination, Action onTargetReach = null)
         {
-            _target = target;
+            _currentMoveCoroutine = StartCoroutine(MoveToTarget(destination, onTargetReach));
         }
 
-        private bool IsInitialized()
+        public void StartMoveToTarget(Transform destination, Action onTargetReach = null)
         {
-            return _target != Vector3.zero;
+            _currentMoveCoroutine = StartCoroutine(MoveToTarget(destination, onTargetReach));
         }
-     
-        private bool IsTargetNotReached()
+
+        private IEnumerator MoveToTarget(Vector3 destination, Action onTargetReach = null)
         {
-            return transform.position.SqrMagnitudeTo(_target) >= MinimalDistance;
+            test = destination;
+
+            while (!IsDestinationReached(destination))
+            {
+                _agent.SetDestination(destination);
+                _animator.Move(_agent.velocity.magnitude);
+                yield return null;
+            }
+            StopMove();
+              onTargetReach?.Invoke();
+        }
+
+        private IEnumerator MoveToTarget(Transform destination, Action onTargetReach = null)
+        {
+            test = destination.position;
+
+            while (!IsDestinationReached(destination.position))
+            {
+                _agent.SetDestination(destination.position);
+                _animator.Move(_agent.velocity.magnitude);
+                yield return null;
+            }
+            StopMove();
+               onTargetReach?.Invoke();
+        }
+
+        private bool IsDestinationReached(Vector3 destination)
+        {
+            return Vector3.Distance(transform.position, destination) <= StoppingDistance;
+        }
+
+        private void OnDrawGizmos()
+        {
+            Gizmos.color = Color.red;
+            Gizmos.DrawCube(test, Vector3.one);
         }
 
         public void Receive(Stats stats)

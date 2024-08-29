@@ -13,13 +13,15 @@ namespace CodeBase.Enemy.States
 
         public override void Enter()
         {
-
+            /*_enemyMover.SetDestination(_target.transform);
+            _enemyMover.StartMove();*/
+            _enemyMover.StartMoveToTarget(_target.transform);
         }
 
         public override void Execute()
         {
-            _enemyMover.SetDestination(_target.transform.position);
-            _enemyMover.Execute();
+        
+           // _enemyMover.Execute();
         }
 
         public override void Exit()

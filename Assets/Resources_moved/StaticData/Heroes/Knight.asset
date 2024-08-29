@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Hp: 50
   Damage: 1
-  MoveSpeed: 2
+  MoveSpeed: 4
   Armor: 3
   AttackCooldown: 0.2
   EffectiveDistance: 1
