@@ -14,11 +14,6 @@ namespace CodeBase.Enemy.States
             _patrol.StartPatrol();
         }
 
-        public override void Execute()
-        {
-            
-        }
-
         public override void Exit()
         {
             _patrol.StopPatrol();

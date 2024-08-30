@@ -15,11 +15,6 @@ namespace CodeBase.Enemy.States
 
         }
 
-        public override void Execute()
-        {
-
-        }
-
         public override void Exit()
         {
 

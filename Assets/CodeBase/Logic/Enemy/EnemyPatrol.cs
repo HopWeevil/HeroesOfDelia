@@ -1,6 +1,4 @@
 using CodeBase.Character;
-using System;
-using System.Collections;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -20,22 +18,12 @@ namespace CodeBase.Enemy
         public void Update()
         {
             UpdateCooldown();
-           /* if (CanMove())
-            {
-                if (TryGetRandomPosition(transform.position, _patrolRadius, _enemyMover.StoppingDistance, out Vector3 position))
-                {
-                    StartCoroutine(MoveToTarget(position, ResetPatrol));
-
-                }
-            }*/
-
             if (CanMove())
             {
                 if (TryGetRandomPosition(transform.position, _patrolRadius, _enemyMover.StoppingDistance, out Vector3 position))
                 {
                     _isMoving = true;
                     _enemyMover.StartMoveToTarget(position, ResetPatrol);
-
                 }
             }
         }
@@ -54,34 +42,8 @@ namespace CodeBase.Enemy
 
         private void ResetPatrol()
         {
-            //_enemyMover.StopMove();
             _isMoving = false;
             _currentCooldown = _patrolCooldown;        
-        }
-
-        private IEnumerator MoveToTarget(Vector3 destination, Action onTargetReach)
-        {
-            Debug.Log("Start");
-            _isMoving = true;
-          //  _enemyMover.SetDestination(destination);
-
-            /*while (IsDestinationReached(destination))
-            {
-                _enemyMover.Execute();
-                yield return null;
-            }*/
-            _enemyMover.StartMove();
-
-            Debug.Log("End");
-
-            yield return new WaitUntil(() => !IsDestinationReached(destination));
-
-            onTargetReach?.Invoke();
-        }
-
-        private bool IsDestinationReached(Vector3 destination)
-        {
-            return Vector3.Distance(transform.position, destination) >= _enemyMover.StoppingDistance && _isMoving == true;
         }
 
         private bool TryGetRandomPosition(Vector3 center, float radius, out Vector3 position)

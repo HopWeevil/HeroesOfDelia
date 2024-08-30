@@ -13,17 +13,13 @@ namespace CodeBase.Enemy.States
         public override void Enter()
         {
             _enemyAttack.EnableAttack();
-        }
-
-        public override void Execute()
-        {
-           // _enemyAttack.Execute();
-            _rotateToHero.Execute();
+            _rotateToHero.EnableRotate();
         }
 
         public override void Exit()
         {
             _enemyAttack.DisableAttack();
+            _rotateToHero.DisableRotate();
         }
 
         public override bool ShouldTransit()
