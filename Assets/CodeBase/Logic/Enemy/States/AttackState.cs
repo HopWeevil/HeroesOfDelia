@@ -22,6 +22,11 @@ namespace CodeBase.Enemy.States
             _rotateToHero.DisableRotate();
         }
 
+        public override void Tick()
+        {
+           
+        }
+
         public override bool ShouldTransit()
         {
             float distance = Vector3.Distance(transform.position, _target.transform.position);
@@ -32,6 +37,6 @@ namespace CodeBase.Enemy.States
             }
 
             return false;
-        }
+        }  
     }
 }

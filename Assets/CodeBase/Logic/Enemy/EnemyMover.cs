@@ -1,7 +1,6 @@
+using System;
 using CodeBase.Character;
 using CodeBase.Data;
-using System;
-using System.Collections;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -13,64 +12,54 @@ namespace CodeBase.Enemy
         [SerializeField] private NavMeshAgent _agent;
         [SerializeField] private CharacterAnimator _animator;
 
+        private const float MinimalDistance = 1;
+        private Vector3 _target;
+
         public float StoppingDistance => _agent.stoppingDistance;
 
-        private Coroutine _currentMoveCoroutine;
-
-        public void Receive(Stats stats)
+        public void Update()
         {
-            _agent.speed = stats.MoveSpeed;
+            if (IsInitialized())
+            {
+                _agent.destination = _target;
+                _animator.Move(_agent.velocity.magnitude);
+            }
+            if (IsDestinationReached(_target))
+            {
+                StopMove();
+            }
         }
 
-        public void StartMoveToTarget(Vector3 destination, Action onTargetReach = null)
+        public void StartMove() 
         {
-            _currentMoveCoroutine = StartCoroutine(MoveToTarget(destination, onTargetReach));
-        }
-
-        public void StartMoveToTarget(Transform destination, Action onTargetReach = null)
-        {
-            _currentMoveCoroutine = StartCoroutine(MoveToTarget(destination, onTargetReach));
+            enabled = true;
         }
 
         public void StopMove()
         {
+            enabled = false;
             _agent.ResetPath();
             _animator.StopMoving();
-
-            if (_currentMoveCoroutine != null)
-            {
-                StopCoroutine(_currentMoveCoroutine);
-                _currentMoveCoroutine = null;
-            }
         }
 
-        private IEnumerator MoveToTarget(Vector3 destination, Action onTargetReach = null)
+        public void SetDestination(Vector3 target)
         {
-            while (!IsDestinationReached(destination))
-            {
-                _agent.SetDestination(destination);
-                _animator.Move(_agent.velocity.magnitude);
-                yield return null;
-            }
-            onTargetReach?.Invoke();
-            StopMove();
+            _target = target;
         }
 
-        private IEnumerator MoveToTarget(Transform destination, Action onTargetReach = null)
+        private bool IsInitialized()
         {
-            while (!IsDestinationReached(destination.position))
-            {
-                _agent.SetDestination(destination.position);
-                _animator.Move(_agent.velocity.magnitude);
-                yield return null;
-            }
-            onTargetReach?.Invoke();
-            StopMove();
+            return _target != Vector3.zero;
         }
 
         private bool IsDestinationReached(Vector3 destination)
         {
-            return Vector3.Distance(transform.position, destination) <= StoppingDistance;
+            return Vector3.Distance(transform.position, destination) >= StoppingDistance;
+        }
+
+        public void Receive(Stats stats)
+        {
+            _agent.speed = stats.MoveSpeed;
         }
     }
 }

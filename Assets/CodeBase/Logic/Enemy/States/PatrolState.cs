@@ -1,5 +1,4 @@
-﻿using CodeBase.Enemy;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace CodeBase.Enemy.States
 {
@@ -17,6 +16,11 @@ namespace CodeBase.Enemy.States
         public override void Exit()
         {
             _patrol.StopPatrol();
+        }
+
+        public override void Tick()
+        {
+
         }
 
         public override bool ShouldTransit()

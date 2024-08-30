@@ -31,5 +31,10 @@ namespace CodeBase.Enemy.States
 
             return false;
         }
+
+        public override void Tick()
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }
