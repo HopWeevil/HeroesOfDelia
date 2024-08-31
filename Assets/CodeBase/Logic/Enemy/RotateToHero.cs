@@ -8,29 +8,18 @@ namespace CodeBase.Enemy
 
         private Transform _heroTransform;
         private Vector3 _positionToLook;
-        private bool _canRotate;
         
         public void Construct(Transform heroTransfrom)
         {
             _heroTransform = heroTransfrom;
         }
 
-        public void Update()
+        public void Rotate()
         {
-            if (IsInitialized() && _canRotate)
+            if (IsInitialized())
             {
                 RotateTowardsHero();
             }
-        }
-
-        public void EnableRotate()
-        {
-            _canRotate = true;
-        }
-
-        public void DisableRotate()
-        {
-            _canRotate = false;
         }
 
         private void RotateTowardsHero()

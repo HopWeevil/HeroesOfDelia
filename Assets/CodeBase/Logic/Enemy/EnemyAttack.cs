@@ -7,29 +7,18 @@ namespace CodeBase.Enemy
     public class EnemyAttack : MonoBehaviour
     {
         private IAttack _attack;
-        private bool _attackIsActive;
 
         private void Awake()
         {
             _attack = GetComponent<IAttack>();
         }
 
-        public void Update()
+        public void TryAttack()
         {
-            if (_attackIsActive)
+            if (_attack != null)
             {
                 _attack.TryAttack();
             }
-        }
-
-        public void EnableAttack()
-        {
-            _attackIsActive = true;
-        }
-
-        public void DisableAttack()
-        {
-            _attackIsActive = false;
         }
     }
 }

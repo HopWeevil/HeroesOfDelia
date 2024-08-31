@@ -11,28 +11,20 @@ namespace CodeBase.Enemy
     {
         [SerializeField] private NavMeshAgent _agent;
         [SerializeField] private CharacterAnimator _animator;
-
-        private const float MinimalDistance = 1;
-        private Vector3 _target;
-
         public float StoppingDistance => _agent.stoppingDistance;
 
-        public void Update()
+        private void Update()
         {
             if (IsInitialized())
-            {
-                _agent.destination = _target;
+            {              
                 _animator.Move(_agent.velocity.magnitude);
-            }
-            if (IsDestinationReached(_target))
-            {
-                StopMove();
             }
         }
 
-        public void StartMove() 
+        public void StartMove(Vector3 position) 
         {
             enabled = true;
+            SetDestination(position);
         }
 
         public void StopMove()
@@ -44,17 +36,12 @@ namespace CodeBase.Enemy
 
         public void SetDestination(Vector3 target)
         {
-            _target = target;
+            _agent.destination = target;
         }
 
         private bool IsInitialized()
         {
-            return _target != Vector3.zero;
-        }
-
-        private bool IsDestinationReached(Vector3 destination)
-        {
-            return Vector3.Distance(transform.position, destination) >= StoppingDistance;
+            return _agent.destination != Vector3.zero;
         }
 
         public void Receive(Stats stats)

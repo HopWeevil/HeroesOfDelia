@@ -18,11 +18,6 @@ namespace CodeBase.Enemy.States
             _patrol.StopPatrol();
         }
 
-        public override void Tick()
-        {
-
-        }
-
         public override bool ShouldTransit()
         {
             float distance = Vector3.Distance(transform.position, _target.transform.position);

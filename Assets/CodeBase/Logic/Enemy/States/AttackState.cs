@@ -10,21 +10,10 @@ namespace CodeBase.Enemy.States
         [SerializeField] private EnemyAttack _enemyAttack;
         [SerializeField] private RotateToHero _rotateToHero;
 
-        public override void Enter()
-        {
-            _enemyAttack.EnableAttack();
-            _rotateToHero.EnableRotate();
-        }
-
-        public override void Exit()
-        {
-            _enemyAttack.DisableAttack();
-            _rotateToHero.DisableRotate();
-        }
-
         public override void Tick()
         {
-           
+            _enemyAttack.TryAttack();
+            _rotateToHero.Rotate();
         }
 
         public override bool ShouldTransit()
