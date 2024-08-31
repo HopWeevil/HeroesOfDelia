@@ -10,20 +10,10 @@ namespace CodeBase.Enemy.States
         [SerializeField] private EnemyAttack _enemyAttack;
         [SerializeField] private RotateToHero _rotateToHero;
 
-        public override void Enter()
+        public override void Tick()
         {
-            _enemyAttack.EnableAttack();
-        }
-
-        public override void Execute()
-        {
-            _enemyAttack.Execute();
-            _rotateToHero.Execute();
-        }
-
-        public override void Exit()
-        {
-            _enemyAttack.DisableAttack();
+            _enemyAttack.TryAttack();
+            _rotateToHero.Rotate();
         }
 
         public override bool ShouldTransit()
@@ -36,6 +26,6 @@ namespace CodeBase.Enemy.States
             }
 
             return false;
-        }
+        }  
     }
 }

@@ -1,7 +1,4 @@
-﻿using CodeBase.Character;
-using CodeBase.Enemy;
-using Unity.VisualScripting;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace CodeBase.Enemy.States
 {
@@ -9,21 +6,6 @@ namespace CodeBase.Enemy.States
     {
         [SerializeField] private float _maxDistance;
         [SerializeField] private float _minDistance;
-
-        public override void Enter()
-        {
-
-        }
-
-        public override void Execute()
-        {
-
-        }
-
-        public override void Exit()
-        {
-
-        }
 
         public override bool ShouldTransit()
         {

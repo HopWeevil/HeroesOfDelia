@@ -8,13 +8,13 @@ namespace CodeBase.Enemy
 
         private Transform _heroTransform;
         private Vector3 _positionToLook;
-
+        
         public void Construct(Transform heroTransfrom)
         {
             _heroTransform = heroTransfrom;
         }
 
-        public void Execute()
+        public void Rotate()
         {
             if (IsInitialized())
             {

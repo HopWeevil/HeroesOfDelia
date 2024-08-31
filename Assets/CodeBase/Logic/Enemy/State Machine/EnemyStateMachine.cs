@@ -31,7 +31,7 @@ namespace CodeBase.Enemy.StateMachine
         {
             if (_currentState != null)
             {
-                _currentState.Execute();
+                _currentState.Tick();
 
                 foreach (var state in _states)
                 {

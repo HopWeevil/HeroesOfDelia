@@ -16,21 +16,11 @@ MonoBehaviour:
   Description: Location1
   LevelKey: Location1
   EnemySpawners:
-  - EnemyTypeId: 3
-    Position: {x: 1.09, y: 0, z: -23.87}
-  - EnemyTypeId: 2
-    Position: {x: 16.25, y: 0, z: -4}
   - EnemyTypeId: 0
-    Position: {x: 15.79, y: 0, z: -14.59}
-  - EnemyTypeId: 0
-    Position: {x: -3.87, y: 0, z: -14.73}
-  - EnemyTypeId: 0
-    Position: {x: 5.22, y: 0, z: -14.73}
-  - EnemyTypeId: 2
-    Position: {x: 16.25, y: 0, z: -22.64}
-  InitialHeroPosition: {x: 2, y: 0, z: 0}
+    Position: {x: 18.95, y: 0.3856697, z: -10.960928}
+  InitialHeroPosition: {x: 22.47, y: 0, z: -2.87}
   LevelTransfer:
     TransferTo: 
-    Position: {x: 16, y: 0.050001144, z: -2}
+    Position: {x: -3.86, y: 0.050001144, z: -15.963214}
   SaveTriggerMarker: {x: -3.2, y: 0, z: -16.52}
   Preview: {fileID: 21300000, guid: 5c82d6dd195052e41b25c6df8909c2cb, type: 3}
