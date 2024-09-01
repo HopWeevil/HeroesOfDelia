@@ -1,5 +1,4 @@
-﻿using CodeBase.Infrastructure.AssetManagement;
-using UnityEngine;
+﻿using UnityEngine;
 using CodeBase.Infrastructure.Factories;
 
 namespace CodeBase.Services.Notification

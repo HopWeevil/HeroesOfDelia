@@ -14,12 +14,14 @@ namespace CodeBase.Services.StaticData
         private const string LevelLabel = "LevelStaticData";
         private const string EquipmentLabel = "EquipmentStaticData";
         private const string ResourceLabel = "ResourceStaticData";
+        private const string ResourceRewardLabel = "ResourceRewardStaticData";
 
         private Dictionary<string, LevelStaticData> _levels;
         private Dictionary<HeroTypeId, HeroStaticData> _heroes;
         private Dictionary<EnemyTypeId, EnemyStaticData> _enemies;
         private Dictionary<EquipmentTypeId, EquipmentStaticData> _equipment;
         private Dictionary<ResourceTypeId, ResourceStaticData> _resources;
+        private Dictionary<ResourceTypeId, ResourceRewardStaticData> _rewardItems;
 
         private readonly IAssetProvider _assetProvider;
 
@@ -35,6 +37,7 @@ namespace CodeBase.Services.StaticData
             _levels = (await _assetProvider.LoadAll<LevelStaticData>(LevelLabel)).ToDictionary(x => x.LevelKey, x => x);
             _equipment = (await _assetProvider.LoadAll<EquipmentStaticData>(EquipmentLabel)).ToDictionary(x => x.TypeId, x => x);
             _resources = (await _assetProvider.LoadAll<ResourceStaticData>(ResourceLabel)).ToDictionary(x => x.ResourceTypeId, x => x);
+            _rewardItems = (await _assetProvider.LoadAll<ResourceRewardStaticData>(ResourceRewardLabel)).ToDictionary(x => x.ResourceType, x => x);
         }
 
         public LevelStaticData ForLevel(string sceneKey)
@@ -105,6 +108,11 @@ namespace CodeBase.Services.StaticData
         public List<LevelStaticData> GetAllLevels()
         {
             return _levels.Values.ToList();
+        }
+
+        public List<ResourceRewardStaticData> GetAllRewardItems()
+        {
+            return _rewardItems.Values.ToList();
         }
 
         public List<HeroStaticData> GetAllHeroes()

@@ -20,5 +20,6 @@ namespace CodeBase.Infrastructure.Factories
         Task<PopupMessage> CreatePopupMessage(Color color, string text);
         Task<LevelCard> CreateLevelCard(LevelStaticData data, RectTransform parent);
         Task<GameObject> CreateHud();
+        Task<RewardedAdItem> CreateRewardedAdItem(ResourceRewardStaticData data, RectTransform parent);
     }
 }

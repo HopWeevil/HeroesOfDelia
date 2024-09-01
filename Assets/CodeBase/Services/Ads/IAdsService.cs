@@ -6,7 +6,8 @@ namespace CodeBase.Services.Ads
     {
         event Action RewardedVideoReady;
         event Action RewardedVideoFinished;
-        int Reward { get; }
+        event Action RewardedVideoFailed;
+
         void Initialize();
 
         void ShowRewardedVideo();

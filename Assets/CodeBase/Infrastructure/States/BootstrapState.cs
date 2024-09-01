@@ -1,4 +1,5 @@
 ﻿using CodeBase.Infrastructure.AssetManagement;
+using CodeBase.Services.Ads;
 using CodeBase.Services.StaticData;
 using System.Threading.Tasks;
 
@@ -9,12 +10,14 @@ namespace CodeBase.Infrastructure.States
         private readonly IGameStateMachine _stateMachine;
         private readonly IStaticDataService _staticData;
         private readonly IAssetProvider _assetProvider;
+        private readonly IAdsService _adsService;
 
-        public BootstrapState(IGameStateMachine stateMachine, IStaticDataService staticData, IAssetProvider assetProvider)
+        public BootstrapState(IGameStateMachine stateMachine, IStaticDataService staticData, IAssetProvider assetProvider, IAdsService adsService)
         {
             _stateMachine = stateMachine;
             _staticData = staticData;
             _assetProvider = assetProvider;
+            _adsService = adsService;
         }
 
         public async void Enter()
@@ -33,6 +36,7 @@ namespace CodeBase.Infrastructure.States
         {
             await _staticData.Initialize();
             _assetProvider.Initialize();
+            _adsService.Initialize();
         }
     }
 }

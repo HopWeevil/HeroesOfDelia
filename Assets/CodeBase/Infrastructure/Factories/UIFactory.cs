@@ -73,6 +73,15 @@ namespace CodeBase.Infrastructure.Factories
             return card;
         }
 
+        public async Task<RewardedAdItem> CreateRewardedAdItem(ResourceRewardStaticData data, RectTransform parent)
+        {
+            GameObject prefab = await _assets.Load<GameObject>(AssetAddress.RewardedAdItem);
+            RewardedAdItem item = _container.InstantiatePrefab(prefab, parent).GetComponent<RewardedAdItem>();
+            item.SetItemData(data);
+            item.SetInfo();
+            return item;
+        }
+
         public async Task<GameObject> CreateWindow(string address)
         {
             GameObject prefab = await _assets.Load<GameObject>(address);

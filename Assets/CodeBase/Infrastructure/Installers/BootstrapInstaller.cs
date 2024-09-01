@@ -11,6 +11,7 @@ using CodeBase.Infrastructure.Sceneloader;
 using CodeBase.Infrastructure.Factories;
 using CodeBase.Logic;
 using CodeBase.Services.Notification;
+using CodeBase.Services.Ads;
 
 namespace CodeBase.Infrastructure.Installers
 {
@@ -28,6 +29,7 @@ namespace CodeBase.Infrastructure.Installers
             BindInputService();
             BindPersistentProgressService();
             BindSaveLoadService();
+            BindAdsService();
             BindAssetProvider();
             BindStaticDataService();
             BindBindRandomizeService();
@@ -82,6 +84,12 @@ namespace CodeBase.Infrastructure.Installers
         {
             Container.Bind<ISaveLoadService>().To<SaveLoadService>().AsSingle();
         }
+
+        private void BindAdsService()
+        {
+            Container.Bind<IAdsService>().To<AdsService>().AsSingle();
+        }
+
 
         private void BindPersistentProgressService()
         {

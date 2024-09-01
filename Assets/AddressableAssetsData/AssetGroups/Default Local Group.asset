@@ -132,6 +132,22 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: b57031f042c2330489a0a1b4cea3c017
+    m_Address: RewardedAdItem
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 4284d74e4590d04498ae8f333b0751d1
+    m_Address: ShopWindow
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 586a9f31005a6904198ac2d6a52da511
+    m_Address: StaticData/ResourceRewards
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - ResourceRewardStaticData
+    FlaggedDuringContentUpdateRestriction: 0
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 2b30344375a32544c8f024ab8bc654ca, type: 2}
   m_SchemaSet:

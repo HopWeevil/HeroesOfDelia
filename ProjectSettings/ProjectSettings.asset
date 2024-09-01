@@ -935,8 +935,8 @@ PlayerSettings:
   cloudProjectId: 93a48385-22a5-486b-9e8d-89d1f79ac1bf
   framebufferDepthMemorylessMode: 0
   qualitySettingsNames: []
-  projectName: RPG
-  organizationId: kovbasdima123
+  projectName: HeroesOfDelia
+  organizationId: flying-pig-games
   cloudEnabled: 0
   legacyClampBlendShapeWeights: 0
   hmiLoadingImage: {fileID: 0}

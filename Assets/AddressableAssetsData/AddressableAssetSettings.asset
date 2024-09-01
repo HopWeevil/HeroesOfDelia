@@ -15,7 +15,7 @@ MonoBehaviour:
   m_DefaultGroup: 8b604b1773cce66449beef77495f2259
   m_currentHash:
     serializedVersion: 2
-    Hash: 55ff9283941104b8325b61d7a53dec73
+    Hash: ac1af942940deed2b84561f5e98429cd
   m_OptimizeCatalogSize: 0
   m_BuildRemoteCatalog: 0
   m_BundleLocalCatalog: 0
@@ -92,6 +92,7 @@ MonoBehaviour:
     - LevelStaticData
     - EquipmentStaticData
     - ResourceStaticData
+    - ResourceRewardStaticData
   m_SchemaTemplates: []
   m_GroupTemplateObjects:
   - {fileID: 11400000, guid: fe71050c97b10154fbec724437306c21, type: 2}

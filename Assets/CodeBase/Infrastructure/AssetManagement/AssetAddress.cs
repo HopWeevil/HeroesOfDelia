@@ -17,5 +17,6 @@ namespace CodeBase.Infrastructure.AssetManagement
         public const string EquipmentItemWindow = "EquipmentItemWindow";
         public const string PopupMessage = "PopupMessage";       
         public const string LevelCard = "LevelCard";
+        public const string RewardedAdItem = "RewardedAdItem";
     }
 }

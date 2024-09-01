@@ -358,6 +358,7 @@ GameObject:
   - component: {fileID: 5023004309203324699}
   - component: {fileID: 4623041509043401147}
   - component: {fileID: 6912505649665921394}
+  - component: {fileID: 646456421972258537}
   m_Layer: 5
   m_Name: ShopButton
   m_TagString: Untagged
@@ -469,6 +470,20 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &646456421972258537
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2104479763713944958}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6ea73116ef790e041a8f839b25d2c094, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _button: {fileID: 6912505649665921394}
+  _windowId: 0
 --- !u!1 &2755806099532458236
 GameObject:
   m_ObjectHideFlags: 0
@@ -990,7 +1005,7 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4496760656338801417}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -1057,6 +1072,7 @@ GameObject:
   - component: {fileID: 5557483755696798985}
   - component: {fileID: 7601318808205794668}
   - component: {fileID: 8594561366549026834}
+  - component: {fileID: 3364914408680570145}
   m_Layer: 5
   m_Name: InventoryButton
   m_TagString: Untagged
@@ -1168,6 +1184,20 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &3364914408680570145
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5263445723260053349}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6ea73116ef790e041a8f839b25d2c094, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _button: {fileID: 8594561366549026834}
+  _windowId: 1
 --- !u!1 &6395409921748458677
 GameObject:
   m_ObjectHideFlags: 0
@@ -1466,6 +1496,7 @@ GameObject:
   - component: {fileID: 2647301690854654115}
   - component: {fileID: 7641106136815828488}
   - component: {fileID: 4850780113642194369}
+  - component: {fileID: 5885957472812689816}
   m_Layer: 5
   m_Name: HeroesButton
   m_TagString: Untagged
@@ -1577,6 +1608,20 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &5885957472812689816
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8422671095019749793}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6ea73116ef790e041a8f839b25d2c094, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _button: {fileID: 4850780113642194369}
+  _windowId: 2
 --- !u!1 &9005616353328198540
 GameObject:
   m_ObjectHideFlags: 0
