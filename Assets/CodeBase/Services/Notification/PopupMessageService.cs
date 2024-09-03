@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using CodeBase.Infrastructure.Factories;
+using CodeBase.UI.Elements;
 
 namespace CodeBase.Services.Notification
 {

@@ -12,6 +12,7 @@ using CodeBase.Infrastructure.Factories;
 using CodeBase.Logic;
 using CodeBase.Services.Notification;
 using CodeBase.Services.Ads;
+using CodeBase.Services.IAP;
 
 namespace CodeBase.Infrastructure.Installers
 {
@@ -30,6 +31,7 @@ namespace CodeBase.Infrastructure.Installers
             BindPersistentProgressService();
             BindSaveLoadService();
             BindAdsService();
+            BindIAPService();
             BindAssetProvider();
             BindStaticDataService();
             BindBindRandomizeService();
@@ -90,6 +92,10 @@ namespace CodeBase.Infrastructure.Installers
             Container.Bind<IAdsService>().To<AdsService>().AsSingle();
         }
 
+        private void BindIAPService()
+        {
+            Container.Bind<IIAPService>().To<IAPService>().AsSingle();
+        }
 
         private void BindPersistentProgressService()
         {

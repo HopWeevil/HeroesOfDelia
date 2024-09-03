@@ -1,54 +1,57 @@
-using CodeBase.Character;
+using CodeBase.Logic.Animations;
 using CodeBase.Data;
 using CodeBase.SO;
 using UnityEngine;
 
-public class RangedAttack : MonoBehaviour, IAttack, IStatsReceiver
+namespace CodeBase.Logic.Combat
 {
-    [SerializeField] private CharacterAnimator _animator;
-    [SerializeField] private Transform _projectileSpawnPoint;
-    [SerializeField] private Projectile _projectile;
-    [SerializeField] private LayerMask _targetsLayer;
-
-    private float _cooldownTimer;
-    private Stats _stats;
-
-    private void Update()
+    public class RangedAttack : MonoBehaviour, IAttack, IStatsReceiver
     {
-        UpdateCooldown();
-    }
+        [SerializeField] private CharacterAnimator _animator;
+        [SerializeField] private Transform _projectileSpawnPoint;
+        [SerializeField] private Projectile _projectile;
+        [SerializeField] private LayerMask _targetsLayer;
 
-    public void TryAttack()
-    {
-        if (CooldownIsUp() && !_animator.IsAttacking)
+        private float _cooldownTimer;
+        private Stats _stats;
+
+        private void Update()
         {
-            _animator.PlayAttack();
-            _cooldownTimer = _stats.AttackCooldown;
+            UpdateCooldown();
         }
-    }
 
-    private void UpdateCooldown()
-    {
-        if (_cooldownTimer > 0)
+        public void TryAttack()
         {
-            _cooldownTimer -= Time.deltaTime;
+            if (CooldownIsUp() && !_animator.IsAttacking)
+            {
+                _animator.PlayAttack();
+                _cooldownTimer = _stats.AttackCooldown;
+            }
         }
-    }
 
-    private bool CooldownIsUp()
-    {
-        return _cooldownTimer <= 0;
-    }
+        private void UpdateCooldown()
+        {
+            if (_cooldownTimer > 0)
+            {
+                _cooldownTimer -= Time.deltaTime;
+            }
+        }
 
-    private void OnAttack()
-    {
-        Vector3 direction = transform.forward;
-        Projectile projectile = Instantiate(_projectile, _projectileSpawnPoint.position, Quaternion.LookRotation(direction));
-        projectile.Initialize(_stats.Damage, direction, _targetsLayer);
-    }
+        private bool CooldownIsUp()
+        {
+            return _cooldownTimer <= 0;
+        }
 
-    public void Receive(Stats stats)
-    {
-        _stats = stats;
+        private void OnAttack()
+        {
+            Vector3 direction = transform.forward;
+            Projectile projectile = Instantiate(_projectile, _projectileSpawnPoint.position, Quaternion.LookRotation(direction));
+            projectile.Initialize(_stats.Damage, direction, _targetsLayer);
+        }
+
+        public void Receive(Stats stats)
+        {
+            _stats = stats;
+        }
     }
 }

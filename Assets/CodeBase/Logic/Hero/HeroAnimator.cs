@@ -1,6 +1,6 @@
 using System;
 using System.Linq;
-using CodeBase.Logic;
+using CodeBase.Logic.Animations;
 using UnityEngine;
 
 namespace CodeBase.Hero

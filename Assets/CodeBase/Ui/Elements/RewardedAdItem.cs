@@ -8,66 +8,69 @@ using UnityEngine;
 using UnityEngine.UI;
 using Zenject;
 
-public class RewardedAdItem : MonoBehaviour
+namespace CodeBase.UI.Elements
 {
-    [SerializeField] private Button _showAdButton;
-    [SerializeField] private TMP_Text _amount;
-    [SerializeField] private Image _icon;
-
-    private IAdsService _adsService;
-    private IPersistentProgressService _progressService;
-    private IStaticDataService _staticData;
-    private IPopupMessageService _messageService;
-
-    private ResourceRewardStaticData _data;
-
-    [Inject]
-    private void Construct(IAdsService adsService, IPersistentProgressService progressService, IStaticDataService staticData, IPopupMessageService messageService)
+    public class RewardedAdItem : MonoBehaviour
     {
-        _adsService = adsService;
-        _progressService = progressService;
-        _staticData = staticData;
-        _messageService = messageService;
-    }
+        [SerializeField] private Button _showAdButton;
+        [SerializeField] private TMP_Text _amount;
+        [SerializeField] private Image _icon;
 
-    public void SetItemData(ResourceRewardStaticData data)
-    {
-       _data = data;
-    }
+        private IAdsService _adsService;
+        private IPersistentProgressService _progressService;
+        private IStaticDataService _staticData;
+        private IPopupMessageService _messageService;
 
-    public void SetInfo()
-    {
-        _amount.text = string.Format(_amount.text, _data.Amount);
-        _icon.sprite = _staticData.ForResource(_data.ResourceType).Icon;
-    }
+        private ResourceRewardStaticData _data;
 
-    public void Start()
-    {
-        _showAdButton.onClick.AddListener(OnShowAdClicked);
-        _adsService.RewardedVideoFinished += OnVideoFinished;
-        _adsService.RewardedVideoFailed += OnVideoFailed;
-    }
+        [Inject]
+        private void Construct(IAdsService adsService, IPersistentProgressService progressService, IStaticDataService staticData, IPopupMessageService messageService)
+        {
+            _adsService = adsService;
+            _progressService = progressService;
+            _staticData = staticData;
+            _messageService = messageService;
+        }
 
-    public void OnDestroy()
-    {
-        _showAdButton.onClick.RemoveListener(OnShowAdClicked);
-        _adsService.RewardedVideoFinished -= OnVideoFinished;
-        _adsService.RewardedVideoFailed -= OnVideoFailed;
-    }
+        public void SetItemData(ResourceRewardStaticData data)
+        {
+            _data = data;
+        }
+
+        public void SetInfo()
+        {
+            _amount.text = string.Format(_amount.text, _data.Amount);
+            _icon.sprite = _staticData.ForResource(_data.ResourceType).Icon;
+        }
+
+        public void Start()
+        {
+            _showAdButton.onClick.AddListener(OnShowAdClicked);
+            _adsService.RewardedVideoFinished += OnVideoFinished;
+            _adsService.RewardedVideoFailed += OnVideoFailed;
+        }
+
+        public void OnDestroy()
+        {
+            _showAdButton.onClick.RemoveListener(OnShowAdClicked);
+            _adsService.RewardedVideoFinished -= OnVideoFinished;
+            _adsService.RewardedVideoFailed -= OnVideoFailed;
+        }
 
 
-    private void OnShowAdClicked()
-    {
-        _adsService.ShowRewardedVideo();
-    }
+        private void OnShowAdClicked()
+        {
+            _adsService.ShowRewardedVideo();
+        }
 
-    private void OnVideoFailed()
-    {
-        _messageService.ShowMessage("Failed to show video", Color.red);
-    }
+        private void OnVideoFailed()
+        {
+            _messageService.ShowMessage("Failed to show video", Color.red);
+        }
 
-    private void OnVideoFinished()
-    {
-        _progressService.Economy.IncreaseResourceAmount(_data.ResourceType, _data.Amount);
+        private void OnVideoFinished()
+        {
+            _progressService.Economy.IncreaseResourceAmount(_data.ResourceType, _data.Amount);
+        }
     }
 }

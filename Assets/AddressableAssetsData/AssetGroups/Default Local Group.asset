@@ -148,6 +148,31 @@ MonoBehaviour:
     m_SerializedLabels:
     - ResourceRewardStaticData
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 181a68317ee75e142b40c72ac5809a84
+    m_Address: SmallGemPack
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 40d4bd8251c717e4091eaae48193b53b
+    m_Address: BigGemPack
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: bd0bf625fcbbfb04096716742df7581c
+    m_Address: BigCoinPack
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 6e7432b1ad062d64aba0c40f7625a918
+    m_Address: SmallCoinPack
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: ad9a8c808cf6a574a9c4aa7e1f8d44d9
+    m_Address: ShopItem
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 2b30344375a32544c8f024ab8bc654ca, type: 2}
   m_SchemaSet:

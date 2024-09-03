@@ -1,8 +1,10 @@
 ﻿using CodeBase.Enums;
 using CodeBase.Infrastructure.AssetManagement;
+using CodeBase.Services.IAP;
 using CodeBase.Services.PersistentProgress;
 using CodeBase.Services.StaticData;
 using CodeBase.SO;
+using CodeBase.UI.Elements;
 using CodeBase.UI.Windows;
 using DG.Tweening;
 using System.Threading.Tasks;
@@ -53,15 +55,28 @@ namespace CodeBase.Infrastructure.Factories
         public async Task<EquipmentItemView> CreateEquipmentItemView(RectTransform parent, EquipmentItem item)
         {
             GameObject prefab = await _assets.Load<GameObject>(AssetAddress.InventorySlot);
-            EquipmentItemView slot = _container.InstantiatePrefab(prefab, parent).GetComponent<EquipmentItemView>();
+            EquipmentItemView view = _container.InstantiatePrefab(prefab, parent).GetComponent<EquipmentItemView>();
 
             EquipmentStaticData data = _staticData.ForEquipment(item.EquipmentTypeId);
-            slot.SetEquipmentData(data, item);
+            view.SetEquipmentData(data, item);
 
-            slot.transform.localScale = Vector3.zero;
-            slot.transform.DOScale(Vector3.one, 0.3f).SetEase(Ease.OutBack);
+            view.transform.localScale = Vector3.zero;
+            view.transform.DOScale(Vector3.one, 0.3f).SetEase(Ease.OutBack);
 
-            return slot;
+            return view;
+        }
+
+        public async Task<ShopItem> CreateShopItem(RectTransform parent, ProductConfig config)
+        {
+            GameObject prefab = await _assets.Load<GameObject>(AssetAddress.ShopItem);
+            ShopItem item = _container.InstantiatePrefab(prefab, parent).GetComponent<ShopItem>();
+            Sprite icon = await _assets.Load<Sprite>(config.Icon);
+
+            item.SetQuantity(config.Quantity);
+            item.SetProductID(config.Id);
+            item.SetPrice(config.Price);
+            item.SetIcon(icon);
+            return item;
         }
 
         public async Task<LevelCard> CreateLevelCard(LevelStaticData data, RectTransform parent)

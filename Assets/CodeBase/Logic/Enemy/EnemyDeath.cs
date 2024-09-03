@@ -1,5 +1,5 @@
-using CodeBase.Character;
 using CodeBase.Enemy.StateMachine;
+using CodeBase.Logic.Animations;
 using CodeBase.UI;
 using System;
 using System.Collections;

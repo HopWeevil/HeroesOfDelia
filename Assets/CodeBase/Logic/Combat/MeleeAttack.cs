@@ -1,68 +1,70 @@
-using CodeBase.Character;
 using CodeBase.Data;
-using CodeBase.Logic;
+using CodeBase.Logic.Animations;
 using UnityEngine;
 
-public class MeleeAttack : MonoBehaviour, IAttack, IStatsReceiver
+namespace CodeBase.Logic.Combat
 {
-    [SerializeField] private CharacterAnimator _animator;
-    [SerializeField] private LayerMask _targetsLayer;
-
-    private Stats _stats;
-
-    private float _cooldownTimer;
-
-    private void Update()
+    public class MeleeAttack : MonoBehaviour, IAttack, IStatsReceiver
     {
-        UpdateCooldown();
-    }
+        [SerializeField] private CharacterAnimator _animator;
+        [SerializeField] private LayerMask _targetsLayer;
 
-    public void TryAttack()
-    {
-        if (CooldownIsUp() && !_animator.IsAttacking)
+        private Stats _stats;
+
+        private float _cooldownTimer;
+
+        private void Update()
         {
-            _animator.PlayAttack();
-            _cooldownTimer = _stats.AttackCooldown;
+            UpdateCooldown();
         }
-    }
 
-    private void UpdateCooldown()
-    {
-        if (_cooldownTimer > 0)
+        public void TryAttack()
         {
-            _cooldownTimer -= Time.deltaTime;
-        }
-    }
-
-    private bool CooldownIsUp()
-    {
-        return _cooldownTimer <= 0;
-    }
-
-    private void OnAttack()
-    {
-        if (TryGetTargets(out Collider[] hits))
-        {
-            foreach (Collider hit in hits)
+            if (CooldownIsUp() && !_animator.IsAttacking)
             {
-                hit.transform.GetComponentInChildren<IHealth>()?.TakeDamage(_stats.Damage);
+                _animator.PlayAttack();
+                _cooldownTimer = _stats.AttackCooldown;
             }
         }
-    }
 
-    private bool TryGetTargets(out Collider[] targets)
-    {
-        targets = Physics.OverlapSphere(CalculateStartPoint(), _stats.AttackSplash, _targetsLayer);
-        return targets.Length > 0;
-    }
+        private void UpdateCooldown()
+        {
+            if (_cooldownTimer > 0)
+            {
+                _cooldownTimer -= Time.deltaTime;
+            }
+        }
 
-    private Vector3 CalculateStartPoint()
-    {
-        return new Vector3(transform.position.x, transform.position.y + 0.5f, transform.position.z) + transform.forward * _stats.AttackDistance;
-    }
+        private bool CooldownIsUp()
+        {
+            return _cooldownTimer <= 0;
+        }
 
-    public void Receive(Stats stats)
-    {
-        _stats = stats;
+        private void OnAttack()
+        {
+            if (TryGetTargets(out Collider[] hits))
+            {
+                foreach (Collider hit in hits)
+                {
+                    hit.transform.GetComponentInChildren<IHealth>()?.TakeDamage(_stats.Damage);
+                }
+            }
+        }
+
+        private bool TryGetTargets(out Collider[] targets)
+        {
+            targets = Physics.OverlapSphere(CalculateStartPoint(), _stats.AttackSplash, _targetsLayer);
+            return targets.Length > 0;
+        }
+
+        private Vector3 CalculateStartPoint()
+        {
+            return new Vector3(transform.position.x, transform.position.y + 0.5f, transform.position.z) + transform.forward * _stats.AttackDistance;
+        }
+
+        public void Receive(Stats stats)
+        {
+            _stats = stats;
+        }
     }
 }

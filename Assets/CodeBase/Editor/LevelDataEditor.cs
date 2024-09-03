@@ -1,12 +1,12 @@
+using CodeBase.Logic.EnemySpawner;
+using UnityEditor.SceneManagement;
+using UnityEngine.SceneManagement;
 using System.Collections.Generic;
+using CodeBase.Enums;
 using System.Linq;
 using UnityEditor;
-using UnityEditor.SceneManagement;
 using UnityEngine;
-using UnityEngine.SceneManagement;
-using CodeBase.Enums;
 using CodeBase.SO;
-using CodeBase.Logic.EnemySpawners;
 
 public class LevelDataEditor : EditorWindow
 {
@@ -168,7 +168,6 @@ public class LevelDataEditor : EditorWindow
 
         EditorGUILayout.EndVertical();
     }
-
 
     private void DrawEnemySpawnerListHeader()
     {

@@ -1,6 +1,7 @@
 using System;
-using CodeBase.Character;
 using CodeBase.Data;
+using CodeBase.Logic;
+using CodeBase.Logic.Animations;
 using UnityEngine;
 using UnityEngine.AI;
 

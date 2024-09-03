@@ -5,15 +5,17 @@ namespace CodeBase.Logic.Loot
     public class ResourceLoot : Loot
     {
         private ResourceTypeId _resourceType;
+        private PlayerEconomyData _data;
 
-        public void Initialize(ResourceTypeId typeId)
+        public void Construct(ResourceTypeId typeId, PlayerEconomyData data)
         {
             _resourceType = typeId;
+            _data = data;
         }
 
-        public override void Collect(PlayerEconomyData playerEconomy)
+        public override void Collect()
         {
-            playerEconomy.IncreaseResourceAmount(_resourceType, 1);
+            _data.IncreaseResourceAmount(_resourceType, 1);
             Destroy(gameObject);
         }
     }

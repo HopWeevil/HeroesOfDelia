@@ -1,5 +1,6 @@
-using CodeBase.Character;
+using CodeBase.Logic.Animations;
 using CodeBase.Services.Input;
+using CodeBase.Logic.Combat;
 using UnityEngine;
 using Zenject;
 

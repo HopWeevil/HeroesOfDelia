@@ -1,52 +1,53 @@
-using CodeBase.Data;
 using CodeBase.Infrastructure.Factories;
 using CodeBase.SO;
-using CodeBase.UI.Windows;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using Zenject;
 
-public class EquipmentItemView : MonoBehaviour
+namespace CodeBase.UI.Elements
 {
-    [SerializeField] private Image _icon;
-    [SerializeField] private Button _button;
-    [SerializeField] private TMP_Text _levelText;
-
-    private EquipmentStaticData _data;
-    private EquipmentItem _item;
-    private IUIFactory _factory;
-
-    [Inject]
-    private void Construct(IUIFactory uIFactory)
+    public class EquipmentItemView : MonoBehaviour
     {
-        _factory = uIFactory;
-    }
+        [SerializeField] private Image _icon;
+        [SerializeField] private Button _button;
+        [SerializeField] private TMP_Text _levelText;
 
-    public void SetEquipmentData(EquipmentStaticData data, EquipmentItem item)
-    {
-        _data = data;
-        _item = item;
-    }
+        private EquipmentStaticData _data;
+        private EquipmentItem _item;
+        private IUIFactory _factory;
 
-    private void Start()
-    {
-        _icon.sprite =_data.Icon;
-        _levelText.text = string.Format(_levelText.text, _item.Level.ToString());
-    }
+        [Inject]
+        private void Construct(IUIFactory uIFactory)
+        {
+            _factory = uIFactory;
+        }
 
-    private void OnEnable()
-    {
-        _button.onClick.AddListener(HandleClick);
-    }
+        public void SetEquipmentData(EquipmentStaticData data, EquipmentItem item)
+        {
+            _data = data;
+            _item = item;
+        }
 
-    private void OnDisable()
-    {
-        _button.onClick.RemoveListener(HandleClick);
-    }
+        private void Start()
+        {
+            _icon.sprite = _data.Icon;
+            _levelText.text = string.Format(_levelText.text, _item.Level.ToString());
+        }
 
-    private void HandleClick()
-    {
-        _factory.CreateEquipmentInfoWindow(_item);
+        private void OnEnable()
+        {
+            _button.onClick.AddListener(HandleClick);
+        }
+
+        private void OnDisable()
+        {
+            _button.onClick.RemoveListener(HandleClick);
+        }
+
+        private void HandleClick()
+        {
+            _factory.CreateEquipmentInfoWindow(_item);
+        }
     }
 }

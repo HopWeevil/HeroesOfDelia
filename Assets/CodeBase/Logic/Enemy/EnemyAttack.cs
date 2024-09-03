@@ -1,9 +1,8 @@
-using CodeBase.Character;
+using CodeBase.Logic.Combat;
 using UnityEngine;
 
 namespace CodeBase.Enemy
 {
-    [RequireComponent(typeof(CharacterAnimator))]
     public class EnemyAttack : MonoBehaviour
     {
         private IAttack _attack;

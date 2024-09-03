@@ -1,9 +1,7 @@
-
-using CodeBase.Data;
 using CodeBase.Infrastructure.Services.SaveLoad;
-using CodeBase.Logic;
 using CodeBase.Services.PersistentProgress;
-using UnityEngine;
+using CodeBase.Logic;
+using CodeBase.Data;
 
 namespace CodeBase.Infrastructure.States
 {
@@ -14,26 +12,23 @@ namespace CodeBase.Infrastructure.States
         private readonly ISaveLoadService _saveLoadProgress;
         private readonly ILoadingCurtain _loadingCurtain;
 
-        public LoadProgressState(IGameStateMachine gameStateMachine, IPersistentProgressService progressService, ISaveLoadService saveLoadProgress, ILoadingCurtain loadingCurtain)
+        public LoadProgressState(IGameStateMachine gameStateMachine, IPersistentProgressService progressService, ISaveLoadService saveLoadProgress)
         {
             _gameStateMachine = gameStateMachine;
             _progressService = progressService;
             _saveLoadProgress = saveLoadProgress;
-            _loadingCurtain = loadingCurtain;
         }
 
         public void Enter()
         {
-            //_loadingCurtain.Show();
             LoadProgressOrInitNew();
       
-            //_gameStateMachine.Enter<LoadLevelState, string>("Location1");
             _gameStateMachine.Enter<LoadMetaState>();
         }
 
         public void Exit()
         {
-            //_loadingCurtain.Hide();
+
         }
 
         private void LoadProgressOrInitNew()
@@ -47,8 +42,6 @@ namespace CodeBase.Infrastructure.States
         private PlayerProgress NewProgress()
         {
             var progress = new PlayerProgress();
-            
-
             return progress;
         }
 
@@ -58,8 +51,7 @@ namespace CodeBase.Infrastructure.States
             inventory.AddInventoryItem(new EquipmentItem(Enums.EquipmentTypeId.Sword));
             inventory.AddInventoryItem(new EquipmentItem(Enums.EquipmentTypeId.Sword));
             inventory.AddInventoryItem(new EquipmentItem(Enums.EquipmentTypeId.Axe));
-            inventory.AddInventoryItem(new EquipmentItem(Enums.EquipmentTypeId.SkeletonCrossbow));
-           // inventory.EquipHero(Enums.HeroTypeId.Mage, new EquipmentItem(Enums.EquipmentTypeId.SkeletonStaff), Enums.EquipmentCategory.Weapon);
+            inventory.AddInventoryItem(new EquipmentItem(Enums.EquipmentTypeId.SkeletonCrossbow));      
             return inventory;
         }
 
@@ -67,7 +59,6 @@ namespace CodeBase.Infrastructure.States
         {
             var progress = new PlayerEconomyData();
             progress.AddHeroItem(Enums.HeroTypeId.Knight);
-           // progress.AddHeroItem(Enums.HeroTypeId.Mage);
             progress.IncreaseResourceAmount(Enums.ResourceTypeId.Coin, 5000);
             progress.IncreaseResourceAmount(Enums.ResourceTypeId.Gem, 2000);           
             return progress;

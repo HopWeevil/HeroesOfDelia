@@ -1,11 +1,10 @@
-﻿using CodeBase.Logic;
-using CodeBase.Logic.EnemySpawners;
-using CodeBase.SO;
+﻿using CodeBase.Logic.EnemySpawner;
+using UnityEngine.SceneManagement; 
 using System.Collections.Generic;
+using CodeBase.SO;
 using System.Linq;
 using UnityEditor;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 namespace CodeBase.Editor
 {

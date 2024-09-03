@@ -5,14 +5,17 @@ namespace CodeBase.Logic.Loot
     public class EquipmentLoot : Loot
     {
         private EquipmentTypeId _typeId;
-        public void Initialize(EquipmentTypeId typeId)
+        private PlayerEquipment _equipment;
+
+        public void Initialize(EquipmentTypeId typeId, PlayerEquipment playerEquipment)
         {
             _typeId = typeId;
+            _equipment = playerEquipment;
         }
 
-        public override void Collect(PlayerEconomyData playerEconomy)
+        public override void Collect()
         {
-            //playerEconomy.AddInventoryItem(new InventoryItem(_typeId));
+            _equipment.AddInventoryItem(new EquipmentItem(_typeId));
             Destroy(gameObject);
         }
     }

@@ -1,6 +1,9 @@
 ﻿using CodeBase.Data;
 
-public interface IStatsReceiver
+namespace CodeBase.Logic
 {
-    void Receive(Stats stats);
+    public interface IStatsReceiver
+    {
+        void Receive(Stats stats);
+    }
 }

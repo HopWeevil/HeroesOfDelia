@@ -1,6 +1,6 @@
-﻿using CodeBase.Character;
-using CodeBase.Data;
+﻿using CodeBase.Data;
 using CodeBase.Logic;
+using CodeBase.Logic.Animations;
 using System;
 using UnityEngine;
 

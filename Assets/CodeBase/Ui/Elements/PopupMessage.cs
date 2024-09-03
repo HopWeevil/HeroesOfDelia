@@ -2,45 +2,48 @@ using TMPro;
 using UnityEngine;
 using DG.Tweening;
 
-public class PopupMessage : MonoBehaviour
+namespace CodeBase.UI.Elements
 {
-    [SerializeField] private TMP_Text _text;
-
-    [SerializeField] private float fadeDuration = 0.5f;
-    [SerializeField] private float displayDuration = 1.0f;
-
-    [SerializeField] private CanvasGroup _canvasGroup;
-
-    public void SetText(string text)
+    public class PopupMessage : MonoBehaviour
     {
-        _text.text = text;
-    }
+        [SerializeField] private TMP_Text _text;
 
-    public void SetColor(Color color)
-    {
-        _text.color = color;
-    }
+        [SerializeField] private float fadeDuration = 0.5f;
+        [SerializeField] private float displayDuration = 1.0f;
 
-    public void Show()
-    {
-        _canvasGroup.alpha = 0f;
+        [SerializeField] private CanvasGroup _canvasGroup;
 
-        _canvasGroup.DOFade(1f, fadeDuration).OnComplete(() =>
+        public void SetText(string text)
         {
-            DOVirtual.DelayedCall(displayDuration, Hide);
-        });
-    }
+            _text.text = text;
+        }
 
-    public void Hide()
-    {
-        _canvasGroup.DOFade(0f, fadeDuration).OnComplete(() =>
+        public void SetColor(Color color)
+        {
+            _text.color = color;
+        }
+
+        public void Show()
+        {
+            _canvasGroup.alpha = 0f;
+
+            _canvasGroup.DOFade(1f, fadeDuration).OnComplete(() =>
+            {
+                DOVirtual.DelayedCall(displayDuration, Hide);
+            });
+        }
+
+        public void Hide()
+        {
+            _canvasGroup.DOFade(0f, fadeDuration).OnComplete(() =>
+            {
+                Destroy(gameObject);
+            });
+        }
+
+        public void HideImmediate()
         {
             Destroy(gameObject);
-        });
-    }
-
-    public void HideImmediate()
-    {
-        Destroy(gameObject);
+        }
     }
 }

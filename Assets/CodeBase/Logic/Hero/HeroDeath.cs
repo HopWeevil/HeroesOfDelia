@@ -1,4 +1,4 @@
-using CodeBase.Character;
+using CodeBase.Logic.Animations;
 using UnityEngine;
 
 namespace CodeBase.Hero

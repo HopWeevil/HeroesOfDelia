@@ -5,39 +5,42 @@ using UnityEngine;
 using UnityEngine.UI;
 using Zenject;
 
-public class LevelCard : MonoBehaviour
+namespace CodeBase.UI.Elements
 {
-    [SerializeField] private TMP_Text _title;
-    [SerializeField] private Image _preview;
-    [SerializeField] private Button _button;
-
-    private IGameStateMachine _gameStateMachine;
-    private LevelStaticData _data;
-
-    public void SetLevelData(LevelStaticData data)
+    public class LevelCard : MonoBehaviour
     {
-        _data = data;
-    }
+        [SerializeField] private TMP_Text _title;
+        [SerializeField] private Image _preview;
+        [SerializeField] private Button _button;
 
-    public void SetInfo()
-    {
-        _title.text = _data.Title;
-        _preview.sprite = _data.Preview;
-    }
+        private IGameStateMachine _gameStateMachine;
+        private LevelStaticData _data;
 
-    [Inject]
-    public void Construct(IGameStateMachine stateMachine)
-    {
-        _gameStateMachine = stateMachine;
-    }
+        public void SetLevelData(LevelStaticData data)
+        {
+            _data = data;
+        }
 
-    private void OnEnable()
-    {
-        _button.onClick.AddListener(() => _gameStateMachine.Enter<LoadLevelState, LevelStaticData>(_data));
-    }
+        public void SetInfo()
+        {
+            _title.text = _data.Title;
+            _preview.sprite = _data.Preview;
+        }
 
-    private void OnDisable()
-    {
-        _button.onClick.RemoveListener(() => _gameStateMachine.Enter<LoadLevelState, LevelStaticData>(_data));
+        [Inject]
+        public void Construct(IGameStateMachine stateMachine)
+        {
+            _gameStateMachine = stateMachine;
+        }
+
+        private void OnEnable()
+        {
+            _button.onClick.AddListener(() => _gameStateMachine.Enter<LoadLevelState, LevelStaticData>(_data));
+        }
+
+        private void OnDisable()
+        {
+            _button.onClick.RemoveListener(() => _gameStateMachine.Enter<LoadLevelState, LevelStaticData>(_data));
+        }
     }
 }

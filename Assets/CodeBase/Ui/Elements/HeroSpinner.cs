@@ -8,10 +8,11 @@ namespace CodeBase.UI.Elements
     public class HeroSpinner : MonoBehaviour
     {
         [SerializeField] private RawImage _heroRenderImage;
-        [SerializeField] public float _rotationSpeed = 0.2f;
+        [SerializeField] private float _rotationSpeed = 0.2f;
         [SerializeField] private float _damping = 0.95f;
 
         public Transform _hero;
+
         private Vector3 _lastMousePosition;
         private bool _isDragging;
         private float _inertia;

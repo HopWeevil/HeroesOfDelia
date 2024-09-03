@@ -1,7 +1,7 @@
 using System;
-using CodeBase.Character;
 using CodeBase.Data;
 using CodeBase.Logic;
+using CodeBase.Logic.Animations;
 using UnityEngine;
 
 namespace CodeBase.Enemy
@@ -37,7 +37,6 @@ namespace CodeBase.Enemy
             {
                 _animator.PlayHit();
             }
-
         }
 
         public float GetCurrent()

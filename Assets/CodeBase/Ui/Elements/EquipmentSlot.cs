@@ -8,79 +8,82 @@ using UnityEngine;
 using UnityEngine.UI;
 using Zenject;
 
-public class EquipmentSlot : MonoBehaviour
+namespace CodeBase.UI.Elements
 {
-    [SerializeField] private Image _icon;
-    [SerializeField] private EquipmentCategory _equipmentCategory;
-    [SerializeField] private RectTransform _itemContainer;
-
-    private IPersistentProgressService _progressService;
-    private IStaticDataService _staticDataService;
-    private IUIFactory _factory;
-
-    private EquipmentItemView _currentItemView;
-
-    [Inject]
-    private void Construct(IPersistentProgressService progressService, IStaticDataService staticData, IUIFactory uIFactory)
+    public class EquipmentSlot : MonoBehaviour
     {
-        _progressService = progressService;
-        _staticDataService = staticData;
-        _factory = uIFactory;
-    }
+        [SerializeField] private Image _icon;
+        [SerializeField] private EquipmentCategory _equipmentCategory;
+        [SerializeField] private RectTransform _itemContainer;
 
-    private void OnEnable()
-    {
-        _progressService.Equipments.HeroEquip += OnHeroEquip;
-        _progressService.Equipments.HeroUnEquip += OnHeroUnEquip;
-    }
+        private IPersistentProgressService _progressService;
+        private IStaticDataService _staticDataService;
+        private IUIFactory _factory;
 
-    private void OnDisable()
-    {
-        _progressService.Equipments.HeroEquip -= OnHeroEquip;
-        _progressService.Equipments.HeroUnEquip -= OnHeroUnEquip;
-    }
+        private EquipmentItemView _currentItemView;
 
-    private async void Start()
-    {
-        await LoadEquippedItem();
-    }
-
-    private async void OnHeroEquip(HeroTypeId hero, EquipmentItem equipment)
-    {
-        if (IsMatchingCategory(equipment))
+        [Inject]
+        private void Construct(IPersistentProgressService progressService, IStaticDataService staticData, IUIFactory uIFactory)
         {
-            _currentItemView = await _factory.CreateEquipmentItemView(_itemContainer, equipment);
+            _progressService = progressService;
+            _staticDataService = staticData;
+            _factory = uIFactory;
         }
-    }
 
-    private void OnHeroUnEquip(HeroTypeId hero, EquipmentItem equipment)
-    {
-        if (IsMatchingCategory(equipment))
+        private void OnEnable()
         {
-            DestroyCurrentView();
+            _progressService.Equipments.HeroEquip += OnHeroEquip;
+            _progressService.Equipments.HeroUnEquip += OnHeroUnEquip;
         }
-    }
 
-    private async Task LoadEquippedItem()
-    {
-        EquipmentItem item = _progressService.Equipments.GetEquippedItem(_progressService.Progress.SelectedHero, _equipmentCategory);
-        if (item != null)
+        private void OnDisable()
         {
-            _currentItemView = await _factory.CreateEquipmentItemView(_itemContainer, item);
+            _progressService.Equipments.HeroEquip -= OnHeroEquip;
+            _progressService.Equipments.HeroUnEquip -= OnHeroUnEquip;
         }
-    }
 
-    private bool IsMatchingCategory(EquipmentItem equipment)
-    {
-        EquipmentStaticData data = _staticDataService.ForEquipment(equipment.EquipmentTypeId);
-        return data != null && data.Category == _equipmentCategory;
-    }
-
-    private void DestroyCurrentView()
-    {
-        if (_currentItemView != null)
+        private async void Start()
         {
-            Destroy(_currentItemView.gameObject);
+            await LoadEquippedItem();
+        }
+
+        private async void OnHeroEquip(HeroTypeId hero, EquipmentItem equipment)
+        {
+            if (IsMatchingCategory(equipment))
+            {
+                _currentItemView = await _factory.CreateEquipmentItemView(_itemContainer, equipment);
+            }
+        }
+
+        private void OnHeroUnEquip(HeroTypeId hero, EquipmentItem equipment)
+        {
+            if (IsMatchingCategory(equipment))
+            {
+                DestroyCurrentView();
+            }
+        }
+
+        private async Task LoadEquippedItem()
+        {
+            EquipmentItem item = _progressService.Equipments.GetEquippedItem(_progressService.Progress.SelectedHero, _equipmentCategory);
+            if (item != null)
+            {
+                _currentItemView = await _factory.CreateEquipmentItemView(_itemContainer, item);
+            }
+        }
+
+        private bool IsMatchingCategory(EquipmentItem equipment)
+        {
+            EquipmentStaticData data = _staticDataService.ForEquipment(equipment.EquipmentTypeId);
+            return data != null && data.Category == _equipmentCategory;
+        }
+
+        private void DestroyCurrentView()
+        {
+            if (_currentItemView != null)
+            {
+                Destroy(_currentItemView.gameObject);
+            }
         }
     }
 }

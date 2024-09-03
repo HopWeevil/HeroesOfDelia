@@ -1,5 +1,7 @@
 ﻿using CodeBase.Enums;
+using CodeBase.Services.IAP;
 using CodeBase.SO;
+using CodeBase.UI.Elements;
 using CodeBase.UI.Windows;
 using System;
 using System.Threading.Tasks;
@@ -21,5 +23,6 @@ namespace CodeBase.Infrastructure.Factories
         Task<LevelCard> CreateLevelCard(LevelStaticData data, RectTransform parent);
         Task<GameObject> CreateHud();
         Task<RewardedAdItem> CreateRewardedAdItem(ResourceRewardStaticData data, RectTransform parent);
+        Task<ShopItem> CreateShopItem(RectTransform parent, ProductConfig config);
     }
 }

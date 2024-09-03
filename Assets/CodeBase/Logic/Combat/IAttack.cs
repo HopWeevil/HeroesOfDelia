@@ -1,6 +1,9 @@
 ﻿using CodeBase.SO;
 
-public interface IAttack
+namespace CodeBase.Logic.Combat
 {
-    void TryAttack();
+    public interface IAttack
+    {
+        void TryAttack();
+    }
 }

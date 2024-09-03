@@ -11,6 +11,7 @@ using System.Threading.Tasks;
 using CodeBase.Enums;
 using System.Collections.Generic;
 using System;
+using CodeBase.Services.PersistentProgress;
 
 namespace CodeBase.Logic.Loot
 {
@@ -22,13 +23,15 @@ namespace CodeBase.Logic.Loot
         private IGameFactory _factory;
         private IRandomService _randomizer;
         private IStaticDataService _staticDataService;
+        private IPersistentProgressService _progressService;
 
         [Inject]
-        private void Construct(IGameFactory factory, IRandomService randomService, IStaticDataService staticDataService)
+        private void Construct(IGameFactory factory, IRandomService randomService, IStaticDataService staticDataService, IPersistentProgressService progressService)
         {
             _factory = factory;
             _randomizer = randomService;
             _staticDataService = staticDataService;
+            _progressService = progressService;
         }
 
         public void SetLootData(LootData lootData)
@@ -56,7 +59,7 @@ namespace CodeBase.Logic.Loot
             for (int i = 0; i < numberOfCoins; i++)
             {
                 ResourceLoot loot = await _factory.CreateResourceLoot(ResourceTypeId.Coin, transform.position);
-                loot.Initialize(ResourceTypeId.Coin);
+                loot.Construct(ResourceTypeId.Coin, _progressService.Economy);
                 PlayBurstEffect(loot.transform, 1.5f, 1.5f, 1f, 0.5f);
             }
         }
@@ -78,7 +81,7 @@ namespace CodeBase.Logic.Loot
                 EquipmentStaticData equipment = equipments[_randomizer.Next(0, equipments.Count)];
 
                 EquipmentLoot loot = await _factory.CreateEquipmentLoot(equipment.TypeId, transform.position);
-                loot.Initialize(equipment.TypeId);
+                loot.Initialize(equipment.TypeId, _progressService.Equipments);
                 PlayBurstEffect(loot.transform, 1.5f, 1.5f, 1f, 0.5f);
             }
         }

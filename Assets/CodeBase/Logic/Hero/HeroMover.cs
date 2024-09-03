@@ -1,9 +1,8 @@
-﻿using CodeBase.Character;
-using CodeBase.Data;
+﻿using CodeBase.Data;
+using CodeBase.Logic;
+using CodeBase.Logic.Animations;
 using CodeBase.Services.Input;
-using CodeBase.Services.PersistentProgress;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using Zenject;
 
 namespace CodeBase.Hero
@@ -35,17 +34,18 @@ namespace CodeBase.Hero
             Move();
         }
 
+        public void Receive(Stats stats)
+        {
+            _movementSpeed = stats.MoveSpeed;
+        }
+
         private void Move()
         {
-            Vector3 movementVector = Vector3.zero;
+            Vector3 movementVector = CalculateMovementVector();
 
-            if (_inputService.Axis.sqrMagnitude >= 0.0001)
+            if (IsMoving(movementVector))
             {
-
-                movementVector = _camera.transform.TransformDirection(_inputService.Axis);
-                movementVector.y = 0;
-                movementVector.Normalize();
-                transform.forward = movementVector;
+                RotateTowardsMovementDirection(movementVector);
                 _animator.Move(_characterController.velocity.magnitude, _dumpTime);
             }
             else
@@ -53,14 +53,42 @@ namespace CodeBase.Hero
                 _animator.StopMoving();
             }
 
-            movementVector += Physics.gravity;
-
-            _characterController.Move(_movementSpeed * movementVector * Time.deltaTime);
+            ApplyGravity(ref movementVector);
+            MoveCharacter(movementVector);
         }
 
-        public void Receive(Stats stats)
+        private Vector3 CalculateMovementVector()
         {
-            _movementSpeed = stats.MoveSpeed;
+            Vector3 movementVector = Vector3.zero;
+
+            if (_inputService.Axis.sqrMagnitude >= 0.0001f)
+            {
+                movementVector = _camera.transform.TransformDirection(_inputService.Axis);
+                movementVector.y = 0;
+                movementVector.Normalize();
+            }
+
+            return movementVector;
+        }
+
+        private bool IsMoving(Vector3 movementVector)
+        {
+            return movementVector.sqrMagnitude > 0;
+        }
+
+        private void RotateTowardsMovementDirection(Vector3 movementVector)
+        {
+            transform.forward = movementVector;
+        }
+
+        private void ApplyGravity(ref Vector3 movementVector)
+        {
+            movementVector += Physics.gravity;
+        }
+
+        private void MoveCharacter(Vector3 movementVector)
+        {
+            _characterController.Move(_movementSpeed * movementVector * Time.deltaTime);
         }
     }
 }

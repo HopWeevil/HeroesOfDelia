@@ -1,13 +1,13 @@
-using CodeBase.Services.StaticData;
-using UnityEngine;
-using System.Threading.Tasks;
 using CodeBase.Infrastructure.AssetManagement;
+using CodeBase.Services.StaticData;
 using CodeBase.Services.Randomizer;
-using Zenject;
-using CodeBase.Enums;
+using CodeBase.Logic.EnemySpawner;
+using System.Threading.Tasks;
 using CodeBase.Logic.Loot;
+using CodeBase.Enums;
+using UnityEngine;
 using CodeBase.SO;
-
+using Zenject;
 
 namespace CodeBase.Infrastructure.Factories
 {
@@ -62,8 +62,6 @@ namespace CodeBase.Infrastructure.Factories
             _container.InjectGameObject(lootPiece.gameObject);
             return lootPiece;
         }
-
-   
    
         public async Task CreateSpawner(Vector3 at, EnemyTypeId enemyTypeId)
         {

@@ -3,7 +3,7 @@ using System.Linq;
 using CodeBase.Logic;
 using UnityEngine;
 
-namespace CodeBase.Character
+namespace CodeBase.Logic.Animations
 {
     public class CharacterAnimator : MonoBehaviour, IAnimationStateReader
     {
