@@ -10,28 +10,26 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b7072ec19ee872341bf8ee86d8fb3283, type: 3}
-  m_Name: Skeleton Crossbow
+  m_Name: UltimateRing
   m_EditorClassIdentifier: 
-  Title: Skeleton Crossbow
-  Description: A sinister crossbow with a skeletal design, firing bolts with deadly
-    accuracy.
-  Icon: {fileID: 21300000, guid: 7728ccf7a9219c94ea8592738da7cc9d, type: 3}
-  TypeId: 8
+  Title: Ultimate Ring
+  Description: A legendary ring that significantly boosts all attributes, making
+    the wearer nearly invincible.
+  Icon: {fileID: 21300000, guid: af115e57966564c01adfc3db1c776223, type: 3}
+  TypeId: 13
   Rarity: 0
-  Category: 0
+  Category: 4
   PrefabReference:
-    m_AssetGUID: a5f3284bd46da384699233b39fb528b9
+    m_AssetGUID: 
     m_SubObjectName: 
     m_SubObjectType: 
-    m_EditorAssetChanged: 1
+    m_EditorAssetChanged: 0
   DropReference:
     m_AssetGUID: 9343dc83a0ab1794db33dd932e752032
     m_SubObjectName: 
     m_SubObjectType: 
     m_EditorAssetChanged: 0
   Bonuses:
-  - Type: 4
-    Value: 30
-  - Type: 1
-    Value: -1
-  HeroClass: 2
+  - Type: 0
+    Value: 100
+  HeroClass: 0

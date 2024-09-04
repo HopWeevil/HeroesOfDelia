@@ -48,10 +48,21 @@ namespace CodeBase.Infrastructure.States
         private PlayerEquipment NewInventory()
         {
             var inventory = new PlayerEquipment();
-            inventory.AddInventoryItem(new EquipmentItem(Enums.EquipmentTypeId.Sword));
-            inventory.AddInventoryItem(new EquipmentItem(Enums.EquipmentTypeId.Sword));
-            inventory.AddInventoryItem(new EquipmentItem(Enums.EquipmentTypeId.Axe));
-            inventory.AddInventoryItem(new EquipmentItem(Enums.EquipmentTypeId.SkeletonCrossbow));      
+
+            inventory.AddInventoryItem(new EquipmentItem(Enums.EquipmentTypeId.SortSword));
+            inventory.AddInventoryItem(new EquipmentItem(Enums.EquipmentTypeId.LongSword));
+            inventory.AddInventoryItem(new EquipmentItem(Enums.EquipmentTypeId.KingSword));
+            inventory.AddInventoryItem(new EquipmentItem(Enums.EquipmentTypeId.LumberjackAxe));
+            inventory.AddInventoryItem(new EquipmentItem(Enums.EquipmentTypeId.BattleAxe));
+            inventory.AddInventoryItem(new EquipmentItem(Enums.EquipmentTypeId.WarAxe));
+            inventory.AddInventoryItem(new EquipmentItem(Enums.EquipmentTypeId.VikingHelmet));
+            inventory.AddInventoryItem(new EquipmentItem(Enums.EquipmentTypeId.SkeletonStaff));
+            inventory.AddInventoryItem(new EquipmentItem(Enums.EquipmentTypeId.SkeletonCrossbow));
+            inventory.AddInventoryItem(new EquipmentItem(Enums.EquipmentTypeId.HeavyCrossbow));
+            inventory.AddInventoryItem(new EquipmentItem(Enums.EquipmentTypeId.WizzardStaff));
+            inventory.AddInventoryItem(new EquipmentItem(Enums.EquipmentTypeId.BootsOfSpeed));
+            inventory.AddInventoryItem(new EquipmentItem(Enums.EquipmentTypeId.FrostRing));
+            inventory.AddInventoryItem(new EquipmentItem(Enums.EquipmentTypeId.UltimateRing));
             return inventory;
         }
 

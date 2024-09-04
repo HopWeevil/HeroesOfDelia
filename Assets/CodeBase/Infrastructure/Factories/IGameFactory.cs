@@ -12,7 +12,7 @@ namespace CodeBase.Infrastructure.Factories
         Task CreateSpawner(Vector3 at, EnemyTypeId enemyTypeId);
         Task<ResourceLoot> CreateResourceLoot(ResourceTypeId resourceType, Vector3 at);
         Task<EquipmentLoot> CreateEquipmentLoot(EquipmentTypeId equipmentType, Vector3 at);
-        Task<GameObject> CreateEquipment(EquipmentTypeId equipmentType, Transform parent);
+        Task TryCreateEquipment(EquipmentTypeId equipmentType, Transform parent);
         Task WarmUp();
         void CleanUp();
     }

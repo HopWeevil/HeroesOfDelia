@@ -10,28 +10,27 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b7072ec19ee872341bf8ee86d8fb3283, type: 3}
-  m_Name: Skeleton Crossbow
+  m_Name: KingSword
   m_EditorClassIdentifier: 
-  Title: Skeleton Crossbow
-  Description: A sinister crossbow with a skeletal design, firing bolts with deadly
-    accuracy.
-  Icon: {fileID: 21300000, guid: 7728ccf7a9219c94ea8592738da7cc9d, type: 3}
-  TypeId: 8
-  Rarity: 0
+  Title: King Sword
+  Description: ' A regal sword adorned with intricate designs, wielded by royalty.'
+  Icon: {fileID: 21300000, guid: c5f379770ddf3470cab5328d5615bb23, type: 3}
+  TypeId: 2
+  Rarity: 2
   Category: 0
   PrefabReference:
-    m_AssetGUID: a5f3284bd46da384699233b39fb528b9
+    m_AssetGUID: a85c7ffa7294fdc4bb2109b4b283d172
     m_SubObjectName: 
     m_SubObjectType: 
-    m_EditorAssetChanged: 1
+    m_EditorAssetChanged: 0
   DropReference:
-    m_AssetGUID: 9343dc83a0ab1794db33dd932e752032
+    m_AssetGUID: 491afadd642424b4d81f472858de5e7b
     m_SubObjectName: 
     m_SubObjectType: 
     m_EditorAssetChanged: 0
   Bonuses:
   - Type: 4
-    Value: 30
-  - Type: 1
-    Value: -1
-  HeroClass: 2
+    Value: 40
+  - Type: 6
+    Value: 4
+  HeroClass: 0

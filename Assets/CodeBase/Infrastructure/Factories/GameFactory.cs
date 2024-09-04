@@ -38,11 +38,14 @@ namespace CodeBase.Infrastructure.Factories
             _assets.CleanUp();
         }
 
-        public async Task<GameObject> CreateEquipment(EquipmentTypeId equipmentType, Transform parent)
-        {
+        public async Task TryCreateEquipment(EquipmentTypeId equipmentType, Transform parent)
+        {         
             EquipmentStaticData equipment = _staticData.ForEquipment(equipmentType);
+            if (equipment.PrefabReference == null || !equipment.PrefabReference.RuntimeKeyIsValid())
+                return; //Unfortunately, we don't have models for every equipment
+
             GameObject prefab = await _assets.Load<GameObject>(equipment.PrefabReference);
-            return Object.Instantiate(prefab, parent);
+            Object.Instantiate(prefab, parent);
         }
 
         public async Task<ResourceLoot> CreateResourceLoot(ResourceTypeId resourceType, Vector3 at)

@@ -10,16 +10,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b7072ec19ee872341bf8ee86d8fb3283, type: 3}
-  m_Name: Helmet
+  m_Name: WizzardStaff
   m_EditorClassIdentifier: 
-  Title: Helmet
-  Description: Green helmet
-  Icon: {fileID: 21300000, guid: 169d45648e00348038299fc345aa6b4f, type: 3}
-  TypeId: 2
+  Title: Wizzard Staff
+  Description: A mystical staff infused with ancient magic, enhancing a wizard's
+    spells.
+  Icon: {fileID: 21300000, guid: 049d3e8d377152f4f932cd9ceff54454, type: 3}
+  TypeId: 10
   Rarity: 0
   Category: 0
   PrefabReference:
-    m_AssetGUID: e8668d01e8f36db458ad3892e58b8131
+    m_AssetGUID: 2e2f76832ff6ecc4fb62528db0506691
     m_SubObjectName: 
     m_SubObjectType: 
     m_EditorAssetChanged: 0
@@ -28,5 +29,7 @@ MonoBehaviour:
     m_SubObjectName: 
     m_SubObjectType: 
     m_EditorAssetChanged: 0
-  Bonuses: []
-  HeroClass: 0
+  Bonuses:
+  - Type: 4
+    Value: 50
+  HeroClass: 1

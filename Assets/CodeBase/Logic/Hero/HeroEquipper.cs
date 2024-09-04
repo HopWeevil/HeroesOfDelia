@@ -1,7 +1,7 @@
 ﻿using CodeBase.Enums;
 using CodeBase.Infrastructure.Factories;
 using CodeBase.Services.PersistentProgress;
-using System.Collections.Generic;
+using CodeBase.Services.StaticData;
 using System.Threading.Tasks;
 using UnityEngine;
 using Zenject;
@@ -14,12 +14,14 @@ namespace CodeBase.Hero
 
         private IGameFactory _gameFactory;
         private IPersistentProgressService _progressService;
+        private IStaticDataService _staticData;
 
         [Inject]
-        private void Construct(IGameFactory gameFactory, IPersistentProgressService progressService)
+        private void Construct(IGameFactory gameFactory, IPersistentProgressService progressService, IStaticDataService staticData)
         {
             _gameFactory = gameFactory;
             _progressService = progressService;
+            _staticData = staticData;
         }
 
         private void Start()
@@ -27,6 +29,7 @@ namespace CodeBase.Hero
             _progressService.Equipments.HeroEquip += OnHeroEquip;
             _progressService.Equipments.HeroUnEquip += OnHeroUnequip;
         }
+
         private void OnDestroy()
         {
             _progressService.Equipments.HeroEquip -= OnHeroEquip;
@@ -37,12 +40,35 @@ namespace CodeBase.Hero
         {
             if (_progressService.Equipments.HeroesEquipment.TryGetValue(hero, out var equipment))
             {
-                await _gameFactory.CreateEquipment(equipment[EquipmentCategory.Weapon].EquipmentTypeId, _weaponContainer);
+                await EquipWeapon(equipment[EquipmentCategory.Weapon].EquipmentTypeId);
+            }
+        }
+
+        private async void OnHeroEquip(HeroTypeId id, EquipmentItem item)
+        {
+            if (IsWeapon(item))
+            {
+                ClearWeaponSlot();
+                await EquipWeapon(item.EquipmentTypeId);
             }
         }
 
         private void OnHeroUnequip(HeroTypeId id, EquipmentItem item)
         {
+            if (IsWeapon(item))
+            {
+                ClearWeaponSlot();
+            }
+        }
+
+        private bool IsWeapon(EquipmentItem item)
+        {
+            var equipmentData = _staticData.ForEquipment(item.EquipmentTypeId);
+            return equipmentData?.Category == EquipmentCategory.Weapon;
+        }
+
+        private void ClearWeaponSlot()
+        {
             if (_weaponContainer.childCount > 0)
             {
                 Transform currentWeapon = _weaponContainer.GetChild(0);
@@ -50,15 +76,9 @@ namespace CodeBase.Hero
             }
         }
 
-        private void OnHeroEquip(HeroTypeId id, EquipmentItem item)
+        private async Task EquipWeapon(EquipmentTypeId equipmentTypeId)
         {
-            if (_weaponContainer.childCount > 0)
-            {
-                Transform currentWeapon = _weaponContainer.GetChild(0);
-                Destroy(currentWeapon.gameObject);
-            }
-
-            _gameFactory.CreateEquipment(item.EquipmentTypeId, _weaponContainer);
+            await _gameFactory.TryCreateEquipment(equipmentTypeId, _weaponContainer);
         }
     }
 }

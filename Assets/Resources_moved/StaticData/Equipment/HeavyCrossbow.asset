@@ -10,20 +10,19 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b7072ec19ee872341bf8ee86d8fb3283, type: 3}
-  m_Name: Skeleton Crossbow
+  m_Name: HeavyCrossbow
   m_EditorClassIdentifier: 
-  Title: Skeleton Crossbow
-  Description: A sinister crossbow with a skeletal design, firing bolts with deadly
-    accuracy.
-  Icon: {fileID: 21300000, guid: 7728ccf7a9219c94ea8592738da7cc9d, type: 3}
-  TypeId: 8
+  Title: Heavy Crossbow
+  Description: ' A large, powerful crossbow capable of piercing the toughest armor.'
+  Icon: {fileID: 21300000, guid: 2224ab0b3389d6942a95c73e43bae040, type: 3}
+  TypeId: 9
   Rarity: 0
   Category: 0
   PrefabReference:
-    m_AssetGUID: a5f3284bd46da384699233b39fb528b9
+    m_AssetGUID: f1dac537e47a9b643b06367b8587c36a
     m_SubObjectName: 
     m_SubObjectType: 
-    m_EditorAssetChanged: 1
+    m_EditorAssetChanged: 0
   DropReference:
     m_AssetGUID: 9343dc83a0ab1794db33dd932e752032
     m_SubObjectName: 
@@ -31,7 +30,5 @@ MonoBehaviour:
     m_EditorAssetChanged: 0
   Bonuses:
   - Type: 4
-    Value: 30
-  - Type: 1
-    Value: -1
+    Value: 20
   HeroClass: 2

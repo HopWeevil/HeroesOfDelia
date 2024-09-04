@@ -10,7 +10,7 @@ namespace CodeBase.SO
         [Range(1, 100)]
         public int Hp = 50;
 
-        [Range(1, 30)]
+        [Range(1, 100)]
         public float Damage = 10;
 
         [Range(0, 10)]
