@@ -13,6 +13,8 @@ namespace CodeBase.UI.Elements
 
         [SerializeField] private CanvasGroup _canvasGroup;
 
+        private Tween _fadeTween;
+
         public void SetText(string text)
         {
             _text.text = text;
@@ -27,7 +29,7 @@ namespace CodeBase.UI.Elements
         {
             _canvasGroup.alpha = 0f;
 
-            _canvasGroup.DOFade(1f, fadeDuration).OnComplete(() =>
+            _fadeTween = _canvasGroup.DOFade(1f, fadeDuration).OnComplete(() =>
             {
                 DOVirtual.DelayedCall(displayDuration, Hide);
             });
@@ -35,7 +37,12 @@ namespace CodeBase.UI.Elements
 
         public void Hide()
         {
-            _canvasGroup.DOFade(0f, fadeDuration).OnComplete(() =>
+            if (_canvasGroup == null)
+                return;
+
+            _fadeTween?.Kill();
+
+            _fadeTween = _canvasGroup.DOFade(0f, fadeDuration).OnComplete(() =>
             {
                 Destroy(gameObject);
             });
@@ -43,7 +50,14 @@ namespace CodeBase.UI.Elements
 
         public void HideImmediate()
         {
+            _fadeTween?.Kill();
+
             Destroy(gameObject);
+        }
+
+        private void OnDestroy()
+        {
+            _fadeTween?.Kill();
         }
     }
 }
